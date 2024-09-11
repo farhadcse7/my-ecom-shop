@@ -1,1 +1,1 @@
-<?php
+@extends('website.master')
