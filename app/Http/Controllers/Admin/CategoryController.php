@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,9 +18,10 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return view('admin.category.index');
+        Category::newCategory($request);
+        return back()->with('message', 'Category info create successfully');
     }
 
     public function edit()
