@@ -20,8 +20,9 @@
                     <h3 class="card-title">Create Category Form</h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted"></p>
-                    <form class="form-horizontal">
+                    <p class="text-muted">{{session('message')}}</p>
+                    <form class="form-horizontal" action="{{route('category.store')}}" enctype="multipart/form-data" method="post">
+                        @csrf
                         <div class="row mb-4">
                             <label for="categoryName" class="col-md-3 form-label">Category Name</label>
                             <div class="col-md-9">
@@ -41,10 +42,10 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="publication" class="col-md-3 form-label">Publication Status</label>
+                            <label class="col-md-3 form-label">Publication Status</label>
                             <div class="col-md-9">
-                                <label><input name="status" id="publication" type="radio" checked value="1">Published</label>
-                                <label><input name="status" id="publication" type="radio" value="0">Unpublished</label>
+                                <label><input name="status" type="radio" checked value="1">Published</label>
+                                <label><input name="status" type="radio" value="0">Unpublished</label>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Create New Category</button>

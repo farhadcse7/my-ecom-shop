@@ -35,21 +35,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Bella</td>
-                                <td>Chloe</td>
-                                <td>System Developer</td>
-                                <td>2018/03/12</td>
-                                <td>$654,765</td>
-                                <td>
-                                    <a href="" class="btn btn-success btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach($categories as $category)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$category->name}}</td>
+                                    <td>{{$category->description}}</td>
+                                    <td><img src="{{asset($category->image)}}" alt="" height="50"></td>
+                                    <td>{{$category->status==1 ? 'Published':'Unpublished'}}</td>
+                                    <td>
+                                        <a href="{{route('category.edit',['id'=>$category->id])}}" class="btn btn-success btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('category.destroy',['id'=>$category->id])}}" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

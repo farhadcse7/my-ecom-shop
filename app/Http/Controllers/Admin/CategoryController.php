@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index');
+        return view('admin.category.index', ['categories' => Category::all()]);
     }
 
     public function create()
@@ -21,22 +21,24 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::newCategory($request);
-        return back()->with('message', 'Category info create successfully');
+        return back()->with('message', 'Category info created successfully');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.category.index');
+        return view('admin.category.edit', ['category' => Category::find($id)]);
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        return view('admin.category.index');
+        Category::updateCategory($request, $id);
+        return redirect('/category/index')->with('message', 'Category info updated successfully');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        return view('admin.category.index');
+        Category::deleteCategory($id);
+        return back()->with('message', 'Category info deleted successfully');
     }
 
 }
