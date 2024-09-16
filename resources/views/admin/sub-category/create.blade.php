@@ -20,14 +20,17 @@
                     <h3 class="card-title">Create Sub Category Form</h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted"></p>
-                    <form class="form-horizontal">
+                    <p class="text-muted">{{session('message')}}</p>
+                    <form class="form-horizontal" action="{{route('sub-category.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="row mb-4">
                             <label for="" class="col-md-3 form-label">Category Name</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="category_id">
                                     <option value="">-- Select Category Name --</option>
-                                    <option value="">Category Name</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

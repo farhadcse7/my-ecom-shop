@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\UnitController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -35,6 +36,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     //Brand (Resource)
     Route::resource('brand', BrandController::class);
+
+    //Unit (Resource)
+    Route::resource('unit', UnitController::class);
 
 
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -12,7 +13,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.unit.index', ['units' => Unit::all()]);
     }
 
     /**
@@ -20,7 +21,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.unit.create');
     }
 
     /**
@@ -28,13 +29,15 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        Unit::newUnit($request);
+        return back()->with('message', 'Unit info created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Unit $unit)
     {
         //
     }
@@ -42,24 +45,26 @@ class UnitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Unit $unit)
     {
-        //
+        return view('admin.unit.edit', ['unit' => $unit]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Unit $unit)
     {
-        //
+        Unit::updateUnit($request, $unit->id);
+        return redirect('/unit')->with('message', 'Unit info updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Unit $unit)
     {
-        //
+        Unit::deleteUnit($unit->id);
+        return redirect('/unit')->with('message', 'Unit info deleted successfully');
     }
 }

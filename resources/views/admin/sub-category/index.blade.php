@@ -22,11 +22,13 @@
                     <h3 class="card-title">All Sub Category Info</h3>
                 </div>
                 <div class="card-body">
+                    <p id="sessionMessage" class="text-muted">{{session('message')}}</p>
                     <div class="table-responsive">
                         <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                             <thead>
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
+                                <th class="wd-15p border-bottom-0">Category</th>
                                 <th class="wd-15p border-bottom-0">Name</th>
                                 <th class="wd-20p border-bottom-0">Description</th>
                                 <th class="wd-15p border-bottom-0">Image</th>
@@ -35,21 +37,30 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($sub_categories as $sub_category)
                             <tr>
-                                <td>Bella</td>
-                                <td>Chloe</td>
-                                <td>System Developer</td>
-                                <td>2018/03/12</td>
-                                <td>$654,765</td>
+                                <td>{{$loop->iteration}}</td>
+{{--                                <td>{{$sub_category->category_id}}</td> --}} {{-- for category_id showing--}}
+{{--                                <td>{{$sub_category->category}}</td> --}}{{-- here category is the function from SubCategory Model which collect all info from specific category_id--}}
+                                <td>{{$sub_category->category->name}}</td>
+                                <td>{{$sub_category->name}}</td>
+                                <td>{{$sub_category->description}}</td>
+                                <td><img src="{{asset($sub_category->image)}}" alt="" height="50"></td>
+                                <td>{{$sub_category->status == 1 ? 'Published' : 'Unpublished'}}</td>
                                 <td>
-                                    <a href="" class="btn btn-success btn-sm">
+                                    <a href="{{route('sub-category.edit', $sub_category->id)}}" class="btn btn-success btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    <form action="{{route('sub-category.destroy', $sub_category->id)}}" method="post" class="d-inline-block">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
