@@ -38,28 +38,28 @@
                             </thead>
                             <tbody>
                             @foreach($sub_categories as $sub_category)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-{{--                                <td>{{$sub_category->category_id}}</td> --}} {{-- for category_id showing--}}
-{{--                                <td>{{$sub_category->category}}</td> --}}{{-- here category is the function from SubCategory Model which collect all info from specific category_id--}}
-                                <td>{{$sub_category->category->name}}</td>
-                                <td>{{$sub_category->name}}</td>
-                                <td>{{$sub_category->description}}</td>
-                                <td><img src="{{asset($sub_category->image)}}" alt="" height="50"></td>
-                                <td>{{$sub_category->status == 1 ? 'Published' : 'Unpublished'}}</td>
-                                <td>
-                                    <a href="{{route('sub-category.edit', $sub_category->id)}}" class="btn btn-success btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{route('sub-category.destroy', $sub_category->id)}}" method="post" class="d-inline-block">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this?')">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    {{-- <td>{{$sub_category->category_id}}</td> --}} {{-- for category_id showing--}}
+                                    {{-- <td>{{$sub_category->category}}</td> --}}{{-- here category is the function from SubCategory Model which collect all info from specific category_id--}}
+                                    <td>{{$sub_category->category->name}}</td>
+                                    <td>{{$sub_category->name}}</td>
+                                    <td>{{$sub_category->description}}</td>
+                                    <td><img src="{{asset($sub_category->image)}}" alt="" height="50"></td>
+                                    <td>{{$sub_category->status == 1 ? 'Published' : 'Unpublished'}}</td>
+                                    <td>
+                                        <a href="{{route('sub-category.edit', $sub_category->id)}}" class="btn btn-success btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{route('sub-category.destroy', $sub_category->id)}}" method="post" class="d-inline-block">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

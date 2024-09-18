@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\ProductController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -39,6 +40,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     //Unit (Resource)
     Route::resource('unit', UnitController::class);
+
+    //Product (Resource)
+    Route::resource('product', ProductController::class);
+    //route for dynamically get product subcategory according to category
+    Route::get('/get-sub-category-by-category', [ProductController::class, 'getSubCategoryByCategory'])->name('get-sub-category-by-category');
 
 
 });
