@@ -19,9 +19,9 @@
                               </svg>
                            </span>
                             <span><a href="#">Home</a></span>
-                            <span><a href="#">Electronics</a></span>
-                            <span><a href="#">Computers & Tablets</a></span>
-                            <span>Samsung galaxy A7 tablet</span>
+                            <span><a href="#">{{$product->category->name}}</a></span>
+                            <span><a href="#">{{$product->subCategory->name}}</a></span>
+                            <span>{{$product->name}}</span>
                         </div>
                     </div>
                 </div>
@@ -40,48 +40,28 @@
                             <nav>
                                 <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
                                     <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/nav/product-details-nav-1.jpg" alt="">
+                                        <img src="{{asset($product->image)}}" alt="">
                                     </button>
-                                    <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/nav/product-details-nav-2.jpg" alt="">
-                                    </button>
-                                    <button class="nav-link" id="nav-3-tab" data-bs-toggle="tab" data-bs-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/nav/product-details-nav-3.jpg" alt="">
-                                    </button>
-                                    <button class="nav-link" id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/nav/product-details-nav-4.jpg" alt="">
-                                    </button>
-                                    <button class="nav-link" id="nav-5-tab" data-bs-toggle="tab" data-bs-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/nav/product-details-nav-5.jpg" alt="">
-                                    </button>
+                                    @foreach($product->productImages as $index => $productImage)
+                                        <button class="nav-link" id="nav-{{ $index + 2 }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $index + 2 }}" type="button" role="tab" aria-controls="nav-{{ $index + 2 }}" aria-selected="false">
+                                            <img src="{{asset($productImage->image)}}" alt="">
+                                        </button>
+                                    @endforeach
                                 </div>
                             </nav>
                             <div class="tab-content m-img" id="productDetailsNavContent">
                                 <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                                     <div class="tp-product-details-nav-main-thumb">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/main/product-details-main-1.jpg" alt="">
+                                        <img src="{{asset($product->image)}}" alt="">
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab" tabindex="0">
-                                    <div class="tp-product-details-nav-main-thumb">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/main/product-details-main-2.jpg" alt="">
+                                @foreach($product->productImages as $index => $productImage)
+                                    <div class="tab-pane fade" id="nav-{{ $index + 2 }}" role="tabpanel" aria-labelledby="nav-{{ $index + 2 }}-tab" tabindex="0">
+                                        <div class="tp-product-details-nav-main-thumb">
+                                            <img src="{{asset($productImage->image)}}" alt="">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab" tabindex="0">
-                                    <div class="tp-product-details-nav-main-thumb">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/main/product-details-main-3.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab" tabindex="0">
-                                    <div class="tp-product-details-nav-main-thumb">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/main/product-details-main-4.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab" tabindex="0">
-                                    <div class="tp-product-details-nav-main-thumb">
-                                        <img src="{{asset('/')}}website/assets/img/product/details/main/product-details-main-5.jpg" alt="">
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div> <!-- col end -->
@@ -90,7 +70,7 @@
                             <div class="tp-product-details-category">
                                 <span>Computers & Tablets</span>
                             </div>
-                            <h3 class="tp-product-details-title">Samsung galaxy A8 tablet</h3>
+                            <h3 class="tp-product-details-title">{{$product->name}}</h3>
 
                             <!-- inventory details -->
                             <div class="tp-product-details-inventory d-flex align-items-center mb-10">
@@ -110,12 +90,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>A Screen Everyone Will Love: Whether your family is streaming or video chatting with friends tablet A8... <span>See more</span></p>
+                            <p>{{$product->short_description}}</p>
 
                             <!-- price -->
                             <div class="tp-product-details-price-wrapper mb-20">
-                                <span class="tp-product-details-price old-price">$320.00</span>
-                                <span class="tp-product-details-price new-price">$236.00</span>
+                                <span class="tp-product-details-price old-price">TK. {{$product->regular_price}}</span>
+                                <span class="tp-product-details-price new-price">TK. {{$product->selling_price}}</span>
                             </div>
 
                             <!-- variations -->
@@ -124,19 +104,19 @@
                                 <div class="tp-product-details-variation-item">
                                     <h4 class="tp-product-details-variation-title">Color :</h4>
                                     <div class="tp-product-details-variation-list">
-                                        <button type="button" class="color tp-color-variation-btn" >
+                                        <button type="button" class="color tp-color-variation-btn">
                                             <span data-bg-color="#F8B655"></span>
                                             <span class="tp-color-variation-tootltip">Yellow</span>
                                         </button>
-                                        <button type="button" class="color tp-color-variation-btn active" >
+                                        <button type="button" class="color tp-color-variation-btn active">
                                             <span data-bg-color="#CBCBCB"></span>
                                             <span class="tp-color-variation-tootltip">Gray</span>
                                         </button>
-                                        <button type="button" class="color tp-color-variation-btn" >
+                                        <button type="button" class="color tp-color-variation-btn">
                                             <span data-bg-color="#494E52"></span>
                                             <span class="tp-color-variation-tootltip">Black</span>
                                         </button>
-                                        <button type="button" class="color tp-color-variation-btn" >
+                                        <button type="button" class="color tp-color-variation-btn">
                                             <span data-bg-color="#B4505A"></span>
                                             <span class="tp-color-variation-tootltip">Brown</span>
                                         </button>
@@ -150,12 +130,12 @@
                                 <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
                                     <div class="tp-product-details-quantity">
                                         <div class="tp-product-quantity mb-15 mr-15">
-                                       <span class="tp-cart-minus">
+                                         <span class="tp-cart-minus">
                                           <svg width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M1 1H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                           </svg>
-                                       </span>
-                                            <input class="tp-cart-input" type="text" value="1">
+                                         </span>
+                                            <input class="tp-cart-input" type="number" value="1" style="height: 46px;line-height: 46px;background-color: #F3F5F6;border: 0;border-radius: 0;font-size: 16px;color: #010f1c;padding: 0 30px; text-align: center;" onmouseover="this.type='text';">
                                             <span class="tp-cart-plus">
                                           <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M1 6H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -165,10 +145,14 @@
                                         </div>
                                     </div>
                                     <div class="tp-product-details-add-to-cart mb-15 w-100">
-                                        <button onclick="window.location.href='{{ route('show-cart') }}'" class="tp-product-details-add-to-cart-btn w-100">Add To Cart2</button>
+                                        <button onclick="window.location.href='{{ route('show-cart') }}'" class="tp-product-details-add-to-cart-btn w-100">
+                                            Add To Cart
+                                        </button>
                                     </div>
                                 </div>
-                                <button onclick="window.location.href='{{ route('show-cart') }}'" class="tp-product-details-buy-now-btn w-100">Buy Now2</button>
+                                <button onclick="window.location.href='{{ route('show-cart') }}'" class="tp-product-details-buy-now-btn w-100">
+                                    Buy Now
+                                </button>
                             </div>
                             <div class="tp-product-details-action-sm">
                                 <button type="button" class="tp-product-details-action-sm-btn">
@@ -239,9 +223,15 @@
                         <div class="tp-product-details-tab-nav tp-tab">
                             <nav>
                                 <div class="nav nav-tabs justify-content-center p-relative tp-product-tab" id="navPresentationTab" role="tablist">
-                                    <button class="nav-link" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
-                                    <button class="nav-link active" id="nav-addInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-addInfo" type="button" role="tab" aria-controls="nav-addInfo" aria-selected="false">Additional information</button>
-                                    <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews (2)</button>
+                                    <button class="nav-link" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">
+                                        Description
+                                    </button>
+                                    <button class="nav-link active" id="nav-addInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-addInfo" type="button" role="tab" aria-controls="nav-addInfo" aria-selected="false">
+                                        Additional information
+                                    </button>
+                                    <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">
+                                        Reviews (2)
+                                    </button>
 
                                     <span id="productTabMarker" class="tp-product-details-tab-line"></span>
                                 </div>
@@ -251,122 +241,16 @@
                                     <div class="tp-product-details-desc-wrapper pt-80">
                                         <div class="row justify-content-center">
                                             <div class="col-xl-10">
-                                                <div class="tp-product-details-desc-item pb-105">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="tp-product-details-desc-content pt-25">
-                                                                <span>Galaxy A8 tablet</span>
-                                                                <h3 class="tp-product-details-desc-title">Your world at a glance</h3>
-                                                                <p>With a slim design, a vibrant entertainment system, and <br> outstanding performance, the new Galaxy Tab A7 is a stylish new <br> companion for your life.Dive head-first into the things you love, <br> and easily share your favorite moments. Learn, explore, connect <br> and be inspired.</p>
-                                                            </div>
-                                                            <div class="tp-product-details-desc-content">
-                                                                <h3 class="tp-product-details-desc-title">Draw inspiration with S Pen</h3>
-                                                                <p>S Pen is a bundle of writing instruments in one. Its natural grip, <br> low latency and impressive pressure sensitivity will make it your go-to for everything from drawing to editing documents. And S Pen won't get misplaced thanks.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="tp-product-details-desc-thumb">
-                                                                <img src="{{asset('/')}}website/assets/img/product/details/desc/product-details-desc-1.jpg" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tp-product-details-desc-item  pb-75">
-                                                    <div class="row">
-
-                                                        <div class="col-lg-7">
-                                                            <div class="tp-product-details-desc-thumb">
-                                                                <img src="{{asset('/')}}website/assets/img/product/details/desc/product-details-desc-2.jpg" alt="">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-5 order-first order-lg-last">
-                                                            <div class="tp-product-details-desc-content des-content-2 pl-40">
-                                                                <h3 class="tp-product-details-desc-title">Carry with <br> Confidence and style</h3>
-                                                                <p>Wrap your tablet in a sleek case that's as stylish as it is convenient. Galaxy Tab S6 Lite Book Cover folds around and clings magnetically, so you can easily gear up as you're headed out the door. There's even a compartment for S pen, so you can be sure it doesn't get left behind.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tp-product-details-desc-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-12">
-                                                            <div class="tp-product-details-desc-banner text-center m-img">
-                                                                <h3 class="tp-product-details-desc-banner-title tp-product-details-desc-title">Speed Memory Power = Epic Races</h3>
-                                                                <img src="{{asset('/')}}website/assets/img/product/details/desc/product-details-desc-3.jpg" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                {!! $product->long_description !!}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade show active" id="nav-addInfo" role="tabpanel" aria-labelledby="nav-addInfo-tab" tabindex="0">
-
                                     <div class="tp-product-details-additional-info ">
                                         <div class="row justify-content-center">
                                             <div class="col-xl-10">
-                                                <table>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Standing screen display size</td>
-                                                        <td>Screen display Size 10.4</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Color</td>
-                                                        <td>Gray, Dark gray, Mystic black</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Screen Resolution</td>
-                                                        <td>1920 x 1200 Pixels</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Max Screen Resolution</td>
-                                                        <td>2000 x 1200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Processor</td>
-                                                        <td>2.3 GHz (128 GB)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Graphics Coprocessor</td>
-                                                        <td>Exynos 9611, Octa Core (4x2.3GHz + 4x1.7GHz)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Wireless Type</td>
-                                                        <td>802.11a/b/g/n/ac, Bluetooth</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Average Battery Life (in hours)</td>
-                                                        <td>13 Hours</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Series</td>
-                                                        <td>Samsung Galaxy tab S6 Lite WiFi</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Item model number</td>
-                                                        <td>SM-P6102ZAEXOR</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Hardware Platform</td>
-                                                        <td>Android</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Operating System</td>
-                                                        <td>Android 12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Batteries</td>
-                                                        <td>1 Lithium Polymer batteries required. (included)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Product Dimensions</td>
-                                                        <td>0.28 x 6.07 x 9.63 inches</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                {!! $product->long_description !!}
                                             </div>
                                         </div>
                                     </div>
@@ -378,7 +262,8 @@
                                                 <div class="tp-product-details-review-statics">
                                                     <!-- number -->
                                                     <div class="tp-product-details-review-number d-inline-block mb-50">
-                                                        <h3 class="tp-product-details-review-number-title">Customer reviews</h3>
+                                                        <h3 class="tp-product-details-review-number-title">Customer
+                                                            reviews</h3>
                                                         <div class="tp-product-details-review-summery d-flex align-items-center">
                                                             <div class="tp-product-details-review-summery-value">
                                                                 <span>4.5</span>
@@ -467,11 +352,14 @@
                                                                     <span><i class="fa-solid fa-star"></i></span>
                                                                     <span><i class="fa-solid fa-star"></i></span>
                                                                 </div>
-                                                                <h3 class="tp-product-details-review-avater-title">Eleanor Fant</h3>
+                                                                <h3 class="tp-product-details-review-avater-title">
+                                                                    Eleanor Fant</h3>
                                                                 <span class="tp-product-details-review-avater-meta">06 March, 2023 </span>
 
                                                                 <div class="tp-product-details-review-avater-comment">
-                                                                    <p>Designed very similarly to the nearly double priced Galaxy tab S6, with the only removal being.</p>
+                                                                    <p>Designed very similarly to the nearly double
+                                                                        priced Galaxy tab S6, with the only removal
+                                                                        being.</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -489,11 +377,14 @@
                                                                     <span><i class="fa-solid fa-star"></i></span>
                                                                     <span><i class="fa-solid fa-star"></i></span>
                                                                 </div>
-                                                                <h3 class="tp-product-details-review-avater-title">Shahnewaz Sakil</h3>
+                                                                <h3 class="tp-product-details-review-avater-title">
+                                                                    Shahnewaz Sakil</h3>
                                                                 <span class="tp-product-details-review-avater-meta">06 March, 2023 </span>
 
                                                                 <div class="tp-product-details-review-avater-comment">
-                                                                    <p>This review is for the Samsung Tab S6 Lite, 64gb wifi in blue. purchased this product performed.</p>
+                                                                    <p>This review is for the Samsung Tab S6 Lite, 64gb
+                                                                        wifi in blue. purchased this product
+                                                                        performed.</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -502,8 +393,10 @@
                                             </div> <!-- end col -->
                                             <div class="col-lg-6">
                                                 <div class="tp-product-details-review-form">
-                                                    <h3 class="tp-product-details-review-form-title">Review this product</h3>
-                                                    <p>Your email address will not be published. Required fields are marked *</p>
+                                                    <h3 class="tp-product-details-review-form-title">Review this
+                                                        product</h3>
+                                                    <p>Your email address will not be published. Required fields are
+                                                        marked *</p>
                                                     <form action="#">
                                                         <div class="tp-product-details-review-form-rating d-flex align-items-center">
                                                             <p>Your Rating :</p>
@@ -544,11 +437,13 @@
                                                         <div class="tp-product-details-review-suggetions mb-20">
                                                             <div class="tp-product-details-review-remeber">
                                                                 <input id="remeber" type="checkbox">
-                                                                <label for="remeber">Save my name, email, and website in this browser for the next time I comment.</label>
+                                                                <label for="remeber">Save my name, email, and website in
+                                                                    this browser for the next time I comment.</label>
                                                             </div>
                                                         </div>
                                                         <div class="tp-product-details-review-btn-wrapper">
-                                                            <button class="tp-product-details-review-btn">Submit</button>
+                                                            <button class="tp-product-details-review-btn">Submit
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -581,7 +476,7 @@
                             <div class="swiper-slide">
                                 <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                     <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/related/product-related-1.jpg" alt="">
                                         </a>
 
@@ -632,7 +527,7 @@
                                             <span>Tablet</span>
                                         </div>
                                         <h3 class="tp-product-title-3">
-                                            <a href="{{route('product-detail')}}">GalaxyS6 Android Tablet</a>
+                                            <a href="">GalaxyS6 Android Tablet</a>
                                         </h3>
                                         <div class="tp-product-price-wrapper-3">
                                             <span class="tp-product-price-3 new-price">$102.00</span>
@@ -644,7 +539,7 @@
                             <div class="swiper-slide">
                                 <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                     <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/related/product-related-2.jpg" alt="">
                                         </a>
 
@@ -691,7 +586,7 @@
                                             <span>SmartPhone</span>
                                         </div>
                                         <h3 class="tp-product-title-3">
-                                            <a href="{{route('product-detail')}}">Microsoft Surface Pro 8-13"</a>
+                                            <a href="">Microsoft Surface Pro 8-13"</a>
                                         </h3>
                                         <div class="tp-product-price-wrapper-3">
                                             <span class="tp-product-price-3">$240.00</span>
@@ -702,7 +597,7 @@
                             <div class="swiper-slide">
                                 <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                     <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/related/product-related-3.jpg" alt="">
                                         </a>
 
@@ -753,7 +648,7 @@
                                             <span>Video & Camera</span>
                                         </div>
                                         <h3 class="tp-product-title-3">
-                                            <a href="{{route('product-detail')}}">4K Digital Video Camera.</a>
+                                            <a href="">4K Digital Video Camera.</a>
                                         </h3>
                                         <div class="tp-product-price-wrapper-3">
                                             <span class="tp-product-price-3 new-price">$76.00</span>
@@ -765,7 +660,7 @@
                             <div class="swiper-slide">
                                 <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                     <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/related/product-related-4.jpg" alt="">
                                         </a>
 
@@ -816,7 +711,7 @@
                                             <span>Smart Watch</span>
                                         </div>
                                         <h3 class="tp-product-title-3">
-                                            <a href="{{route('product-detail')}}">Discover Skincare watch</a>
+                                            <a href="">Discover Skincare watch</a>
                                         </h3>
                                         <div class="tp-product-price-wrapper-3">
                                             <span class="tp-product-price-3">$44.00</span>
@@ -837,7 +732,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="tp-product-modal-content d-lg-flex align-items-start">
-                    <button type="button" class="tp-product-modal-close-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal"><i class="fa-regular fa-xmark"></i></button>
+                    <button type="button" class="tp-product-modal-close-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
+                        <i class="fa-regular fa-xmark"></i></button>
                     <div class="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
                         <nav>
                             <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
@@ -882,7 +778,7 @@
                         <div class="tp-product-details-category">
                             <span>Computers & Tablets</span>
                         </div>
-                        <h3 class="tp-product-details-title">Samsung galaxy A8 tablet</h3>
+                        <h3 class="tp-product-details-title"></h3>
 
                         <!-- inventory details -->
                         <div class="tp-product-details-inventory d-flex align-items-center mb-10">
@@ -902,7 +798,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p>A Screen Everyone Will Love: Whether your family is streaming or video chatting with friends tablet A8... <span>See more</span></p>
+                        <p>A Screen Everyone Will Love: Whether your family is streaming or video chatting with friends
+                            tablet A8... <span>See more</span></p>
 
                         <!-- price -->
                         <div class="tp-product-details-price-wrapper mb-20">
@@ -916,19 +813,19 @@
                             <div class="tp-product-details-variation-item">
                                 <h4 class="tp-product-details-variation-title">Color :</h4>
                                 <div class="tp-product-details-variation-list">
-                                    <button type="button" class="color tp-color-variation-btn" >
+                                    <button type="button" class="color tp-color-variation-btn">
                                         <span data-bg-color="#F8B655"></span>
                                         <span class="tp-color-variation-tootltip">Yellow</span>
                                     </button>
-                                    <button type="button" class="color tp-color-variation-btn active" >
+                                    <button type="button" class="color tp-color-variation-btn active">
                                         <span data-bg-color="#CBCBCB"></span>
                                         <span class="tp-color-variation-tootltip">Gray</span>
                                     </button>
-                                    <button type="button" class="color tp-color-variation-btn" >
+                                    <button type="button" class="color tp-color-variation-btn">
                                         <span data-bg-color="#494E52"></span>
                                         <span class="tp-color-variation-tootltip">Black</span>
                                     </button>
-                                    <button type="button" class="color tp-color-variation-btn" >
+                                    <button type="button" class="color tp-color-variation-btn">
                                         <span data-bg-color="#B4505A"></span>
                                         <span class="tp-color-variation-tootltip">Brown</span>
                                     </button>

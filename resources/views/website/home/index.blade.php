@@ -317,7 +317,6 @@
                 <div class="col-xl-5 col-lg-6 col-md-5">
                     <div class="tp-section-title-wrapper mb-40">
                         <h3 class="tp-section-title">Trending Products
-
                             <svg width="114" height="35" viewBox="0 0 114 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053" stroke="currentColor" stroke-width="4" stroke-miterlimit="3.8637" stroke-linecap="round"/>
                             </svg>
@@ -363,13 +362,14 @@
                 <div class="col-xl-12">
                     <div class="tp-product-tab-content">
                         <div class="tab-content" id="myTabContent">
+                            <!-- tab new start -->
                             <div class="tab-pane fade show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0">
                                 <div class="row">
                                     @foreach($products as $product)
                                     <div class="col-xl-3 col-lg-3 col-sm-6">
                                         <div class="tp-product-item p-relative transition-3 mb-25">
                                             <div class="tp-product-thumb p-relative fix m-img">
-                                                <a href="{{route('product-detail')}}">
+                                                <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                     <img src="{{asset($product->image)}}" alt="product-electronic">
                                                 </a>
 
@@ -422,7 +422,7 @@
                                                     <a href="shop.html">Tablet</a>
                                                 </div>
                                                 <h3 class="tp-product-title">
-                                                    <a href="{{route('product-detail')}}">
+                                                    <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                         {{$product->name}}
                                                     </a>
                                                 </h3>
@@ -448,13 +448,14 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <!-- tab featured start -->
                             <div class="tab-pane fade" id="featured-tab-pane" role="tabpanel" aria-labelledby="featured-tab" tabindex="0">
                                 <div class="row">
                                     @foreach($products as $product)
                                     <div class="col-xl-3 col-lg-3 col-sm-6">
                                         <div class="tp-product-item transition-3 mb-25">
                                             <div class="tp-product-thumb p-relative fix m-img">
-                                                <a href="{{route('product-detail')}}">
+                                                <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                     <img src="{{asset($product->image)}}" alt="product-electronic">
                                                 </a>
 
@@ -507,7 +508,7 @@
                                                     <a href="shop.html">Powerbank</a>
                                                 </div>
                                                 <h3 class="tp-product-title">
-                                                    <a href="{{route('product-detail')}}">
+                                                    <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                         {{$product->name}}
                                                     </a>
                                                 </h3>
@@ -532,13 +533,14 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <!-- tab top sell start -->
                             <div class="tab-pane fade" id="topsell-tab-pane" role="tabpanel" aria-labelledby="topsell-tab" tabindex="0">
                                 <div class="row">
                                     @foreach($products as $product)
                                     <div class="col-xl-3 col-lg-3 col-sm-6">
                                         <div class="tp-product-item transition-3 mb-25">
                                             <div class="tp-product-thumb p-relative fix m-img">
-                                                <a href="{{route('product-detail')}}">
+                                                <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                     <img src="{{asset($product->image)}}" alt="product-electronic">
                                                 </a>
 
@@ -591,7 +593,7 @@
                                                     <a href="shop.html">Gaming</a>
                                                 </div>
                                                 <h3 class="tp-product-title">
-                                                    <a href="{{route('product-detail')}}">
+                                                    <a href="{{route('product-detail',['id'=>$product->id])}}">
                                                         {{$product->name}}
                                                     </a>
                                                 </h3>
@@ -635,10 +637,10 @@
                         <div class="tp-banner-content">
                             <span>Sale 20% off all store</span>
                             <h3 class="tp-banner-title">
-                                <a href="{{route('product-detail')}}">Smartphone <br> BLU G91 Pro 2022</a>
+                                <a href="">Smartphone <br> BLU G91 Pro 2022</a>
                             </h3>
                             <div class="tp-banner-btn">
-                                <a href="{{route('product-detail')}}" class="tp-link-btn">Shop Now
+                                <a href="" class="tp-link-btn">Shop Now
                                     <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -653,11 +655,11 @@
                         <div class="tp-banner-thumb include-bg transition-3" data-background="{{asset('/')}}website/assets/img/product/banner/product-banner-2.jpg"></div>
                         <div class="tp-banner-content">
                             <h3 class="tp-banner-title">
-                                <a href="{{route('product-detail')}}">HyperX Cloud II <br> Wireless</a>
+                                <a href="">HyperX Cloud II <br> Wireless</a>
                             </h3>
                             <p>Sale 35% off</p>
                             <div class="tp-banner-btn">
-                                <a href="{{route('product-detail')}}" class="tp-link-btn">Shop Now
+                                <a href="" class="tp-link-btn">Shop Now
                                     <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -679,7 +681,6 @@
                 <div class="col-xl-4 col-md-5 col-sm-6">
                     <div class="tp-section-title-wrapper mb-40">
                         <h3 class="tp-section-title">Deal of The Day
-
                             <svg width="114" height="35" viewBox="0 0 114 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053" stroke="currentColor" stroke-width="4" stroke-miterlimit="3.8637" stroke-linecap="round"/>
                             </svg>
@@ -707,7 +708,7 @@
                             <div class="swiper-wrapper">
                                 <div class="tp-product-offer-item tp-product-item transition-3 swiper-slide">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/offer/product-offer-1.jpg" alt="product-electronic">
                                         </a>
 
@@ -767,7 +768,7 @@
                                             <a href="shop.html">HD Camera</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Professional Camera 4K Digital Video Camera.
                                             </a>
                                         </h3>
@@ -803,7 +804,7 @@
                                 </div>
                                 <div class="tp-product-offer-item tp-product-item transition-3 swiper-slide">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/offer/product-offer-2.jpg" alt="product-electronic">
                                         </a>
 
@@ -863,7 +864,7 @@
                                             <a href="shop.html">HD Camera</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Professional Camera 4K Digital Video Camera.
                                             </a>
                                         </h3>
@@ -899,7 +900,7 @@
                                 </div>
                                 <div class="tp-product-offer-item tp-product-item transition-3 swiper-slide">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/offer/product-offer-3.jpg" alt="product-electronic">
                                         </a>
 
@@ -959,7 +960,7 @@
                                             <a href="shop.html">HD Camera</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Professional Camera 4K Digital Video Camera.
                                             </a>
                                         </h3>
@@ -995,7 +996,7 @@
                                 </div>
                                 <div class="tp-product-offer-item tp-product-item transition-3 swiper-slide">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/offer/product-offer-2.jpg" alt="product-electronic">
                                         </a>
 
@@ -1055,7 +1056,7 @@
                                             <a href="shop.html">HD Camera</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Professional Camera 4K Digital Video Camera.
                                             </a>
                                         </h3>
@@ -1137,7 +1138,7 @@
                                         <div class="tp-product-gadget-banner-content">
                                             <span class="tp-product-gadget-banner-price">Only $99.00</span>
                                             <h3 class="tp-product-gadget-banner-title">
-                                                <a href="{{route('product-detail')}}">Selected novelty <br> Products</a>
+                                                <a href="">Selected novelty <br> Products</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -1145,7 +1146,7 @@
                                         <div class="tp-product-gadget-banner-content">
                                             <span class="tp-product-gadget-banner-price">Only $55.00</span>
                                             <h3 class="tp-product-gadget-banner-title">
-                                                <a href="{{route('product-detail')}}">Top Rated <br> Products</a>
+                                                <a href="">Top Rated <br> Products</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -1161,7 +1162,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-12.jpg" alt="product-electronic">
                                         </a>
 
@@ -1214,7 +1215,7 @@
                                             <a href="shop.html">Electric</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Yamaha Electric Violin-YEV104BL-Black String
                                             </a>
                                         </h3>
@@ -1239,7 +1240,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-13.jpg" alt="product-electronic">
                                         </a>
 
@@ -1287,7 +1288,7 @@
                                             <a href="shop.html">Tablet Pro 8</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Microsoft Surface Pro 8-13" Touchscreen.
                                             </a>
                                         </h3>
@@ -1313,7 +1314,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-14.jpg" alt="product-electronic">
                                         </a>
 
@@ -1366,7 +1367,7 @@
                                             <a href="shop.html">Headphone</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Playstation 4 2TB Slim Gaming Console.
                                             </a>
                                         </h3>
@@ -1391,7 +1392,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-15.jpg" alt="product-electronic">
                                         </a>
 
@@ -1444,7 +1445,7 @@
                                             <a href="shop.html">Pertronix</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Flame-Thrower VW Type 1 Engine Plug.
                                             </a>
                                         </h3>
@@ -1470,7 +1471,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-16.jpg" alt="product-electronic">
                                         </a>
 
@@ -1523,7 +1524,7 @@
                                             <a href="shop.html">Amazon</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Echo Show 5 (2nd Gen) Adjustable Stand | Charcoal
                                             </a>
                                         </h3>
@@ -1548,7 +1549,7 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="tp-product-item p-relative transition-3 mb-25">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-17.jpg" alt="product-electronic">
                                         </a>
 
@@ -1596,7 +1597,7 @@
                                             <a href="shop.html">Medical</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Smart Watch Heart Rate Blood Pressure.
                                             </a>
                                         </h3>
@@ -1767,7 +1768,7 @@
                             <div class="swiper-wrapper">
                                 <div class="tp-product-item transition-3 mb-25 swiper-slide">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-6.jpg" alt="product-electronic">
                                         </a>
 
@@ -1820,7 +1821,7 @@
                                             <a href="shop.html">Fast Charger</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Fast Charger 6.5A Type-C Cable For OPPO Find X3 Pro
                                             </a>
                                         </h3>
@@ -1844,7 +1845,7 @@
                                 </div>
                                 <div class="tp-product-item transition-3 mb-25 swiper-slide ">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-7.jpg" alt="product-electronic">
                                         </a>
 
@@ -1892,7 +1893,7 @@
                                             <a href="shop.html">Earbuds</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 True Wireless Noise Cancelling Earbuds with Apple.
                                             </a>
                                         </h3>
@@ -1916,7 +1917,7 @@
                                 </div>
                                 <div class="tp-product-item transition-3 mb-25 swiper-slide ">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-8.jpg" alt="product-electronic">
                                         </a>
 
@@ -1969,7 +1970,7 @@
                                             <a href="shop.html">Tablet</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.
                                             </a>
                                         </h3>
@@ -1993,7 +1994,7 @@
                                 </div>
                                 <div class="tp-product-item transition-3 mb-25 swiper-slide ">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-9.jpg" alt="product-electronic">
                                         </a>
 
@@ -2046,7 +2047,7 @@
                                             <a href="shop.html">Tablet</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.
                                             </a>
                                         </h3>
@@ -2070,7 +2071,7 @@
                                 </div>
                                 <div class="tp-product-item transition-3 mb-25 swiper-slide ">
                                     <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             <img src="{{asset('/')}}website/assets/img/product/product-10.jpg" alt="product-electronic">
                                         </a>
 
@@ -2123,7 +2124,7 @@
                                             <a href="shop.html">Tablet</a>
                                         </div>
                                         <h3 class="tp-product-title">
-                                            <a href="{{route('product-detail')}}">
+                                            <a href="">
                                                 Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.
                                             </a>
                                         </h3>
@@ -2171,7 +2172,7 @@
                         <div class="tp-product-sm-wrapper mr-20">
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-1.jpg" alt="">
                                     </a>
                                 </div>
@@ -2180,7 +2181,7 @@
                                         <a href="shop.html">HD Camera</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">
+                                        <a href="">
                                             Oppo A96 5G Mobile Phone
                                         </a>
                                     </h3>
@@ -2203,7 +2204,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-2.jpg" alt="">
                                     </a>
                                 </div>
@@ -2212,7 +2213,7 @@
                                         <a href="shop.html">Iron Man</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Single Stem Vase</a>
+                                        <a href="">Single Stem Vase</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2233,7 +2234,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-3.jpg" alt="">
                                     </a>
                                 </div>
@@ -2242,7 +2243,7 @@
                                         <a href="shop.html">Speaker</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Echo Dot smart speaker</a>
+                                        <a href="">Echo Dot smart speaker</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2277,7 +2278,7 @@
                         <div class="tp-product-sm-wrapper mr-20">
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-4.jpg" alt="">
                                     </a>
                                 </div>
@@ -2286,7 +2287,7 @@
                                         <a href="shop.html">Motherboard</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">CPU Cooler 6 Heat Pipes</a>
+                                        <a href="">CPU Cooler 6 Heat Pipes</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2307,7 +2308,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-5.jpg" alt="">
                                     </a>
                                 </div>
@@ -2316,7 +2317,7 @@
                                         <a href="shop.html">Digital Camera</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Photography Camera</a>
+                                        <a href="">Photography Camera</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2337,7 +2338,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-6.jpg" alt="">
                                     </a>
                                 </div>
@@ -2346,7 +2347,7 @@
                                         <a href="shop.html">Smart Watches</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Real-Time Weather.</a>
+                                        <a href="">Real-Time Weather.</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2381,7 +2382,7 @@
                         <div class="tp-product-sm-wrapper mr-20">
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-7.jpg" alt="">
                                     </a>
                                 </div>
@@ -2390,7 +2391,7 @@
                                         <a href="shop.html">Usb Flash Disk</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Metal Usb 3.0 Pen Drive 2TB</a>
+                                        <a href="">Metal Usb 3.0 Pen Drive 2TB</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2411,7 +2412,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-8.jpg" alt="">
                                     </a>
                                 </div>
@@ -2420,7 +2421,7 @@
                                         <a href="shop.html">HawkEye</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">HawkEye Fishtrax</a>
+                                        <a href="">HawkEye Fishtrax</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">
@@ -2441,7 +2442,7 @@
                             </div>
                             <div class="tp-product-sm-item d-flex align-items-center">
                                 <div class="tp-product-thumb mr-25 fix">
-                                    <a href="{{route('product-detail')}}">
+                                    <a href="">
                                         <img src="{{asset('/')}}website/assets/img/product/sm/product-sm-9.jpg" alt="">
                                     </a>
                                 </div>
@@ -2450,7 +2451,7 @@
                                         <a href="shop.html">Tablet</a>
                                     </div>
                                     <h3 class="tp-product-title">
-                                        <a href="{{route('product-detail')}}">Galaxy Tab S6 Android</a>
+                                        <a href="">Galaxy Tab S6 Android</a>
                                     </h3>
                                     <div class="tp-product-rating d-sm-flex align-items-center">
                                         <div class="tp-product-rating-icon">

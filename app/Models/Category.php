@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function Carbon\this;
 
 class Category extends Model
 {
@@ -52,4 +53,11 @@ class Category extends Model
         self::$category = Category::find($id);
         self::$category->delete();
     }
+
+    //function for website menubar category linked subcategory list
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
 }

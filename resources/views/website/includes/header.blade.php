@@ -1,6 +1,5 @@
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
+<!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+    <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
 
 <!-- pre loader area start -->
 <div id="loading">
@@ -22,8 +21,7 @@
             </div>
         </div>
     </div>
-</div>
-<!-- pre loader area end -->
+</div><!-- pre loader area end -->
 
 <!-- back to top start -->
 <div class="back-to-top-wrapper">
@@ -32,8 +30,7 @@
             <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
-</div>
-<!-- back to top end -->
+</div><!-- back to top end -->
 
 <!-- offcanvas area start -->
 <div class="offcanvas__area offcanvas__radius">
@@ -88,7 +85,7 @@
                     <ul class="offcanvas__currency-list tp-currency-list">
                         <li>USD</li>
                         <li>ERU</li>
-                        <li>BDT </li>
+                        <li>BDT</li>
                         <li>INR</li>
                     </ul>
                 </div>
@@ -112,8 +109,7 @@
         </div>
     </div>
 </div>
-<div class="body-overlay"></div>
-<!-- offcanvas area end -->
+<div class="body-overlay"></div><!-- offcanvas area end -->
 
 <!-- mobile menu area start -->
 <div id="tp-bottom-menu-sticky" class="tp-mobile-menu d-lg-none">
@@ -161,8 +157,7 @@
             </div>
         </div>
     </div>
-</div>
-<!-- mobile menu area end -->
+</div><!-- mobile menu area end -->
 
 <!-- search area start -->
 <section class="tp-search-area">
@@ -191,8 +186,7 @@
             </div>
         </div>
     </div>
-</section>
-<!-- search area end -->
+</section><!-- search area end -->
 
 <!-- cart mini area start -->
 <div class="cartmini__area tp-all-font-roboto">
@@ -203,7 +197,8 @@
                     <h4>Shopping cart</h4>
                 </div>
                 <div class="cartmini__close">
-                    <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
+                    <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i>
+                    </button>
                 </div>
             </div>
             <div class="cartmini__shipping">
@@ -248,8 +243,7 @@
             </div>
         </div>
     </div>
-</div>
-<!-- cart mini area end -->
+</div><!-- cart mini area end -->
 
 <!-- header area start -->
 <header>
@@ -388,7 +382,7 @@
                             </div>
                             <div class="tp-header-action d-flex align-items-center ml-50">
                                 <div class="tp-header-action-item d-none d-lg-block">
-                                    <a href="compare.html"  class="tp-header-action-btn">
+                                    <a href="compare.html" class="tp-header-action-btn">
                                         <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M19.1556 13L15.0778 17.0967L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -451,109 +445,25 @@
                                 </button>
                                 <nav class="tp-category-menu-content">
                                     <ul>
-                                        <li>
-                                            <a href="{{route('category')}}">
-                                         <span>
-                                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                               <path d="M5.90532 14.8316V12.5719C5.9053 11.9971 6.37388 11.5301 6.95443 11.5262H9.08101C9.66434 11.5262 10.1372 11.9944 10.1372 12.5719V12.5719V14.8386C10.1371 15.3266 10.5305 15.7254 11.0233 15.7368H12.441C13.8543 15.7368 15 14.6026 15 13.2035V13.2035V6.77525C14.9925 6.22482 14.7314 5.70794 14.2911 5.37171L9.44253 1.50496C8.59311 0.83168 7.38562 0.83168 6.5362 1.50496L1.70886 5.37873C1.26693 5.7136 1.00544 6.23133 1 6.78227V13.2035C1 14.6026 2.1457 15.7368 3.55899 15.7368H4.97671C5.48173 15.7368 5.89114 15.3315 5.89114 14.8316V14.8316" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                         </span>
-                                                Accessories</a>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="shop.html" class="has-mega-menu">
-                                         <span>
-                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                               <path d="M2.6856 4.54975C2.6856 3.52014 3.51984 2.6859 4.54945 2.68508H5.3977C5.88984 2.68508 6.36136 2.48971 6.71089 2.14348L7.30359 1.54995C8.02984 0.819578 9.21031 0.816281 9.94068 1.54253L9.9415 1.54336L9.94892 1.54995L10.5425 2.14348C10.892 2.49053 11.3635 2.68508 11.8556 2.68508H12.7031C13.7327 2.68508 14.5677 3.51932 14.5677 4.54975V5.39636C14.5677 5.88849 14.7623 6.36084 15.1093 6.71037L15.7029 7.3039C16.4332 8.03015 16.4374 9.21061 15.7111 9.94098L15.7103 9.94181L15.7029 9.94923L15.1093 10.5428C14.7623 10.8915 14.5677 11.363 14.5677 11.8551V12.7034C14.5677 13.733 13.7335 14.5672 12.7039 14.5672H12.7031H11.854C11.3619 14.5672 10.8895 14.7626 10.5408 15.1096L9.94727 15.7024C9.22185 16.4327 8.04221 16.4368 7.31183 15.7122C7.31101 15.7114 7.31019 15.7106 7.30936 15.7098L7.30194 15.7024L6.70924 15.1096C6.36054 14.7626 5.88819 14.568 5.39605 14.5672H4.54945C3.51984 14.5672 2.6856 13.733 2.6856 12.7034V11.8535C2.6856 11.3613 2.49023 10.8898 2.14318 10.5411L1.55047 9.94758C0.820097 9.22215 0.815976 8.04251 1.5414 7.31214C1.5414 7.31132 1.54223 7.31049 1.54305 7.30967L1.55047 7.30225L2.14318 6.70872C2.49023 6.35919 2.6856 5.88767 2.6856 5.39471V4.54975" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                               <path d="M6.50787 10.7453L10.745 6.50812" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                               <path d="M10.6823 10.6862H10.6897" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                               <path d="M6.56053 6.56446H6.56795" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                         </span>
-                                                Electronics</a>
-
-                                            <ul class="mega-menu tp-submenu">
-                                                <li>
-                                                    <a href="shop.html" class="mega-menu-title">Featured</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html"><img src="{{asset('/')}}website/assets/img/header/menu/menu-1.jpg" alt=""></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">New Arrivals</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Best Seller</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Top Rated</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <li>
-                                                    <a href="shop.html" class="mega-menu-title">Computer & Laptops</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html"><img src="{{asset('/')}}website/assets/img/header/menu/menu-2.jpg" alt=""></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Top Brands</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Weekly Best Selling</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Most Viewed</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="shop.html" class="mega-menu-title">Accessories</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html"><img src="{{asset('/')}}website/assets/img/header/menu/menu-3.jpg" alt=""></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Headphones</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">TWS Earphone</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Gaming Headset</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="shop.html">
+                                        @foreach($categories as $category)
+                                            <li class="has-dropdown">
+                                                <a href="{{route('category',['id'=>$category->id])}}">
                                          <span>
                                             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                <path d="M14.5 1H2.5C1.67157 1 1 1.67157 1 2.5V10C1 10.8284 1.67157 11.5 2.5 11.5H14.5C15.3284 11.5 16 10.8284 16 10V2.5C16 1.67157 15.3284 1 14.5 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                <path d="M5.5 14.5H11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                <path d="M8.5 11.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                         </span>
-                                                Computers</a>
-
-                                            <ul class="tp-submenu">
-                                                <li class="has-dropdown">
-                                                    <a href="shop.html">Desktop</a>
+                                         </span>{{$category->name}}</a>
+                                                @if(count($category->subCategories)>0)
                                                     <ul class="tp-submenu">
-                                                        <li><a href="shop.html">Gaming</a></li>
-                                                        <li><a href="shop.html">WorkSpace</a></li>
-                                                        <li><a href="shop.html">Customize</a></li>
-                                                        <li><a href="shop.html">Luxury</a></li>
+                                                        @foreach($category->subCategories as $subCategory)
+                                                            <li><a href="">{{$subCategory->name}}</a></li>
+                                                        @endforeach
                                                     </ul>
-                                                </li>
-                                                <li><a href="shop.html">Laptop</a></li>
-                                                <li><a href="shop.html">Console</a></li>
-                                                <li><a href="shop.html">Top Rated</a></li>
-                                            </ul>
-                                        </li>
+                                                @endif
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </nav>
                             </div>
@@ -629,23 +539,28 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li  class="has-dropdown has-mega-menu">
+                                        <li class="has-dropdown has-mega-menu">
                                             <a href="shop.html">Shop</a>
                                             <div class="shop-mega-menu tp-submenu tp-mega-menu">
                                                 <div class="row">
                                                     <div class="col-lg-2">
                                                         <div class="shop-mega-menu-list">
-                                                            <a href="shop.html" class="shop-mega-menu-title">Shop Pages</a>
+                                                            <a href="shop.html" class="shop-mega-menu-title">Shop
+                                                                Pages</a>
                                                             <ul>
                                                                 <li><a href="shop-category.html">Grid Category</a></li>
                                                                 <li><a href="shop.html">Grid Layout</a></li>
                                                                 <li><a href="shop-list.html">List Layout</a></li>
-                                                                <li><a href="shop-masonary.html">Masonary Layout</a></li>
-                                                                <li><a href="shop-full-width.html">Full width Layout</a></li>
+                                                                <li><a href="shop-masonary.html">Masonary Layout</a>
+                                                                </li>
+                                                                <li><a href="shop-full-width.html">Full width Layout</a>
+                                                                </li>
                                                                 <li><a href="shop-1600.html">1600px Layout</a></li>
                                                                 <li><a href="shop.html">Left Sidebar</a></li>
-                                                                <li><a href="shop-right-sidebar.html">Right Sidebar</a></li>
-                                                                <li><a href="shop-no-sidebar.html">Hidden Sidebar</a></li>
+                                                                <li><a href="shop-right-sidebar.html">Right Sidebar</a>
+                                                                </li>
+                                                                <li><a href="shop-no-sidebar.html">Hidden Sidebar</a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -653,11 +568,15 @@
                                                         <div class="shop-mega-menu-list">
                                                             <a href="shop.html" class="shop-mega-menu-title">Features</a>
                                                             <ul>
-                                                                <li><a href="shop-filter-dropdown.html">Filter Dropdown</a></li>
-                                                                <li><a href="shop-filter-offcanvas.html">Filters Offcanvas</a></li>
+                                                                <li><a href="shop-filter-dropdown.html">Filter
+                                                                        Dropdown</a></li>
+                                                                <li><a href="shop-filter-offcanvas.html">Filters
+                                                                        Offcanvas</a></li>
                                                                 <li><a href="shop.html">Filters Sidebar</a></li>
-                                                                <li><a href="shop-load-more.html">Load More button</a></li>
-                                                                <li><a href="shop-infinite-scroll.html">Infinit scrolling</a></li>
+                                                                <li><a href="shop-load-more.html">Load More button</a>
+                                                                </li>
+                                                                <li><a href="shop-infinite-scroll.html">Infinit
+                                                                        scrolling</a></li>
                                                                 <li><a href="shop-list.html">Collections list</a></li>
                                                                 <li><a href="shop.html">Hidden search</a></li>
                                                                 <li><a href="shop.html">Search Full screen</a></li>
@@ -666,7 +585,8 @@
                                                     </div>
                                                     <div class="col-lg-2">
                                                         <div class="shop-mega-menu-list">
-                                                            <a href="shop.html" class="shop-mega-menu-title">Hover Style</a>
+                                                            <a href="shop.html" class="shop-mega-menu-title">Hover
+                                                                Style</a>
                                                             <ul>
                                                                 <li><a href="shop.html">Hover Style 1</a></li>
                                                                 <li><a href="shop.html">Hover Style 2</a></li>
@@ -708,26 +628,31 @@
                                                         <li><a href="shop-list.html">Shop List</a></li>
                                                         <li><a href="shop-category.html">Categories</a></li>
                                                         <li><a href="product-details.html">Product Details</a></li>
-                                                        <li><a href="product-details-progress.html">Product Details Progress</a></li>
+                                                        <li><a href="product-details-progress.html">Product Details
+                                                                Progress</a></li>
                                                     </ul>
                                                 </li>
                                                 <!-- third col -->
-                                                <li  class="has-dropdown">
+                                                <li class="has-dropdown">
                                                     <a href="product-details.html" class="mega-menu-title">Products</a>
                                                     <ul class="tp-submenu">
 
                                                         <li><a href="product-details.html">Product Simple</a></li>
                                                         <li><a href="product-details-video.html">With Video</a></li>
-                                                        <li><a href="product-details-countdown.html">With Countdown Timer</a></li>
-                                                        <li><a href="product-details-presentation.html">Product Presentation</a></li>
-                                                        <li><a href="product-details-swatches.html">Variations Swatches</a></li>
+                                                        <li><a href="product-details-countdown.html">With Countdown
+                                                                Timer</a></li>
+                                                        <li><a href="product-details-presentation.html">Product
+                                                                Presentation</a></li>
+                                                        <li><a href="product-details-swatches.html">Variations
+                                                                Swatches</a></li>
                                                         <li><a href="product-details-list.html">List View</a></li>
-                                                        <li><a href="product-details-gallery.html">Details Gallery</a></li>
+                                                        <li><a href="product-details-gallery.html">Details Gallery</a>
+                                                        </li>
                                                         <li><a href="product-details-slider.html">With Slider</a></li>
                                                     </ul>
                                                 </li>
                                                 <!-- third col -->
-                                                <li  class="has-dropdown">
+                                                <li class="has-dropdown">
                                                     <a href="shop.html" class="mega-menu-title">eCommerce</a>
                                                     <ul class="tp-submenu">
                                                         <li><a href="cart.html">Shopping Cart</a></li>
@@ -740,7 +665,7 @@
                                                 </li>
 
                                                 <!-- second col -->
-                                                <li  class="has-dropdown">
+                                                <li class="has-dropdown">
                                                     <a href="shop.html" class="mega-menu-title">More Pages</a>
                                                     <ul class="tp-submenu">
 
@@ -793,8 +718,7 @@
             </div>
         </div>
     </div>
-</header>
-<!-- header area end -->
+</header><!-- header area end -->
 
 <div id="header-sticky-2" class="tp-header-sticky-area">
     <div class="container">
@@ -878,7 +802,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li  class="has-dropdown has-mega-menu">
+                                <li class="has-dropdown has-mega-menu">
                                     <a href="shop.html">Shop</a>
                                     <div class="shop-mega-menu tp-submenu tp-mega-menu">
                                         <div class="row">
@@ -903,10 +827,12 @@
                                                     <a href="shop.html" class="shop-mega-menu-title">Features</a>
                                                     <ul>
                                                         <li><a href="shop-filter-dropdown.html">Filter Dropdown</a></li>
-                                                        <li><a href="shop-filter-offcanvas.html">Filters Offcanvas</a></li>
+                                                        <li><a href="shop-filter-offcanvas.html">Filters Offcanvas</a>
+                                                        </li>
                                                         <li><a href="shop.html">Filters Sidebar</a></li>
                                                         <li><a href="shop-load-more.html">Load More button</a></li>
-                                                        <li><a href="shop-infinite-scroll.html">Infinit scrolling</a></li>
+                                                        <li><a href="shop-infinite-scroll.html">Infinit scrolling</a>
+                                                        </li>
                                                         <li><a href="shop-list.html">Collections list</a></li>
                                                         <li><a href="shop.html">Hidden search</a></li>
                                                         <li><a href="shop.html">Search Full screen</a></li>
@@ -957,18 +883,21 @@
                                                 <li><a href="shop-list.html">Shop List</a></li>
                                                 <li><a href="shop-category.html">Categories</a></li>
                                                 <li><a href="product-details.html">Product Details</a></li>
-                                                <li><a href="product-details-progress.html">Product Details Progress</a></li>
+                                                <li><a href="product-details-progress.html">Product Details Progress</a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <!-- third col -->
-                                        <li  class="has-dropdown">
+                                        <li class="has-dropdown">
                                             <a href="product-details.html" class="mega-menu-title">Products</a>
                                             <ul class="tp-submenu">
 
                                                 <li><a href="product-details.html">Product Simple</a></li>
                                                 <li><a href="product-details-video.html">With Video</a></li>
-                                                <li><a href="product-details-countdown.html">With Countdown Timer</a></li>
-                                                <li><a href="product-details-presentation.html">Product Presentation</a></li>
+                                                <li><a href="product-details-countdown.html">With Countdown Timer</a>
+                                                </li>
+                                                <li><a href="product-details-presentation.html">Product Presentation</a>
+                                                </li>
                                                 <li><a href="product-details-swatches.html">Variations Swatches</a></li>
                                                 <li><a href="product-details-list.html">List View</a></li>
                                                 <li><a href="product-details-gallery.html">Details Gallery</a></li>
@@ -976,7 +905,7 @@
                                             </ul>
                                         </li>
                                         <!-- third col -->
-                                        <li  class="has-dropdown">
+                                        <li class="has-dropdown">
                                             <a href="shop.html" class="mega-menu-title">eCommerce</a>
                                             <ul class="tp-submenu">
                                                 <li><a href="cart.html">Shopping Cart</a></li>
@@ -989,7 +918,7 @@
                                         </li>
 
                                         <!-- second col -->
-                                        <li  class="has-dropdown">
+                                        <li class="has-dropdown">
                                             <a href="shop.html" class="mega-menu-title">More Pages</a>
                                             <ul class="tp-submenu">
 
@@ -1023,7 +952,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                     <div class="tp-header-action d-flex align-items-center justify-content-end ml-50">
                         <div class="tp-header-action-item d-none d-lg-block">
-                            <a href="compare.html"  class="tp-header-action-btn">
+                            <a href="compare.html" class="tp-header-action-btn">
                                 <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M19.1556 13L15.0778 17.0967L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

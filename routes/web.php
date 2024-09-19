@@ -14,8 +14,8 @@ use App\Http\Controllers\Admin\ProductController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
-Route::get('/product-category', [WebsiteController::class, 'category'])->name('category');
-Route::get('/product-detail', [WebsiteController::class, 'product'])->name('product-detail');
+Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('category');
+Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 
 Route::get('/show-cart', [CartController::class, 'index'])->name('show-cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
