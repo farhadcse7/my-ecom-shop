@@ -12,24 +12,32 @@ class WebsiteController extends Controller
     public function index()
     {
         return view('website.home.index', [
-            'products'   => Product::latest()->take(8)->get(),
-            'categories' => Category::all()
+            //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
+            'products' => Product::latest()->take(8)->get()
         ]);
     }
 
     public function category($id)
     {
         return view('website.category.index', [
-            'categories' => Category::all(),
-            'products'   => Product::where('category_id', $id)->latest()->get()
+            //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
+            'products' => Product::where('category_id', $id)->latest()->get()
+        ]);
+    }
+
+    public function subCategory($id)
+    {
+        return view('website.category.index', [
+            //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
+            'products' => Product::where('sub_category_id', $id)->latest()->get()
         ]);
     }
 
     public function product($id)
     {
         return view('website.product.index', [
-            'categories' => Category::all(),
-            'product'    => Product::find($id)
+            //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
+            'product' => Product::find($id)
         ]);
     }
 }

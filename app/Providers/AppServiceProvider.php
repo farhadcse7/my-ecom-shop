@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
+use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //only add above- use View, Here website.master is view directory of resources
+        View::composer(['website.master'], function ($view){
+            $view->with('categories',Category::all());
+        });
     }
 }

@@ -15,9 +15,16 @@ use App\Http\Controllers\Admin\ProductController;
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('category');
+Route::get('/product-sub-category/{id}', [WebsiteController::class, 'subCategory'])->name('sub-category');
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 
-Route::get('/show-cart', [CartController::class, 'index'])->name('show-cart');
+//Cart
+Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{rowId}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
+
+//Checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 //Admin Route List
