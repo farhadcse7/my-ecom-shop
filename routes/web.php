@@ -5,6 +5,8 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 
+use App\Http\Controllers\CustomerAuthController;
+
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -25,7 +27,18 @@ Route::post('/cart/update/{rowId}', [CartController::class, 'update'])->name('ca
 Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
 
 //Checkout
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order');
+Route::get('/checkout/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirm-order');
+Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order');
+
+//Customer Auth
+Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
+Route::get('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
+Route::post('/customer/store', [CustomerAuthController::class, 'store'])->name('customer.store');
+Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
+Route::post('/customer/login', [CustomerAuthController::class, 'loginCheck'])->name('customer.login');
+Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
 //Admin Route List
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {

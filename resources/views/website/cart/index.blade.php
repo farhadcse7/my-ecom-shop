@@ -41,6 +41,7 @@
                             </thead>
                             <tbody>
                             <!-- Cart Table for product list start -->
+                            @php($sum=0)
                             @foreach($cart_products as $cart_product)
                                 <tr>
                                     <!-- img -->
@@ -88,6 +89,7 @@
                                         </button>
                                     </td>
                                 </tr>
+                                @php($sum=$sum+ ($cart_product->price * $cart_product->qty))
                             @endforeach
                             <!-- Cart Table for product list end -->
                             </tbody>
@@ -120,29 +122,33 @@
                     <div class="tp-cart-checkout-wrapper">
                         <div class="tp-cart-checkout-top d-flex align-items-center justify-content-between">
                             <span class="tp-cart-checkout-top-title">Subtotal</span>
-                            <span class="tp-cart-checkout-top-price">{{Cart::subtotal()}}</span>
+                            <span class="tp-cart-checkout-top-price">TK. {{$sum}}</span>
+                        </div>
+                        <div class="tp-cart-checkout-shipping d-flex align-items-center justify-content-between">
+                            <span class="tp-cart-checkout-shipping-title">Tax Amount (15%)</span>
+                            <span class="tp-cart-checkout-shipping-title">TK. {{$tax=round(($sum*0.15))}}</span>
                         </div>
                         <div class="tp-cart-checkout-shipping">
                             <h4 class="tp-cart-checkout-shipping-title">Shipping</h4>
-
                             <div class="tp-cart-checkout-shipping-option-wrapper">
                                 <div class="tp-cart-checkout-shipping-option">
-                                    <input id="flat_rate" type="radio" name="shipping">
-                                    <label for="flat_rate">Flat rate: <span>$20.00</span></label>
+                                    <input id="flat_rate" type="radio" name="shipping" value="100">
+                                    <label for="flat_rate">Outside Dhaka: <span>TK. 100</span></label>
                                 </div>
                                 <div class="tp-cart-checkout-shipping-option">
-                                    <input id="local_pickup" type="radio" name="shipping">
-                                    <label for="local_pickup">Local pickup: <span> $25.00</span></label>
+                                    <input id="local_pickup" type="radio" name="shipping" value="50" checked>
+                                    <label for="local_pickup">Inside Dhaka: <span> TK. 50</span></label>
                                 </div>
                                 <div class="tp-cart-checkout-shipping-option">
-                                    <input id="free_shipping" type="radio" name="shipping">
-                                    <label for="free_shipping">Free shipping</label>
+                                    <input id="free_shipping" type="radio" name="shipping" value="0">
+                                    <label for="free_shipping">Free shipping: <span>TK. 0</span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
                             <span>Total</span>
-                            <span>{{Cart::priceTotal()}}</span>
+                            @php($shipping=0)
+                            <span id="total_amount">TK. {{$sum+$tax+$shipping}}</span>
                         </div>
                         <div class="tp-cart-checkout-proceed">
                             <a href="{{ route('checkout') }}" class="tp-cart-checkout-btn w-100">Proceed to Checkout</a>
@@ -153,4 +159,30 @@
         </div>
     </section>
     <!-- cart area end -->
+
+    <!-- js script for shipping amount start-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Define the sum and tax values from Laravel
+            let sum = {{$sum}};
+            let tax = {{$tax}};
+
+            // Listen for changes to the radio buttons
+            document.querySelectorAll('input[name="shipping"]').forEach(function (input) {
+                input.addEventListener('change', function () {
+                    // Get the selected shipping value
+                    let shippingCost = parseFloat(this.value);
+
+                    // Calculate the new total
+                    let total = sum + tax + shippingCost;
+
+                    // Update the total in the DOM
+                    document.getElementById('total_amount').innerText = 'TK. ' + total;
+                });
+            });
+        });
+    </script>
+    <!-- js script for shipping amount end-->
+
 @endsection
+
