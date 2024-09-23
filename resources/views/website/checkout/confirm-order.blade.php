@@ -26,12 +26,14 @@
     <section class="tp-checkout-area pb-120" data-bg-color="#EFF1F5">
         <div class="container">
             <div class="row">
+                <!-- Deliviery address side -->
                 <div class="col-lg-7">
                     <div class="tp-checkout-bill-area">
                         <h3 class="tp-checkout-bill-title">Billing Details</h3>
                         <div class="tp-checkout-bill-form">
-                            <form action="#">
-                                <div class="tp-checkout-bill-inner">
+                            <div class="tp-checkout-bill-inner">
+                                <form action="{{route('checkout.new-order')}}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="">
@@ -43,7 +45,7 @@
                                         <div class="col-md-12">
                                             <div class="tp-checkout-option-wrapper">
                                                 <div class="">
-                                                    <input id="checkbox-3" type="radio" name="payment_method" value="cash" checked >
+                                                    <input id="checkbox-3" type="radio" name="payment_method" value="cash" checked>
                                                     <label for="checkbox-3">Cash On Delivery</label>
                                                 </div>
                                                 <div class="">
@@ -52,122 +54,77 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="shipping" value="" id="hiddenShipping">
                                         <div class="tp-login-bottom">
                                             <button type="submit" class="tp-checkout-btn w-30">Confirm Order</button>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- Order side -->
                 <div class="col-lg-5">
                     <!-- checkout place order -->
                     <div class="tp-checkout-place white-bg">
                         <h3 class="tp-checkout-place-title">Your Order</h3>
-
                         <div class="tp-order-info-list">
                             <ul>
-
                                 <!-- header -->
                                 <li class="tp-order-info-list-header">
                                     <h4>Product</h4>
                                     <h4>Total</h4>
                                 </li>
-
                                 <!-- item list -->
-                                <li class="tp-order-info-list-desc">
-                                    <p>Xiaomi Redmi Note 9 Global V. <span> x 2</span></p>
-                                    <span>$274:00</span>
-                                </li>
-                                <li class="tp-order-info-list-desc">
-                                    <p>Office Chair Multifun <span> x 1</span></p>
-                                    <span>$74:00</span>
-                                </li>
-                                <li class="tp-order-info-list-desc">
-                                    <p>Apple Watch Series 6 Stainless <span> x 3</span></p>
-                                    <span>$362:00</span>
-                                </li>
-                                <li class="tp-order-info-list-desc">
-                                    <p>Body Works Mens Collection <span> x 1</span></p>
-                                    <span>$145:00</span>
-                                </li>
-
-                                <!-- subtotal -->
+                                @php($sum=0)
+                                @foreach(Cart::content() as $item)
+                                    <li class="tp-order-info-list-desc">
+                                        <p>{{$item->name}} <span> x {{$item->qty}}</span></p>
+                                        <p class="ms-auto">({{$item->price}} x {{$item->qty}})</p>
+                                        <span class="ps-5 ms-5">{{$item->price * $item->qty}}</span>
+                                    </li>
+                                    @php($sum=$sum+($item->price * $item->qty))
+                                @endforeach
+                            <!-- subtotal -->
                                 <li class="tp-order-info-list-subtotal">
                                     <span>Subtotal</span>
-                                    <span>$507.00</span>
+                                    <span>{{$sum}}</span>
                                 </li>
-
+                                <li class="tp-order-info-list-subtotal">
+                                    <span>Tax Amount (15%)</span>
+                                    <span>{{$tax=round($sum * 0.15)}}</span>
+                                </li>
                                 <!-- shipping -->
                                 <li class="tp-order-info-list-shipping">
                                     <span>Shipping</span>
                                     <div class="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
                                     <span>
-                                       <input id="flat_rate" type="radio" name="shipping">
-                                       <label for="flat_rate">Flat rate: <span>$20.00</span></label>
+                                       <input id="flat_rate" type="radio" name="shipping" value="100">
+                                       <label for="flat_rate">Outside Dhaka: <span>TK. 100</span></label>
                                     </span>
                                         <span>
-                                       <input id="local_pickup" type="radio" name="shipping">
-                                       <label for="local_pickup">Local pickup: <span>$25.00</span></label>
+                                       <input id="local_pickup" type="radio" name="shipping" value="50">
+                                       <label for="local_pickup">Inside Dhaka: <span>TK. 50</span></label>
                                     </span>
                                         <span>
-                                       <input id="free_shipping" type="radio" name="shipping">
+                                       <input id="free_shipping" type="radio" name="shipping" value="0" checked>
                                        <label for="free_shipping">Free shipping</label>
                                     </span>
                                     </div>
                                 </li>
-
                                 <!-- total -->
                                 <li class="tp-order-info-list-total">
                                     <span>Total</span>
-                                    <span>$1,476.00</span>
+                                    @php($shipping=0)
+                                    <span id="total_amount">TK. {{$totalPayable=$sum+$tax+$shipping}}</span>
                                 </li>
+                                <?php
+                                Session::put('order_total', $totalPayable);
+                                Session::put('tax_amount', $tax);
+                                //  Session::put('shipping_amount', $shipping);
+                                ?>
                             </ul>
-                        </div>
-                        <div class="tp-checkout-payment">
-                            <div class="tp-checkout-payment-item">
-                                <input type="radio" id="back_transfer" name="payment">
-                                <label for="back_transfer" data-bs-toggle="direct-bank-transfer">Direct Bank
-                                    Transfer</label>
-                                <div class="tp-checkout-payment-desc direct-bank-transfer">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                        payment reference. Your order will not be shipped until the funds have cleared
-                                        in our account.</p>
-                                </div>
-                            </div>
-                            <div class="tp-checkout-payment-item">
-                                <input type="radio" id="cheque_payment" name="payment">
-                                <label for="cheque_payment">Cheque Payment</label>
-                                <div class="tp-checkout-payment-desc cheque-payment">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                        payment reference. Your order will not be shipped until the funds have cleared
-                                        in our account.</p>
-                                </div>
-                            </div>
-                            <div class="tp-checkout-payment-item">
-                                <input type="radio" id="cod" name="payment">
-                                <label for="cod">Cash on Delivery</label>
-                                <div class="tp-checkout-payment-desc cash-on-delivery">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                        payment reference. Your order will not be shipped until the funds have cleared
-                                        in our account.</p>
-                                </div>
-                            </div>
-                            <div class="tp-checkout-payment-item paypal-payment">
-                                <input type="radio" id="paypal" name="payment">
-                                <label for="paypal">PayPal <img src="assets/img/icon/payment-option.png" alt="">
-                                    <a href="#">What is PayPal?</a></label>
-                            </div>
-                        </div>
-                        <div class="tp-checkout-agree">
-                            <div class="tp-checkout-option">
-                                <input id="read_all" type="checkbox">
-                                <label for="read_all">I have read and agree to the website.</label>
-                            </div>
-                        </div>
-                        <div class="tp-checkout-btn-wrapper">
-                            <a href="#" class="tp-checkout-btn w-100">Place Order</a>
                         </div>
                     </div>
                 </div>
@@ -175,4 +132,39 @@
         </div>
     </section>
     <!-- checkout area end -->
+
+    <!-- js script for shipping amount start-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Define the sum and tax values from Laravel
+            let sum = {{$sum}};
+            let tax = {{$tax}};
+            let shippingCost = {{$shipping}};
+
+            // Function to calculate and update the total
+            function updateShippingCost() {
+                document.getElementById('hiddenShipping').value = shippingCost;
+            }
+
+            // Set initial total with default shipping cost
+            updateShippingCost();
+
+            // Listen for changes to the radio buttons
+            document.querySelectorAll('input[name="shipping"]').forEach(function (input) {
+                let shippingCost = 0;
+                input.addEventListener('change', function () {
+                    // Get the selected shipping value
+                    let shippingCost = parseFloat(this.value);
+
+                    // Calculate the new total
+                    let total = sum + tax + shippingCost;
+
+                    // Update the total in the DOM
+                    document.getElementById('total_amount').innerText = 'TK. ' + total;
+                    document.getElementById('hiddenShipping').value = shippingCost;
+                });
+            });
+        });
+    </script>
+    <!-- js script for shipping amount end-->
 @endsection

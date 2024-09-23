@@ -13,7 +13,7 @@ class CartController extends Controller
 
     public function index()
     {
-        // return  Cart::content();
+        // return  Cart::content(); //without passing Cart::content() as variable we can use into file as it's global
         return view('website.cart.index', ['cart_products' => Cart::content()]);
     }
 

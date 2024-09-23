@@ -21,21 +21,21 @@ Route::get('/product-sub-category/{id}', [WebsiteController::class, 'subCategory
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 
 //Cart
-Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index'); //cart product list showing
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{rowId}', [CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
 
 //Checkout
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order');
 Route::get('/checkout/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirm-order');
+Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order');
 Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order');
 
 //Customer Auth
 Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
 Route::get('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
-Route::post('/customer/store', [CustomerAuthController::class, 'store'])->name('customer.store');
+Route::post('/customer/store', [CustomerAuthController::class, 'newCustomer'])->name('customer.store');
 Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
 Route::post('/customer/login', [CustomerAuthController::class, 'loginCheck'])->name('customer.login');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');

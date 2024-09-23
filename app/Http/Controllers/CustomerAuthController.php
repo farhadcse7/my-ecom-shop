@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +16,7 @@ class CustomerAuthController extends Controller
         return view('customer.register');
     }
 
-    public function store(Request $request)
+    public function newCustomer(Request $request)
     {
         // return $request;
         $this->customer = Customer::newCustomer($request);
@@ -27,7 +28,7 @@ class CustomerAuthController extends Controller
 
     public function dashboard()
     {
-        return view('customer.dashboard');
+        return view('customer.dashboard', ['orders' => Order::where('customer_id', Session::get('customer_id'))->latest()->get()]);
     }
 
     public function login()

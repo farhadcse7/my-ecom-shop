@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col">
-                    <h4 class="text-center text-success">session('message')</h4>
+                    <h4 class="text-center text-success">{{session('message')}}</h4>
                 </div>
             </div>
         </div>

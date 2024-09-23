@@ -136,11 +136,11 @@
                                     <label for="flat_rate">Outside Dhaka: <span>TK. 100</span></label>
                                 </div>
                                 <div class="tp-cart-checkout-shipping-option">
-                                    <input id="local_pickup" type="radio" name="shipping" value="50" checked>
+                                    <input id="local_pickup" type="radio" name="shipping" value="50">
                                     <label for="local_pickup">Inside Dhaka: <span> TK. 50</span></label>
                                 </div>
                                 <div class="tp-cart-checkout-shipping-option">
-                                    <input id="free_shipping" type="radio" name="shipping" value="0">
+                                    <input id="free_shipping" type="radio" name="shipping" value="0" checked>
                                     <label for="free_shipping">Free shipping: <span>TK. 0</span></label>
                                 </div>
                             </div>
