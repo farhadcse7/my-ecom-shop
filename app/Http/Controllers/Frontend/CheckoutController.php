@@ -33,7 +33,7 @@ class CheckoutController extends Controller
         // return $request;
         $this->order              = new Order();
         $this->order->customer_id = Session::get('customer_id');
-        $this->order->order_total = Session::get('order_total');
+        $this->order->order_total = Session::get('order_total') + $request->shipping; //as shipping amount is passed hidden
         $this->order->tax_amount  = Session::get('tax_amount');
         // $this->order->shipping_amount  = Session::get('shipping_amount');
         $this->order->shipping_amount  = $request->shipping;

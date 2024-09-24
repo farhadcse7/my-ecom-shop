@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -66,5 +67,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     //route for dynamically get product subcategory according to category
     Route::get('/get-sub-category-by-category', [ProductController::class, 'getSubCategoryByCategory'])->name('get-sub-category-by-category');
 
+    //Admin Order
+    Route::get('/admin-order/index', [AdminOrderController::class, 'index'])->name('admin-order.index');
+    Route::get('/admin-order/detail/{id}', [AdminOrderController::class, 'detail'])->name('admin-order.detail');
+    Route::get('/admin-order/edit/{id}', [AdminOrderController::class, 'edit'])->name('admin-order.edit');
+    Route::post('/admin-order/update/{id}', [AdminOrderController::class, 'update'])->name('admin-order.update');
+    Route::get('/admin-order/show-invoice/{id}', [AdminOrderController::class, 'showInvoice'])->name('admin-order.show-invoice');
+    Route::get('/admin-order/download-invoice/{id}', [AdminOrderController::class, 'downloadInvoice'])->name('admin-order.download-invoice');
+    Route::get('/admin-order/destroy/{id}', [AdminOrderController::class, 'destroy'])->name('admin-order.destroy');
 
 });

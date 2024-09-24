@@ -180,6 +180,7 @@
                                             <label for="tp_password_two">Password</label>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
                                     <div class="tp-login-remeber">
