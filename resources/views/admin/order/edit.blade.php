@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="" method="POST">
+                    <form action="{{route('admin-order.update', ['id'=>$order->id])}}" method="POST">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-md-3">Order Total</label>
@@ -62,9 +62,9 @@
                             <div class="col-md-9">
                                 <select class="form-control" name="courier_id">
                                     <option value="">-- Select Courier --</option>
-                                    <option value="1">SA Poribahan</option>
-                                    <option value="2">SteadFast</option>
-                                    <option value="3">Sundorban</option>
+                                    @foreach($couriers as $courier)
+                                        <option value="{{$courier->id}}" @selected($order->courier_id == $courier->id)>{{$courier->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

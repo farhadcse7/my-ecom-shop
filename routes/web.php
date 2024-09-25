@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+//frontend
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
-
 use App\Http\Controllers\CustomerAuthController;
 
+//backend
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\CourierController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -75,5 +78,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/admin-order/show-invoice/{id}', [AdminOrderController::class, 'showInvoice'])->name('admin-order.show-invoice');
     Route::get('/admin-order/download-invoice/{id}', [AdminOrderController::class, 'downloadInvoice'])->name('admin-order.download-invoice');
     Route::get('/admin-order/destroy/{id}', [AdminOrderController::class, 'destroy'])->name('admin-order.destroy');
+
+    //Courier (Resource)
+    Route::resource('courier', CourierController::class);
 
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Courier;
 use Illuminate\Http\Request;
 
 class CourierController extends Controller
@@ -12,7 +13,7 @@ class CourierController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.courier.index', ['couriers' => Courier::all()]);
     }
 
     /**
@@ -20,7 +21,7 @@ class CourierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.courier.create');
     }
 
     /**
@@ -28,38 +29,51 @@ class CourierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  return $request;
+        $request->validate(
+            [
+                'name'   => 'required',
+                'email'  => 'required',
+                'mobile' => 'required',
+            ]
+        );
+        Courier::newCourier($request);
+        return back()->with('message', 'Courier info save successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Courier $courier)
     {
-        //
+        return view('admin.courier.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Courier $courier)
     {
-        //
+        return view('admin.courier.edit', ['courier' => $courier]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Courier $courier)
     {
-        //
+//        return $request;
+        Courier::updateCourier($request, $courier->id);
+        return redirect('/courier')->with('message', 'Courier info update successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Courier $courier)
     {
-        //
+        Courier::deleteCourier($courier->id);
+        return redirect('/courier')->with('message', 'Courier info delete successfully.');
     }
+
 }
