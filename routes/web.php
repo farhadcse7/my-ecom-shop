@@ -34,8 +34,8 @@ Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('car
 //Checkout
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/checkout/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirm-order');
-Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order');
-Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order');
+Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order'); //save order info using post
+Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order'); //Order info save successfully.- message will show
 
 //Customer Auth
 Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
