@@ -120,16 +120,16 @@
                     <div class="invoice-box">
                         <table cellpadding="0" cellspacing="0">
                             <tr class="top">
-                                <td colspan="2">
+                                <td colspan="4">
                                     <table>
                                         <tr>
                                             <td class="title">
-                                                <img src="https://sparksuite.github.io/simple-html-invoice-template/images/logo.png" style="width: 100%; max-width: 300px"/>
+                                                <img src="{{asset('/')}}website/assets/img/logo/logo.svg" style="width: 100%; max-width: 300px"/>
                                             </td>
                                             <td>
-                                                Invoice #: 123<br/>
-                                                Created: January 1, 2023<br/>
-                                                Due: February 1, 2023
+                                                Invoice #: {{$order->id}}<br/>
+                                                Order Date: {{$order->order_date}}<br/>
+                                                Invoice Date: {{date('Y-m-d')}}
                                             </td>
                                         </tr>
                                     </table>
@@ -137,57 +137,58 @@
                             </tr>
 
                             <tr class="information">
-                                <td colspan="2">
+                                <td colspan="4">
                                     <table>
                                         <tr>
                                             <td>
-                                                Sparksuite, Inc.<br/>
-                                                12345 Sunny Road<br/>
-                                                Sunnyville, CA 12345
+                                                <h3>Delivery Address</h3>
+                                                {{$order->customer->name}}<br/>
+                                                {{$order->customer->email}}<br/>
+                                                {{$order->customer->mobile}}<br/>
+                                                {{$order->delivery_address}}
                                             </td>
                                             <td>
-                                                Acme Corp.<br/>
+                                                <h3>Company Info</h3>
+                                                Shofy Corp.<br/>
                                                 John Doe<br/>
-                                                john@example.com
+                                                017464587461<br/>
+                                                john@shofy.com
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
-
-                            <tr class="heading">
-                                <td>Payment Method</td>
-                                <td>Check #</td>
-                            </tr>
-
-                            <tr class="details">
-                                <td>Check</td>
-                                <td>1000</td>
-                            </tr>
-
                             <tr class="heading">
                                 <td>Item</td>
-                                <td>Price</td>
+                                <td style="text-align: center">Unit Price</td>
+                                <td style="text-align: center">Quantity</td>
+                                <td style="text-align: right">Total Price</td>
                             </tr>
-
-                            <tr class="item">
-                                <td>Website design</td>
-                                <td>$300.00</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Hosting (3 months)</td>
-                                <td>$75.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Domain name (1 year)</td>
-                                <td>$10.00</td>
-                            </tr>
-
+                            @php($sum=0)
+                            @foreach($order->products as $product) <!-- here products()= OrderDetail model -->
+                                <tr class="item">
+                                    <td>{{$product->product_name}}</td>
+                                    <td style="text-align: center">{{$product->product_price}}</td>
+                                    <td style="text-align: center">{{$product->product_qty}}</td>
+                                    <td style="text-align: right">{{$product->product_price * $product->product_qty }}</td>
+                                </tr>
+                                @php($sum=$sum + ($product->product_price * $product->product_qty))
+                            @endforeach
                             <tr class="total">
-                                <td></td>
-                                <td>Total: $385.00</td>
+                                <td colspan="3"></td>
+                                <td>Sub Total: TK. {{$sum}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="3"></td>
+                                <td>Tax Amount (15%): TK. {{$order->tax_amount}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="3"></td>
+                                <td>Shipping Amount: TK. {{$order->shipping_amount}}</td>
+                            </tr>
+                            <tr class="total">
+                                <td colspan="3"></td>
+                                <td>Total Payable: TK. {{$order->order_total}}</td>
                             </tr>
                         </table>
                     </div>
