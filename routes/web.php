@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CustomerMiddleware;
 use Illuminate\Support\Facades\Route;
 
 //frontend
@@ -8,6 +9,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\CustomerProfileController;
 
 //backend
 use App\Http\Controllers\Admin\DashboardController;
@@ -38,12 +40,21 @@ Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->nam
 Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order'); //Order info save successfully.- message will show
 
 //Customer Auth
-Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
 Route::get('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
 Route::post('/customer/store', [CustomerAuthController::class, 'newCustomer'])->name('customer.store');
 Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
 Route::post('/customer/login', [CustomerAuthController::class, 'loginCheck'])->name('customer.login');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+
+//Customer Profile
+Route::middleware([CustomerMiddleware::class])->group(function () {
+    Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard'); //used CustomerAuthController
+    Route::get('/customer/profile', [CustomerProfileController::class, 'index'])->name('customer.profile');
+    Route::get('/customer/order', [CustomerProfileController::class, 'order'])->name('customer.order');
+    Route::get('/customer/payment', [CustomerProfileController::class, 'payment'])->name('customer.payment');
+    Route::get('/customer/change-password', [CustomerProfileController::class, 'changePassword'])->name('customer.change-password');
+    Route::post('/customer/update-password', [CustomerProfileController::class, 'updatePassword'])->name('customer.update-password');
+});
 
 // SSLCOMMERZ Start
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);

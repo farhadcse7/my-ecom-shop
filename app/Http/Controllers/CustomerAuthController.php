@@ -23,6 +23,9 @@ class CustomerAuthController extends Controller
         Session::put('customer_id', $this->customer->id);
         Session::put('customer_name', $this->customer->name);
 
+        if (isset($request->check_page) && $request->check_page == 'dashboard'){
+            return redirect('/customer/dashboard');
+        }
         return redirect('/checkout/confirm-order');
     }
 

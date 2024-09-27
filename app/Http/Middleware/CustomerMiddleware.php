@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Session;
 
 class CustomerMiddleware
 {
@@ -15,6 +16,10 @@ class CustomerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (Session::get('customer_id')) {
+            return $next($request);
+        } else {
+            return redirect('/customer/login');
+        }
     }
 }
