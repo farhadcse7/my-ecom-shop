@@ -27,12 +27,14 @@
                             <label for="unitName" class="col-md-3 form-label">Unit Name</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="name" id="unitName" placeholder="Unit Name" type="text">
+                                <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="unitCode" class="col-md-3 form-label">Unit Code</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="code" id="unitCode" placeholder="Unit Code" type="text">
+                                <span class="text-danger">{{$errors->has('code') ? $errors->first('code') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">

@@ -32,9 +32,12 @@ class CourierController extends Controller
         //  return $request;
         $request->validate(
             [
-                'name'   => 'required',
-                'email'  => 'required',
-                'mobile' => 'required',
+                'name'    => 'required|string|max:255',
+                'email'   => 'required|string|email|max:255|unique:couriers,email',
+                'mobile'  => 'required|string|max:15|unique:couriers,mobile',
+                'address' => 'required|string|max:500',
+                'logo'    => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+                'status'  => 'required|integer|in:0,1',
             ]
         );
         Courier::newCourier($request);

@@ -29,7 +29,14 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        $request->validate(
+            [
+                'name'        => 'required|string|unique:units,name',
+                'code'        => 'required|string|unique:units,code',
+                'description' => 'nullable|string|max:1000',
+            ]
+        );
+
         Unit::newUnit($request);
         return back()->with('message', 'Unit info created successfully');
     }

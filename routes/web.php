@@ -20,9 +20,14 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\CourierController;
+use App\Http\Controllers\Admin\SliderController;
 
 //Website Route list
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
+Route::get('/about-us', [WebsiteController::class, 'about'])->name('about');
+Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
+Route::get('/contact-us', [WebsiteController::class, 'contact'])->name('contact');
+Route::get('/ajax-search', [WebsiteController::class, 'ajaxSearch'])->name('ajax-search'); //ajax product search
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('category');
 Route::get('/product-sub-category/{id}', [WebsiteController::class, 'subCategory'])->name('sub-category');
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
@@ -107,5 +112,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     //Courier (Resource)
     Route::resource('courier', CourierController::class);
+
+    //Slider (Resource)
+    Route::resource('slider', SliderController::class);
 
 });

@@ -50,6 +50,7 @@ class Brand extends Model
     public static function deleteBrand($id)
     {
         self::$brand = Brand::find($id);
+        unlink(self::$brand->image);
         self::$brand->delete();
     }
 }

@@ -33,6 +33,10 @@ class CheckoutController extends Controller
     public function newOrder(Request $request)
     {
 //         return $request;
+        $request->validate(
+            [
+                'delivery_address' => 'required'
+            ]);
         if ($request->payment_method == 'cash') {
             $this->order              = new Order();
             $this->order->customer_id = Session::get('customer_id');

@@ -32,12 +32,14 @@
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('category_id') ? $errors->first('category_id') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="subcategoryName" class="col-md-3 form-label">Sub Category Name</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="name" id="subcategoryName" placeholder="Sub Category Name" type="text">
+                                <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -50,6 +52,7 @@
                             <label for="image" class="col-md-3 form-label">Sub Category Image</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="image" id="image" type="file">
+                                <span class="text-danger">{{$errors->has('image') ? $errors->first('image') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">

@@ -20,6 +20,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'name'        => 'required|string|unique:categories,name',
+                'description' => 'required|string',
+                'image'       => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]
+        );
         Category::newCategory($request);
         return back()->with('message', 'Category info created successfully');
     }

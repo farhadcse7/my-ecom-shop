@@ -51,6 +51,7 @@ class Category extends Model
     public static function deleteCategory($id)
     {
         self::$category = Category::find($id);
+        unlink(self::$category->image);
         self::$category->delete();
     }
 
@@ -58,6 +59,13 @@ class Category extends Model
     public function subCategories()
     {
         return $this->hasMany(SubCategory::class);
+    }
+
+
+    //for showing specific category total products - added
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
 }

@@ -49,12 +49,14 @@
                             <label for="address" class="col-md-3 form-label">Courier Address</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="address" id="address" placeholder="Courier Address"></textarea>
+                                <span class="text-danger">{{$errors->has('address') ? $errors->first('address') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="image" class="col-md-3 form-label">Courier Logo</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="logo" id="image" type="file"/>
+                                <span class="text-danger">{{$errors->has('logo') ? $errors->first('logo') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">

@@ -33,17 +33,20 @@
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('category_id') ? $errors->first('category_id') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="" class="col-md-3 form-label">Sub Category Name</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="sub_category_id" id="subCategory"> <!-- subCategory id for ajax response load-->
+                                <select class="form-control" name="sub_category_id" id="subCategory">
+                                    <!-- subCategory id for ajax response load-->
                                     <option value="">-- Select Sub Category Name --</option>
                                     @foreach($sub_categories as $sub_category)
                                         <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('sub_category_id') ? $errors->first('sub_category_id') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -55,6 +58,7 @@
                                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('brand_id') ? $errors->first('brand_id') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -66,6 +70,7 @@
                                         <option value="{{$unit->id}}">{{$unit->name}}</option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger">{{$errors->has('unit_id') ? $errors->first('unit_id') : ''}}</span>
                             </div>
                         </div>
 
@@ -73,12 +78,14 @@
                             <label for="subcategoryName" class="col-md-3 form-label">Product Name</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="name" id="subcategoryName" placeholder="Product Name" type="text">
+                                <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="categoryName" class="col-md-3 form-label">Product Code</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="code" id="categoryName" placeholder="Product Code" type="text">
+                                <span class="text-danger">{{$errors->has('code') ? $errors->first('code') : ''}}</span>
                             </div>
                         </div>
 
@@ -95,42 +102,57 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="image" class="col-md-3 form-label">Product Price</label>
+                            <label class="col-md-3 form-label">Product Price</label>
                             <div class="col-md-9">
                                 <div class="input-group">
-                                    <input class="form-control" name="regular_price" placeholder="regular price" id="image" type="number"/>
-                                    <input class="form-control" name="selling_price" placeholder="selling price" id="image" type="number"/>
+                                    <input class="form-control" name="regular_price" placeholder="regular price" type="number"/>
+                                    <input class="form-control" name="selling_price" placeholder="selling price" type="number"/>
                                 </div>
+                                <span class="text-danger">{{$errors->has('regular_price') ? $errors->first('regular_price') : ''}}</span>
+                                <span class="text-danger">{{$errors->has('selling_price') ? $errors->first('selling_price') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="image" class="col-md-3 form-label">Stock Amount</label>
+                            <label for="stock_amount" class="col-md-3 form-label">Stock Amount</label>
                             <div class="col-md-9">
-                                <input class="form-control" name="stock_amount" placeholder="Stock Amount" id="image" type="number"/>
+                                <input class="form-control" name="stock_amount" placeholder="Stock Amount" id="stock_amount" type="number"/>
+                                <span class="text-danger">{{$errors->has('stock_amount') ? $errors->first('stock_amount') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="description" class="col-md-3 form-label">Meta title</label>
+                            <label for="meta_title" class="col-md-3 form-label">Meta title</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" name="meta_title" id="description" placeholder="Short Description"></textarea>
+                                <textarea class="form-control" name="meta_title" id="meta_title" placeholder="Short Description"></textarea>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="description" class="col-md-3 form-label">Meta description</label>
+                            <label for="meta_description" class="col-md-3 form-label">Meta description</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" name="meta_description" id="description" placeholder="Short Description"></textarea>
+                                <textarea class="form-control" name="meta_description" id="meta_description" placeholder="Short Description"></textarea>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="image" class="col-md-3 form-label">Product Image</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="image" id="image" type="file"/>
+                                <span class="text-danger">{{$errors->has('image') ? $errors->first('image') : ''}}</span>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="otherimage" class="col-md-3 form-label">Product Other Image</label>
                             <div class="col-md-9">
                                 <input class="form-control" name="other_image[]" multiple id="otherimage" type="file"/>
+                                <span class="text-danger">
+                                    {{-- Error if no image is uploaded --}}
+                                    @if ($errors->has('other_image'))
+                                        {{ $errors->first('other_image') }}
+                                    @endif
+
+                                    {{-- Errors for each uploaded file --}}
+                                    @foreach ($errors->get('other_image.*') as $message)
+                                        {{ $message[0] }}<br>
+                                    @endforeach
+                                </span>
                             </div>
                         </div>
                         <div class="row mb-4">

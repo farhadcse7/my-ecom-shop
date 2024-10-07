@@ -520,7 +520,7 @@
                                                     </div>
                                                     <div class="tp-product-content-2 pt-15">
                                                         <div class="tp-product-tag-2">
-                                                            <a href="#">Whitetails Store</a>
+                                                            <a href="{{route('sub-category',['id'=>$product->subCategory->id])}}">{{$product->subCategory->name}}</a>
                                                         </div>
                                                         <h3 class="tp-product-title-2">
                                                             <a href="{{route('product-detail', ['id'=>$product->id])}}">{{$product->name}}</a>

@@ -52,6 +52,7 @@ class SubCategory extends Model
     public static function deleteSubCategory($id)
     {
         self::$subCategory = SubCategory::find($id);
+        unlink(self::$subCategory->image);
         self::$subCategory->delete();
     }
 
@@ -61,5 +62,11 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
 //        return $this->belongsTo(Category::class, 'cat_id'); //when category_id not used, here cat_id foreign key
 
+    }
+
+    //for category deletion cascade
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

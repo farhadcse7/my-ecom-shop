@@ -133,6 +133,7 @@
                                     <div class="tp-login-input-box">
                                         <div class="tp-login-input">
                                             <input id="name" name="name" type="text" placeholder="Enter Your Name">
+                                            <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : ''}}</span>
                                         </div>
                                         <div class="tp-login-input-title">
                                             <label for="name">Full Name</label>
@@ -141,6 +142,7 @@
                                     <div class="tp-login-input-box">
                                         <div class="tp-login-input">
                                             <input id="email_two" name="email" type="email" placeholder="Enter Your Email">
+                                            <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                                         </div>
                                         <div class="tp-login-input-title">
                                             <label for="email_two">Email Address</label>
@@ -149,6 +151,7 @@
                                     <div class="tp-login-input-box">
                                         <div class="tp-login-input">
                                             <input id="mobile" name="mobile" type="number" placeholder="Enter Your Mobile Number">
+                                            <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : ''}}</span>
                                         </div>
                                         <div class="tp-login-input-title">
                                             <label for="mobile">Mobile </label>
@@ -157,6 +160,7 @@
                                     <div class="tp-login-input-box">
                                         <div class="tp-login-input">
                                             <input id="tp_password_two" name="password" type="password" placeholder="Enter Your Password">
+                                            <span class="text-danger">{{$errors->has('password') ? $errors->first('password') : ''}}</span>
                                         </div>
                                         <div class="tp-login-input-eye" id="password-show-toggle">
                                     <span id="open-eye" class="open-eye">

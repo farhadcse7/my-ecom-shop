@@ -32,6 +32,14 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         //return $request;
+        $request->validate(
+            [
+                'category_id' => 'required|integer|exists:categories,id',
+                'name'        => 'required|string|unique:sub_categories,name',
+                'description' => 'nullable|string',
+                'image'       => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]
+        );
         SubCategory::newSubCategory($request);
         return back()->with('message', 'Sub Category info created successfully');
     }

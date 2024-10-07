@@ -39,6 +39,7 @@
                                             <div class="">
                                                 <label>Street address <span>*</span></label>
                                                 <textarea name="delivery_address" id="text-area" placeholder="Delivery Address" class="form-control" style="height: 100px"></textarea>
+                                                <span class="text-danger">{{$errors->has('delivery_address') ? $errors->first('delivery_address') : ''}}</span>
                                             </div>
                                         </div>
 

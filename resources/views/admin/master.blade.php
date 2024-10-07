@@ -433,7 +433,7 @@
                                                          class="avatar  profile-user brround cover-image">
 												</span>
                                             <div class="text-center p-1 d-flex d-lg-none-max">
-                                                <h6 class="mb-0" id="profile-heading">Elena<i class="user-angle ms-1 fa fa-angle-down "></i></h6>
+                                                <h6 class="mb-0" id="profile-heading">Admin<i class="user-angle ms-1 fa fa-angle-down "></i></h6>
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -481,7 +481,7 @@
             <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
             <div class="app-sidebar">
                 <div class="side-header">
-                    <a class="header-brand1" href="index.html">
+                    <a class="header-brand1" href="{{route('dashboard')}}">
                         <img src="{{asset('/')}}admin/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="{{asset('/')}}admin/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
                         <img src="{{asset('/')}}admin/assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
@@ -506,6 +506,15 @@
                         </li>
                         <li>
                             <h3>Components</h3>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M21.5,21H20V4.5C20,4.223877,19.776123,4,19.5,4S19,4.223877,19,4.5V21h-3v-8.5c0-0.276123-0.223877-0.5-0.5-0.5S15,12.223877,15,12.5V21h-3V8.5C12,8.223877,11.776123,8,11.5,8S11,8.223877,11,8.5V21H8v-4.5C8,16.223877,7.776123,16,7.5,16S7,16.223877,7,16.5V21H3V2.5C3,2.223877,2.776123,2,2.5,2S2,2.223877,2,2.5v19.0005493C2.0001831,21.7765503,2.223999,22.0001831,2.5,22h19c0.276123,0,0.5-0.223877,0.5-0.5S21.776123,21,21.5,21z"/></svg>
+                                <span class="side-menu__label">Slider Module</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{{route('slider.create')}}" class="slide-item"> Add Slider</a></li>
+                                <li><a href="{{route('slider.index')}}" class="slide-item">Manage Slider</a></li>
+                            </ul>
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="#">
@@ -578,17 +587,7 @@
                                 <span class="side-menu__label">Customer Module</span><i class="angle fa fa-angle-right"></i>
                             </a>
                             <ul class="slide-menu">
-                                <li><a href="chat.html" class="slide-item">Manage Customer</a></li>
-                            </ul>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M16.6766357,7.3233643C15.7435303,4.2431641,12.8848267,2,9.5,2C5.3578491,2,2,5.3578491,2,9.5c0,3.3848267,2.2431641,6.2435303,5.3233643,7.1766357C8.2564697,19.7568359,11.1151733,22,14.5,22c4.1402588-0.0045166,7.4954834-3.3597412,7.5-7.5C22,11.1151733,19.7568359,8.2564697,16.6766357,7.3233643z M16,9.5c0,0.8760376-0.1757202,1.7103882-0.4899292,2.4730225l-3.4830933-3.4830933C12.7896118,8.1757202,13.6239624,8,14.5,8c0.4649658,0.0005493,0.9176636,0.0518799,1.3549194,0.1450806C15.9481201,8.5823364,15.9994507,9.0350342,16,9.5z M15.0283203,12.906311c-0.5328369,0.862854-1.2597656,1.5897217-2.1226807,2.1224365l-3.9343872-3.9343872c0.5328369-0.8630981,1.2598877-1.5901489,2.1229858-2.1230469L15.0283203,12.906311z M7.0787354,15.5289917C4.6891479,14.5682983,3,12.2332764,3,9.5C3,5.9101562,5.9101562,3,9.5,3c2.7313232,0.0031738,5.06427,1.6907959,6.0264893,4.0783081C15.1900635,7.0321655,14.8491211,7,14.5,7C10.3578491,7,7,10.3578491,7,14.5C7,14.8500366,7.0323486,15.1917114,7.0787354,15.5289917z M8,14.5c0-0.8759766,0.1757812-1.7103271,0.4899292-2.4729614l3.4830322,3.4830322C11.2103271,15.8242188,10.3759766,16,9.5,16c-0.465332,0-0.918457-0.0509644-1.3560791-0.1439209C8.0509644,15.418457,8,14.965332,8,14.5z M14.5,21c-2.7332764,0-5.0682983-1.6891479-6.0289917-4.0787354C8.8082886,16.9676514,9.1499634,17,9.5,17c4.1402588-0.0045166,7.4954834-3.3597412,7.5-7.5c0-0.3491211-0.0321655-0.6900635-0.0783081-1.0264893C19.3092041,9.43573,20.9968262,11.7686768,21,14.5C21,18.0898438,18.0898438,21,14.5,21z"/></svg>
-                                <span class="side-menu__label">User Module</span><i class="angle fa fa-angle-right"></i>
-                            </a>
-                            <ul class="slide-menu">
-                                <li><a href="treeview.html" class="slide-item">Add User</a></li>
-                                <li><a href="typography.html" class="slide-item">Manage User</a></li>
+                                <li><a href="" class="slide-item">Manage Customer</a></li>
                             </ul>
                         </li>
                     </ul>

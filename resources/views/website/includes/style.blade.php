@@ -11,3 +11,4 @@
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/flaticon_shofy.css">
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/spacing.css">
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/main.css">
+<link rel="stylesheet" href="{{asset('/')}}website/assets/css/custom.css">

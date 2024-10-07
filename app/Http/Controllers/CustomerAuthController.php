@@ -19,6 +19,14 @@ class CustomerAuthController extends Controller
     public function newCustomer(Request $request)
     {
         // return $request;
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:customers,email|max:255',
+                'password' => 'required|string|min:8',
+                'mobile' => 'required|string|unique:customers,mobile|max:15'
+            ]
+        );
         $this->customer = Customer::newCustomer($request);
         Session::put('customer_id', $this->customer->id);
         Session::put('customer_name', $this->customer->name);

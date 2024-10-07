@@ -54,6 +54,7 @@ class Courier extends Model
     public static function deleteCourier($id)
     {
         self::$courier = Courier::find($id);
+        unlink(self::$courier->logo);
         self::$courier->delete();
     }
 

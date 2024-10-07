@@ -29,7 +29,14 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        $request->validate(
+            [
+                'name'        => 'required|string|unique:brands,name',
+                'description' => 'nullable|string|max:1000',
+                'image'       => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]
+        );
+
         Brand::newBrand($request);
         return back()->with('message', 'Brand info created successfully');
     }
