@@ -1,0 +1,5 @@
+admin@gmail.com
+pass-admin@gmail.com
+
+customer1@gmail.com
+pass-customer1@gmail.com
