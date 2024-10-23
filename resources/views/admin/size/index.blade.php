@@ -3,12 +3,12 @@
     <!-- PAGE-HEADER -->
     <div class="page-header">
         <div>
-            <h1 class="page-title">Unit Module</h1>
+            <h1 class="page-title">Size Module</h1>
         </div>
         <div class="ms-auto pageheader-btn">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Unit</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Manage Unit</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Size</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Size</li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header border-bottom">
-                    <h3 class="card-title">All Unit Info</h3>
+                    <h3 class="card-title">All Size Info</h3>
                 </div>
                 <div class="card-body">
                     <p id="sessionMessage" class="text-muted">{{session('message')}}</p>
@@ -36,18 +36,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($units as $unit)
+                            @foreach($sizes as $size)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$unit->name}}</td>
-                                    <td>{{$unit->code}}</td>
-                                    <td>{{$unit->description}}</td>
-                                    <td>{{$unit->status==1 ? 'Published':'Unpublished'}}</td>
+                                    <td>{{$size->name}}</td>
+                                    <td>{{$size->code}}</td>
+                                    <td>{{$size->description}}</td>
+                                    <td>{{$size->status==1 ? 'Published':'Unpublished'}}</td>
                                     <td>
-                                        <a href="{{route('unit.edit', $unit->id)}}" class="btn btn-success btn-sm">
+                                        <a href="{{route('size.edit', $size->id)}}" class="btn btn-success btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('unit.destroy', $unit->id)}}" method="post" class="d-inline-block">
+                                        <form action="{{route('size.destroy', $size->id)}}" method="post" class="d-inline-block">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this?')">

@@ -47,6 +47,12 @@
                         <td>{{$order->order_status}}</td>
                     </tr>
                     <tr>
+                        <th>Customer Info</th>
+                        <td> Name: {{$order->customer->name}} <br/>
+                            Mobile: {{$order->customer->mobile}} <br/>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Delivery Address</th>
                         <td>{{$order->delivery_address}}</td>
                     </tr>
@@ -91,10 +97,13 @@
                         <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                             <thead>
                             <tr>
-                                <th class="wd-15p border-bottom-0">SL NO</th>
+                                <th class="wd-10p border-bottom-0">SL NO</th>
                                 <th class="wd-15p border-bottom-0">Product Name</th>
+                                <th class="wd-15p border-bottom-0">Product Code</th>
+                                <th class="wd-15p border-bottom-0">Product Color</th>
+                                <th class="wd-15p border-bottom-0">Product Size</th>
                                 <th class="wd-15p border-bottom-0">Product Price</th>
-                                <th class="wd-20p border-bottom-0">Product Quantity</th>
+                                <th class="wd-10p border-bottom-0">Quantity</th>
                                 <th class="wd-15p border-bottom-0">Total Price</th>
                             </tr>
                             </thead>
@@ -103,6 +112,9 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$product->product_name}}</td>
+                                    <td>{{$product->product_code}}</td>
+                                    <td>{{$product->product_color}}</td>
+                                    <td>{{$product->product_size}}</td>
                                     <td>{{$product->product_price}}</td>
                                     <td>{{$product->product_qty}}</td>
                                     <td>{{$product->product_qty * $product->product_price}}</td>

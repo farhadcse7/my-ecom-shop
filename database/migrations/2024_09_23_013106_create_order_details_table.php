@@ -16,8 +16,11 @@ return new class extends Migration
             $table->integer('order_id');
             $table->integer('product_id');
             $table->string('product_name');
+            $table->string('product_code');
             $table->integer('product_price');
             $table->integer('product_qty');
+            $table->string('product_color');
+            $table->string('product_size');
             $table->timestamps();
         });
     }

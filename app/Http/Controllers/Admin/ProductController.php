@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductImage;
+use App\Models\ProductSize;
+use App\Models\Size;
 use App\Models\SubCategory;
 use App\Models\Unit;
 use Illuminate\Http\Request;
@@ -32,7 +36,9 @@ class ProductController extends Controller
             'categories'     => Category::all(),
             'sub_categories' => SubCategory::all(),
             'brands'         => Brand::all(),
-            'units'          => Unit::all()
+            'units'          => Unit::all(),
+            'colors'         => Color::all(),
+            'sizes'          => Size::all()
         ]);
     }
 
@@ -55,6 +61,10 @@ class ProductController extends Controller
             'unit_id'           => 'required|integer|exists:units,id',
             'name'              => 'required|string|unique:products,name',
             'code'              => 'required|string|unique:products,code',
+            //'color'             => 'required|array', // Ensure color is an array
+            //'color.*'           => 'string', // Ensure each item in the color array is a string
+            //'size'              => 'required|array', // Ensure size is an array
+            //'size.*'            => 'string', // Ensure each item in the size array is a string
             'short_description' => 'nullable|string|max:255',
             'long_description'  => 'nullable|string',
             'regular_price'     => 'required|integer|min:0',
@@ -70,6 +80,8 @@ class ProductController extends Controller
         ]);
 
         $this->product = Product::newProduct($request);
+        ProductColor::newProductColor($request->color, $this->product->id); //saving process of product colors
+        ProductSize::newProductSize($request->size, $this->product->id); //saving process of product sizes
         ProductImage::newProductImage($request->file('other_image'), $this->product->id); //saving process of product other images
         return back()->with('message', 'Product info created successfully');
     }
@@ -95,7 +107,9 @@ class ProductController extends Controller
             //'sub_categories' => SubCategory::all(),
             'sub_categories' => $subCategories,
             'brands'         => Brand::all(),
-            'units'          => Unit::all()
+            'units'          => Unit::all(),
+            'colors'         => Color::all(),
+            'sizes'          => Size::all()
         ]);
     }
 
@@ -105,6 +119,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         Product::updateProduct($request, $product->id);
+        ProductColor::updateProductColor($request->color, $product->id);
+        ProductSize::updateProductSize($request->size, $product->id);
         //if added new images then remove existing and adding new images
         if ($request->file('other_image')) {
             ProductImage::updateProductImage($request->file('other_image'), $product->id);
@@ -118,6 +134,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         Product::deleteProduct($product->id);
+        ProductColor::deleteProductColor($product->id);
+        ProductSize::deleteProductSize($product->id);
         ProductImage::deleteProductImage($product->id);
         return back()->with('message', 'Product info delete successfully');
     }

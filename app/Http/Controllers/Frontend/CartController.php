@@ -19,6 +19,8 @@ class CartController extends Controller
 
     public function add(Request $request, $id)
     {
+        //return $request;
+
         $this->product = Product::find($id);
         Cart::add([
             'id'      => $id,
@@ -26,7 +28,13 @@ class CartController extends Controller
             'qty'     => $request->qty,
             'price'   => $this->product->selling_price,
             'weight'  => 0,
-            'options' => ['image' => $this->product->image, 'code' => $this->product->code],
+            'options' =>
+                [
+                    'color' => $request->color,
+                    'size' => $request->size,
+                    'image' => $this->product->image,
+                    'code' => $this->product->code
+                ],
         ]);
 
         return redirect()->route('cart.index')->with('message', 'Cart product info add successfully');

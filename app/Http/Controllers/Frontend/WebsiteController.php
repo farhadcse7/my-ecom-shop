@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class WebsiteController extends Controller
         ]);
     }
 
+    //product details
     public function product($id)
     {
         $product          = Product::find($id);
@@ -52,7 +54,8 @@ class WebsiteController extends Controller
         return view('website.product.index', [
             //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
             'product'          => $product,
-            'related_products' => $related_products
+            'related_products' => $related_products,
+            'colors'=>Color::all()
         ]);
     }
 

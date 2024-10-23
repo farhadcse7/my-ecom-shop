@@ -3,12 +3,12 @@
     <!-- PAGE-HEADER -->
     <div class="page-header">
         <div>
-            <h1 class="page-title">Size Module</h1>
+            <h1 class="page-title">Color Module</h1>
         </div>
         <div class="ms-auto pageheader-btn">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Size</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Manage Size</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Color</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Color</li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header border-bottom">
-                    <h3 class="card-title">All Size Info</h3>
+                    <h3 class="card-title">All Color Info</h3>
                 </div>
                 <div class="card-body">
                     <p id="sessionMessage" class="text-muted">{{session('message')}}</p>
@@ -36,18 +36,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($sizes as $size)
+                            @foreach($colors as $color)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$size->name}}</td>
-                                    <td>{{$size->code}}</td>
-                                    <td>{{$size->description}}</td>
-                                    <td>{{$size->status==1 ? 'Published':'Unpublished'}}</td>
+                                    <td>{{$color->name}}</td>
+                                    <td>{{$color->code}}
+                                    <span style="margin-left:8px; display:inline-block; width: 18px; height: 18px; background-color:{{ $color->code }};"></span>
+                                    </td>
+                                    <td>{{$color->description}}</td>
+                                    <td>{{$color->status==1 ? 'Published':'Unpublished'}}</td>
                                     <td>
-                                        <a href="{{route('size.edit', $size->id)}}" class="btn btn-success btn-sm">
+                                        <a href="{{route('color.edit', $color->id)}}" class="btn btn-success btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('size.destroy', $size->id)}}" method="post" class="d-inline-block">
+                                        <form action="{{route('color.destroy', $color->id)}}" method="post" class="d-inline-block">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this?')">

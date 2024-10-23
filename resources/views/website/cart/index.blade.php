@@ -49,8 +49,10 @@
                                             <img src="{{ asset($cart_product->options->image) }}" alt=""></a>
                                     </td>
                                     <!-- title -->
-                                    <td class="tp-cart-title"><a href="">{{$cart_product->name}}</a>
-                                        <p style="padding-left: 20px">Code: {{$cart_product->options->code}}</p>
+                                    <td class="tp-cart-title"><a href="">{{$cart_product->name}}</a><br/>
+                                        <span style="padding-left: 20px">Code: {{$cart_product->options->code}}</span><br/>
+                                        <span style="padding-left: 20px">Color: {{$cart_product->options->color}}</span><br/>
+                                        <span style="padding-left: 20px">Size: {{$cart_product->options->size}}</span>
                                     </td>
 
                                     <!--single price -->

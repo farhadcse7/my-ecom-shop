@@ -31,6 +31,14 @@
     <link href="{{asset('/')}}admin/assets/switcher/css/switcher.css" rel="stylesheet">
     <link href="{{asset('/')}}admin/assets/switcher/demo.css" rel="stylesheet">
 
+    <!-- For increasing select2 multiple selection field -->
+    <style>
+        .select2-container {
+            width: 500px !important;
+        }
+    </style>
+
+
 </head>
 
 <body class="ltr app sidebar-mini">
@@ -551,6 +559,24 @@
                             <ul class="slide-menu">
                                 <li><a href="{{route('unit.create')}}" class="slide-item">Add Unit</a></li>
                                 <li><a href="{{route('unit.index')}}" class="slide-item">Manage Unit</a></li>
+                            </ul>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M12,2C6.4771729,2,2,6.4771729,2,12s4.4771729,10,10,10c5.5201416-0.0064697,9.9935303-4.4798584,10-10C22,6.4771729,17.5228271,2,12,2z M19.7819214,7.5h-9.2255249l2.5594482-4.4225464C15.9681396,3.4337769,18.4015503,5.1206055,19.7819214,7.5z M14.0211182,8.5l2.0198364,3.503479L14.0192871,15.5H9.9798584l-2.0228882-3.5084229L9.9776611,8.5H14.0211182z M12,3c0.0019531,0,0.0038452,0.0003052,0.0057983,0.0003052L7.380249,10.991272L4.8326416,6.5727539C6.4761353,4.4058838,9.0706177,3,12,3z M3,12c0-1.6405029,0.4459839-3.1737671,1.2128296-4.49823L8.8244019,15.5H3.7061157C3.2515259,14.4241333,3,13.2414551,3,12z M4.2138672,16.5h9.2272339l-2.5576782,4.423584C8.0288696,20.5695801,5.5935059,18.8815918,4.2138672,16.5z M12,21c-0.0021362,0-0.0041504-0.0003052-0.0062866-0.0003052l4.6235962-7.996582l2.550354,4.4237671C17.524231,19.5939941,14.9295654,21,12,21z M15.1746826,8.5h5.1159668C20.7460938,9.5758057,20.9986572,10.7584839,21,12c0,1.6407471-0.446106,3.1741943-1.2131348,4.4987183L15.1746826,8.5z"/></svg>
+                                <span class="side-menu__label">Color Module</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{{route('color.create')}}" class="slide-item">Add Color</a></li>
+                                <li><a href="{{route('color.index')}}" class="slide-item">Manage Color</a></li>
+                            </ul>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M12,2C6.4771729,2,2,6.4771729,2,12s4.4771729,10,10,10c5.5201416-0.0064697,9.9935303-4.4798584,10-10C22,6.4771729,17.5228271,2,12,2z M19.7819214,7.5h-9.2255249l2.5594482-4.4225464C15.9681396,3.4337769,18.4015503,5.1206055,19.7819214,7.5z M14.0211182,8.5l2.0198364,3.503479L14.0192871,15.5H9.9798584l-2.0228882-3.5084229L9.9776611,8.5H14.0211182z M12,3c0.0019531,0,0.0038452,0.0003052,0.0057983,0.0003052L7.380249,10.991272L4.8326416,6.5727539C6.4761353,4.4058838,9.0706177,3,12,3z M3,12c0-1.6405029,0.4459839-3.1737671,1.2128296-4.49823L8.8244019,15.5H3.7061157C3.2515259,14.4241333,3,13.2414551,3,12z M4.2138672,16.5h9.2272339l-2.5576782,4.423584C8.0288696,20.5695801,5.5935059,18.8815918,4.2138672,16.5z M12,21c-0.0021362,0-0.0041504-0.0003052-0.0062866-0.0003052l4.6235962-7.996582l2.550354,4.4237671C17.524231,19.5939941,14.9295654,21,12,21z M15.1746826,8.5h5.1159668C20.7460938,9.5758057,20.9986572,10.7584839,21,12c0,1.6407471-0.446106,3.1741943-1.2131348,4.4987183L15.1746826,8.5z"/></svg>
+                                <span class="side-menu__label">Size Module</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{{route('size.create')}}" class="slide-item">Add Size</a></li>
+                                <li><a href="{{route('size.index')}}" class="slide-item">Manage Size</a></li>
                             </ul>
                         </li>
                         <li class="slide">
@@ -1099,9 +1125,6 @@
 <!-- APEXCHART JS -->
 <script src="{{asset('/')}}admin/assets/js/apexcharts.js"></script>
 
-<!-- INTERNAL SELECT2 JS -->
-<script src="{{asset('/')}}admin/assets/plugins/select2/select2.full.min.js"></script>
-
 <!-- CHART-CIRCLE JS-->
 <script src="{{asset('/')}}admin/assets/plugins/circle-progress/circle-progress.min.js"></script>
 
@@ -1136,6 +1159,12 @@
 <script src="{{asset('/')}}admin/assets/plugins/summernote-editor/summernote1.js"></script>
 <script src="{{asset('/')}}admin/assets/js/summernote.js"></script>
 
+<!-- INTERNAL SELECT2 JS (for multiple select) -->
+<script src="{{asset('/')}}admin/assets/plugins/select2/select2.full.min.js"></script>
+
+<!-- FORM ELEMENTS JS (for multiple select) -->
+<script src="{{ asset('/') }}admin/assets/js/formelementadvnced.js"></script>
+
 <!-- COLOR THEME JS -->
 <script src="{{asset('/')}}admin/assets/js/themeColors.js"></script>
 
@@ -1169,6 +1198,13 @@
             }
         });
     }
+</script>
+
+<!-- For increasing select2 multiple selection field -->
+<script>
+    $(document).ready(function() {
+        $('.select2-show-search').select2();
+    });
 </script>
 
 </body>

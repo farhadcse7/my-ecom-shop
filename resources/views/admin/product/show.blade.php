@@ -54,6 +54,22 @@
                                 <td>{{$product->code}}</td>
                             </tr>
                             <tr>
+                                <th>Product Colors</th>
+                                <td>
+                                    @foreach($product->productColors as $productColor)
+                                        {{$productColor->color->name}}
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Product Sizes</th>
+                                <td>
+                                    @foreach($product->productSizes as $productSize)
+                                        {{$productSize->size->name}}
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Product Short Description</th>
                                 <td>{{$product->short_description}}</td>
                             </tr>

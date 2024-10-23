@@ -90,6 +90,31 @@
                         </div>
 
                         <div class="row mb-4">
+                            <label for="categoryName" class="col-md-3 form-label">Product Color</label>
+                            <div class="col-md-9">
+                                <select name="color[]" multiple="" class="form-control select2-show-search form-select" data-placeholder="Choose one">
+                                    <option label="Choose one"></option>
+                                    @foreach($colors as $color)
+                                    <option value="{{$color->id}}">{{$color->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">{{$errors->has('color') ? $errors->first('color') : ''}}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="categoryName" class="col-md-3 form-label">Product Size</label>
+                            <div class="col-md-9">
+                                <select name="size[]" multiple="" class="form-control select2-show-search" data-placeholder="Choose one">
+                                    <option label="Choose one"></option>
+                                    @foreach($sizes as $size)
+                                        <option value="{{$size->id}}">{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">{{$errors->has('size') ? $errors->first('size') : ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
                             <label for="description" class="col-md-3 form-label">Short Description</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="short_description" id="description" placeholder="Short Description"></textarea>

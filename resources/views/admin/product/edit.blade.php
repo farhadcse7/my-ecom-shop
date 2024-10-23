@@ -83,6 +83,29 @@
                         </div>
 
                         <div class="row mb-4">
+                            <label for="categoryName" class="col-md-3 form-label">Product Color</label>
+                            <div class="col-md-9">
+                                <select name="color[]" multiple class="form-control select2-show-search form-select" data-placeholder="Choose one">
+                                    <option label="Choose one"></option>
+                                    @foreach($colors as $color)
+                                        <option value="{{$color->id}}" @foreach($product->productColors as $productColor){{$productColor->color_id==$color->id ? 'selected': ''}} @endforeach>{{$color->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="categoryName" class="col-md-3 form-label">Product Size</label>
+                            <div class="col-md-9">
+                                <select name="size[]" multiple class="form-control select2-show-search" data-placeholder="Choose one">
+                                    <option label="Choose one"></option>
+                                    @foreach($sizes as $size)
+                                        <option value="{{$size->id}}" @foreach($product->productSizes as $productSize){{$productSize->size_id==$size->id ? 'selected': ''}} @endforeach>{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
                             <label for="description" class="col-md-3 form-label">Short Description</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="short_description" id="description" placeholder="Short Description">{{$product->short_description}}</textarea>

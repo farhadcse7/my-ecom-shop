@@ -98,35 +98,47 @@
                                 <span class="tp-product-details-price new-price">TK. {{$product->selling_price}}</span>
                             </div>
 
-                            <!-- variations -->
-                            <div class="tp-product-details-variation">
-                                <!-- single item -->
-                                <div class="tp-product-details-variation-item">
-                                    <h4 class="tp-product-details-variation-title">Color :</h4>
-                                    <div class="tp-product-details-variation-list">
-                                        <button type="button" class="color tp-color-variation-btn">
-                                            <span data-bg-color="#F8B655"></span>
-                                            <span class="tp-color-variation-tootltip">Yellow</span>
-                                        </button>
-                                        <button type="button" class="color tp-color-variation-btn active">
-                                            <span data-bg-color="#CBCBCB"></span>
-                                            <span class="tp-color-variation-tootltip">Gray</span>
-                                        </button>
-                                        <button type="button" class="color tp-color-variation-btn">
-                                            <span data-bg-color="#494E52"></span>
-                                            <span class="tp-color-variation-tootltip">Black</span>
-                                        </button>
-                                        <button type="button" class="color tp-color-variation-btn">
-                                            <span data-bg-color="#B4505A"></span>
-                                            <span class="tp-color-variation-tootltip">Brown</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- actions and form-->
+                            <!-- variations- Color & Size and form -->
                             <form action="{{route('cart.add', ['id'=>$product->id])}}" method="post">
                                 @csrf
+                                <div class="tp-product-details-variation">
+                                    <!-- Color starts -->
+                                    <div class="tp-product-details-variation-item">
+                                        <h4 class="tp-product-details-variation-title">Color :</h4>
+                                        <div class="tp-product-details-variation-list">
+                                            @foreach($product->productColors as $key=>$productColor)
+                                                {{--  <button type="button" class="color tp-color-variation-btn">--}}
+                                                {{--  <span data-bg-color="{{$productColor->color->code}}"></span>--}}
+                                                {{--  <span class="tp-color-variation-tootltip">{{$productColor->color->name}}</span>--}}
+                                                {{--  </button>--}}
+                                                <label class="color-option">
+                                                    <input type="radio" class="btn color tp-color-variation-btn" name="color" value="{{$productColor->color->name}}" {{$key==0 ? 'checked': ''}} required/>
+                                                    <span class="color-circle" style="background-color: {{ $productColor->color->code }}"></span>
+                                                    <span>{{$productColor->color->name}}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <!-- Color end -->
+
+                                    <!-- Size start -->
+                                    <div class="tp-product-details-variation-item">
+                                        <h4 class="tp-product-details-variation-title">Size :</h4>
+                                        <select name="size" class="tp-product-details-size-dropdown" required style="width: 40%; padding: 5px">
+                                            <option value="" disabled selected>Select Size</option>
+                                            @foreach($product->productSizes as $key2=>$productSize)
+                                                {{-- <option value="{{$productSize->size->name}}" {{$key2==0 ? 'selected': ''}}>--}}
+                                                <option value="{{$productSize->size->name}}">
+                                                    {{$productSize->size->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!-- Size end -->
+                                </div>
+
+
+                                <!-- actions -->
                                 <div class="tp-product-details-action-wrapper">
                                     <h3 class="tp-product-details-action-title">Quantity</h3>
                                     <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
