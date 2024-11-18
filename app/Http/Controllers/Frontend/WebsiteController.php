@@ -31,7 +31,9 @@ class WebsiteController extends Controller
     {
         return view('website.category.index', [
             //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
-            'products' => Product::where('category_id', $id)->latest()->get()
+            //'products' => Product::where('category_id', $id)->latest()->get(),
+            'products'   => Product::where('category_id', $id)->latest()->paginate(2),
+            'categoryId' => $id, // Pass the category ID to use in the sortBy method
         ]);
     }
 
@@ -55,7 +57,7 @@ class WebsiteController extends Controller
             //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
             'product'          => $product,
             'related_products' => $related_products,
-            'colors'=>Color::all()
+            'colors'           => Color::all()
         ]);
     }
 
@@ -65,6 +67,41 @@ class WebsiteController extends Controller
         $search   = $_GET['query'];
         $products = Product::where('name', 'like', '%' . $search . '%')->latest()->get();
         return response()->json($products);
+    }
+
+    //ajax sorting
+    public function sortBy(Request $request)
+    {
+        if (!$request->has('category_id') || !$request->has('sort_by')) {
+            return response()->json(['error' => 'Missing required parameters']);
+        }
+
+        $query = Product::where('category_id', $request->category_id);
+
+        // Handle sorting
+        if ($request->sort_by == 'lowest_price') {
+            $products = $query->orderBy('selling_price', 'asc')->paginate(2);
+        } elseif ($request->sort_by == 'highest_price') {
+            $products = $query->orderBy('selling_price', 'desc')->paginate(2);
+        } else {
+            $products = $query->paginate(2);
+        }
+
+        // Render HTML content for products
+        $view = view('website.category.index-content', [
+            'products'    => $products,
+            'currentSort' => $request->sort_by,
+            'categoryId'  => $request->category_id,
+        ])->render();
+
+        // Generate pagination
+        $pagination = $products->hasPages() ? $products->links('pagination::bootstrap-5')->render() : '';
+
+        // Return a JSON response with HTML and pagination
+        return response()->json([
+            'html'       => $view,
+            'pagination' => $pagination,
+        ]);
     }
 
     public function blog()

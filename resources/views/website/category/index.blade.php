@@ -405,7 +405,7 @@
                     <div class="tp-shop-main-wrapper">
                         <div class="tp-shop-top mb-45">
                             <div class="row">
-                                <div class="col-xl-6">
+                                <div class="col-xl-5">
                                     <div class="tp-shop-top-left d-flex align-items-center ">
                                         <div class="tp-shop-top-tab tp-tab">
                                             <ul class="nav nav-tabs" id="productTab" role="tablist">
@@ -433,44 +433,53 @@
                                         <div class="tp-shop-top-result">
                                             <p>Showing 1–14 of 26 results</p>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div class="col-xl-6">
+                                <div class="col-xl-7">
                                     <div class="tp-shop-top-right d-sm-flex align-items-center justify-content-xl-end">
                                         <div class="tp-shop-top-select">
-                                            <select>
-                                                <option>Default Sorting</option>
-                                                <option>Low to Hight</option>
-                                                <option>High to Low</option>
-                                                <option>New Added</option>
-                                                <option>On Sale</option>
+                                            <select id="items_per_page">
+                                                <option value="12" {{ request('per_page') == 12 ? 'selected' : '' }}>12
+                                                    items
+                                                </option>
+                                                <option value="24" {{ request('per_page') == 24 ? 'selected' : '' }}>24
+                                                    items
+                                                </option>
+                                                <option value="36" {{ request('per_page') == 36 ? 'selected' : '' }}>36
+                                                    items
+                                                </option>
+                                                <option value="48" {{ request('per_page') == 48 ? 'selected' : '' }}>48
+                                                    items
+                                                </option>
                                             </select>
                                         </div>
-                                        <div class="tp-shop-top-filter">
-                                            <button type="button" class="tp-filter-btn filter-open-btn">
-                                          <span>
-                                             <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.9998 3.45001H10.7998" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.8 3.45001H1" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M6.5999 5.9C7.953 5.9 9.0499 4.8031 9.0499 3.45C9.0499 2.0969 7.953 1 6.5999 1C5.2468 1 4.1499 2.0969 4.1499 3.45C4.1499 4.8031 5.2468 5.9 6.5999 5.9Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M15.0002 11.15H12.2002" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M5.2 11.15H1" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.4002 13.6C10.7533 13.6 11.8502 12.5031 11.8502 11.15C11.8502 9.79691 10.7533 8.70001 9.4002 8.70001C8.0471 8.70001 6.9502 9.79691 6.9502 11.15C6.9502 12.5031 8.0471 13.6 9.4002 13.6Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                             </svg>
-                                          </span>
-                                                Filter
-                                            </button>
+                                        <div class="col-md-1"></div>
+                                        <div class="tp-shop-top-select">
+                                            <select id="sort_by">
+                                                <option value="default" {{ request('sort_by') == 'default' ? 'selected' : '' }}>
+                                                    Default
+                                                </option>
+                                                <option value="lowest_price" {{ request('sort_by') == 'lowest_price' ? 'selected' : '' }}>
+                                                    Lowest Price
+                                                </option>
+                                                <option value="highest_price" {{ request('sort_by') == 'highest_price' ? 'selected' : '' }}>
+                                                    Highest Price
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Hidden input for category_id -->
+                        <input type="hidden" id="category_id" value="{{ $categoryId }}">
                         <!--Main Product Section Start -->
                         <div class="tp-shop-items-wrapper tp-shop-item-primary">
                             <div class="tab-content" id="productTabContent">
                                 <!--Grid Start -->
                                 <div class="tab-pane fade show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
-                                    <div class="row infinite-container">
+                                    <div class="row infinite-container" id="search-result">
                                         @foreach($products as $product)
                                             <div class="col-xl-4 col-md-6 col-sm-6 infinite-item">
                                                 <div class="tp-product-item-2 mb-40">
@@ -620,6 +629,9 @@
                             </div>
                         </div>
                         <!--Main Product Section End -->
+
+                        <!--Custom pagination of template starts here -->
+                        <!--
                         <div class="infinite-pagination d-none">
                             <a href="shop.html" class="infinite-next-link">Next</a>
                         </div>
@@ -656,6 +668,20 @@
                                 </nav>
                             </div>
                         </div>
+                         -->
+                        <!--Custom pagination of template ends here -->
+
+                        <!-- Pagination links of Bootstrap starts here-->
+                        <!-- Display pagination links (Bootstrap 5) -->
+                    {{--                        <div id="pagination-container">--}}
+                    {{--                            {{ $products->withQueryString()->links('pagination::bootstrap-5') }}--}}
+                    {{--                        </div>--}}
+
+                    <!-- Pagination Links -->
+                        <div id="pagination-container">
+                            {{ $products->withQueryString()->links('pagination::bootstrap-5') }}
+                        </div>
+
                     </div>
                 </div>
             </div>
