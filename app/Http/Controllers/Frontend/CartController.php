@@ -22,19 +22,29 @@ class CartController extends Controller
         //return $request;
 
         $this->product = Product::find($id);
+
+        $options = [
+            'image' => $this->product->image,
+            'code'  => $this->product->code,
+            'color' => $request->color ?? 'NA', // Default to "NA" if color is not provided
+            'size'  => $request->size ?? 'NA', // Default to "NA" if size is not provided
+        ];
+
+        // Add color and size if provided
+//        if ($request->filled('color')) {
+//            $options['color'] = $request->color;
+//        }
+//        if ($request->filled('size')) {
+//            $options['size'] = $request->size;
+//        }
+
         Cart::add([
             'id'      => $id,
             'name'    => $this->product->name,
             'qty'     => $request->qty,
             'price'   => $this->product->selling_price,
             'weight'  => 0,
-            'options' =>
-                [
-                    'color' => $request->color,
-                    'size' => $request->size,
-                    'image' => $this->product->image,
-                    'code' => $this->product->code
-                ],
+            'options' => $options,
         ]);
 
         return redirect()->route('cart.index')->with('message', 'Cart product info add successfully');

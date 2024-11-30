@@ -103,6 +103,7 @@
                                 @csrf
                                 <div class="tp-product-details-variation">
                                     <!-- Color starts -->
+                                    @if(!empty($product->productColors) && count($product->productColors) > 0)
                                     <div class="tp-product-details-variation-item">
                                         <h4 class="tp-product-details-variation-title">Color :</h4>
                                         <div class="tp-product-details-variation-list">
@@ -112,16 +113,18 @@
                                                 {{--  <span class="tp-color-variation-tootltip">{{$productColor->color->name}}</span>--}}
                                                 {{--  </button>--}}
                                                 <label class="color-option">
-                                                    <input type="radio" class="btn color tp-color-variation-btn" name="color" value="{{$productColor->color->name}}" {{$key==0 ? 'checked': ''}} required/>
+                                                    <input type="radio" class="btn color tp-color-variation-btn" name="color" value="{{$productColor->color->name}}" {{$key==0 ? 'checked': ''}} required />
                                                     <span class="color-circle" style="background-color: {{ $productColor->color->code }}"></span>
                                                     <span>{{$productColor->color->name}}</span>
                                                 </label>
                                             @endforeach
                                         </div>
                                     </div>
+                                    @endif
                                     <!-- Color end -->
 
                                     <!-- Size start -->
+                                    @if(!empty($product->productSizes) && count($product->productSizes) > 0)
                                     <div class="tp-product-details-variation-item">
                                         <h4 class="tp-product-details-variation-title">Size :</h4>
                                         <select name="size" class="tp-product-details-size-dropdown" required style="width: 40%; padding: 5px">
@@ -134,6 +137,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @endif
                                     <!-- Size end -->
                                 </div>
 

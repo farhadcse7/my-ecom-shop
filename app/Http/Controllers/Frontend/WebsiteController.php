@@ -39,7 +39,7 @@ class WebsiteController extends Controller
 
     public function subCategory($id)
     {
-        return view('website.category.index', [
+        return view('website.sub-category.index', [
             //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
             'products' => Product::where('sub_category_id', $id)->latest()->get()
         ]);
