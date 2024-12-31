@@ -14,7 +14,7 @@ class Slider extends Model
     public static function newSlider($request)
     {
         self::$image     = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/slider-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -34,8 +34,11 @@ class Slider extends Model
     {
         self::$slider = Slider::find($id);
         if ($request->file('image')) {
+            if (self::$slider->image) {
+                unlink(self::$slider->image);
+            }
             self::$image     = $request->file('image');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/slider-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;

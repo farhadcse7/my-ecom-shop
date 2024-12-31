@@ -14,7 +14,7 @@ class Courier extends Model
     public static function newCourier($request)
     {
         self::$image     = $request->file('logo');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/courier-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -27,15 +27,17 @@ class Courier extends Model
         self::$courier->logo    = self::$imageUrl;
         self::$courier->status  = $request->status;
         self::$courier->save();
-
     }
 
     public static function updateCourier($request, $id)
     {
         self::$courier = Courier::find($id);
         if ($request->file('logo')) {
+            if (self::$courier->logo) {
+                unlink(self::$courier->logo);
+            }
             self::$image     = $request->file('logo');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/courier-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;
@@ -57,5 +59,4 @@ class Courier extends Model
         unlink(self::$courier->logo);
         self::$courier->delete();
     }
-
 }

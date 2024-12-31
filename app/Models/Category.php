@@ -15,7 +15,7 @@ class Category extends Model
     public static function newCategory($request)
     {
         self::$image     = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/category-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -32,8 +32,11 @@ class Category extends Model
     {
         self::$category = Category::find($id);
         if ($request->file('image')) {
+            if (self::$category->image) {
+                unlink(self::$category->image);
+            }
             self::$image     = $request->file('image');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/category-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;
@@ -67,5 +70,4 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-
 }

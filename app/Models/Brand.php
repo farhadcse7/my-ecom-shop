@@ -14,7 +14,7 @@ class Brand extends Model
     public static function newBrand($request)
     {
         self::$image     = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/brand-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -31,8 +31,11 @@ class Brand extends Model
     {
         self::$brand = Brand::find($id);
         if ($request->file('image')) {
+            if (self::$brand->image) {
+                unlink(self::$brand->image);
+            }
             self::$image     = $request->file('image');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/brand-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;

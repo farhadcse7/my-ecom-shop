@@ -24,7 +24,7 @@ class ProductImage extends Model
 
         // Proceed with the loop if $images is valid
         foreach ($images as $image) {
-            self::$imageName = $image->getClientOriginalName();
+            self::$imageName = time() . '-' . $image->getClientOriginalName();
             self::$directory = 'uploads/product-other-images/';
             $image->move(self::$directory, self::$imageName); //here not self::$image->move(), it's loop $image
             self::$imageUrl = self::$directory . self::$imageName;
@@ -60,5 +60,4 @@ class ProductImage extends Model
             $productImage->delete();
         }
     }
-
 }

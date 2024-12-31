@@ -14,7 +14,7 @@ class SubCategory extends Model
     public static function newSubCategory($request)
     {
         self::$image     = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/sub-category-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -32,8 +32,11 @@ class SubCategory extends Model
     {
         self::$subCategory = SubCategory::find($id);
         if ($request->file('image')) {
+            if (self::$subCategory->image) {
+                unlink(self::$subCategory->image);
+            }
             self::$image     = $request->file('image');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/sub-category-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;
@@ -60,7 +63,7 @@ class SubCategory extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-//        return $this->belongsTo(Category::class, 'cat_id'); //when category_id not used, here cat_id foreign key
+        //        return $this->belongsTo(Category::class, 'cat_id'); //when category_id not used, here cat_id foreign key
 
     }
 

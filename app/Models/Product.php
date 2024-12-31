@@ -14,7 +14,7 @@ class Product extends Model
     public static function newProduct($request)
     {
         self::$image     = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName();
         self::$directory = 'uploads/product-images/';
         self::$image->move(self::$directory, self::$imageName);
         self::$imageUrl = self::$directory . self::$imageName;
@@ -43,8 +43,11 @@ class Product extends Model
     {
         self::$product = Product::find($id);
         if ($request->file('image')) {
+            if (self::$product->image) {
+                unlink(self::$product->image);
+            }
             self::$image     = $request->file('image');
-            self::$imageName = self::$image->getClientOriginalName();
+            self::$imageName = time() . '-' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/product-images/';
             self::$image->move(self::$directory, self::$imageName);
             self::$imageUrl = self::$directory . self::$imageName;
@@ -112,6 +115,4 @@ class Product extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
-
-
 }
