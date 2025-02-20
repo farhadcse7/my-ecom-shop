@@ -27,14 +27,39 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function category($id)
+    public function category($id, Request $request)
     {
+        $query = Product::where('category_id', $id);
+
+        if ($request->has('sort_by')) {
+            $sortBy = $request->input('sort_by');
+
+            if ($sortBy == 'lowest_price') {
+                $query->orderBy('selling_price', 'asc');
+            } elseif ($sortBy == 'highest_price') {
+                $query->orderBy('selling_price', 'desc');
+            } else {
+                $query->latest();
+            }
+        } else {
+            $query->latest();
+        }
+
+        $perPage = $request->has('per_page') ? $request->input('per_page') : 2; // Default to 2 items per page
+        $products = $query->paginate($perPage);
+
         return view('website.category.index', [
-            //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
-            //'products' => Product::where('category_id', $id)->latest()->get(),
-            'products'   => Product::where('category_id', $id)->latest()->paginate(2),
-            'categoryId' => $id, // Pass the category ID to use in the sortBy method
+            'products'   => $products,
+            'categoryId' => $id,
+            'perPage'    => $perPage,
         ]);
+
+        // return view('website.category.index', [
+        //     //'categories' => Category::all(), // 'categories' added globally into AppServiceProvider.php file
+        //     //'products' => Product::where('category_id', $id)->latest()->get(),
+        //     'products'   => Product::where('category_id', $id)->latest()->paginate(2),
+        //     'categoryId' => $id, // Pass the category ID to use in the sortBy method
+        // ]);
     }
 
     public function subCategory($id)
@@ -118,5 +143,4 @@ class WebsiteController extends Controller
     {
         return view('website.contact.contact');
     }
-
 }

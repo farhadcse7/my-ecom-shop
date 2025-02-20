@@ -82,7 +82,7 @@
 </script>
 
 <!--  price sorting ajax -->
-<script>
+{{-- <script>
     $(document).ready(function () {
         // Sorting handler
         $('#sort_by').on('change', function () {
@@ -140,4 +140,4 @@
         }
     });
 
-</script>
+</script> --}}

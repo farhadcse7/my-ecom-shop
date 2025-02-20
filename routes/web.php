@@ -30,7 +30,7 @@ Route::get('/about-us', [WebsiteController::class, 'about'])->name('about');
 Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
 Route::get('/contact-us', [WebsiteController::class, 'contact'])->name('contact');
 Route::get('/ajax-search', [WebsiteController::class, 'ajaxSearch'])->name('ajax-search'); //ajax product search
-Route::get('/sort-by', [WebsiteController::class, 'sortBy'])->name('sort.by'); //ajax product sorting
+//Route::get('/sort-by', [WebsiteController::class, 'sortBy'])->name('sort.by'); //ajax product sorting
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('category');
 Route::get('/product-sub-category/{id}', [WebsiteController::class, 'subCategory'])->name('sub-category');
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');

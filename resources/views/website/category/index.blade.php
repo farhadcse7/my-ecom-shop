@@ -438,36 +438,50 @@
                                 </div>
                                 <div class="col-xl-7">
                                     <div class="tp-shop-top-right d-sm-flex align-items-center justify-content-xl-end">
-                                        <div class="tp-shop-top-select">
-                                            <select id="items_per_page">
-                                                <option value="12" {{ request('per_page') == 12 ? 'selected' : '' }}>12
-                                                    items
-                                                </option>
-                                                <option value="24" {{ request('per_page') == 24 ? 'selected' : '' }}>24
-                                                    items
-                                                </option>
-                                                <option value="36" {{ request('per_page') == 36 ? 'selected' : '' }}>36
-                                                    items
-                                                </option>
-                                                <option value="48" {{ request('per_page') == 48 ? 'selected' : '' }}>48
-                                                    items
-                                                </option>
-                                            </select>
-                                        </div>
+                                        <!-- Items Per Page Form -->
+                                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET">
+                                            <div class="tp-shop-top-select">
+                                                <select id="items_per_page" name="per_page" onchange="this.form.submit()">
+                                                    <option value="1" {{ request('per_page') == 1 ? 'selected' : '' }}>1
+                                                        items
+                                                    </option>
+                                                    <option value="2" {{ (request('per_page') == 2 || !request('per_page')) ? 'selected' : '' }}>2
+                                                        items
+                                                    </option>
+                                                    <option value="3" {{ request('per_page') == 3 ? 'selected' : '' }}>3
+                                                        items
+                                                    </option>
+                                                    <option value="4" {{ request('per_page') == 4 ? 'selected' : '' }}>4
+                                                        items
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <!-- Include the current sorting option as a hidden input -->
+                                            @if(request('sort_by'))
+                                                <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
+                                            @endif
+                                        </form>
+
                                         <div class="col-md-1"></div>
-                                        <div class="tp-shop-top-select">
-                                            <select id="sort_by">
-                                                <option value="default" {{ request('sort_by') == 'default' ? 'selected' : '' }}>
-                                                    Default
-                                                </option>
-                                                <option value="lowest_price" {{ request('sort_by') == 'lowest_price' ? 'selected' : '' }}>
-                                                    Lowest Price
-                                                </option>
-                                                <option value="highest_price" {{ request('sort_by') == 'highest_price' ? 'selected' : '' }}>
-                                                    Highest Price
-                                                </option>
-                                            </select>
-                                        </div>
+                                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET">
+                                            <div class="tp-shop-top-select">
+                                                <select id="sort_by" name="sort_by" onchange="this.form.submit()">
+                                                    <option value="default" {{ request('sort_by') == 'default' ? 'selected' : '' }}>
+                                                        Default
+                                                    </option>
+                                                    <option value="lowest_price" {{ request('sort_by') == 'lowest_price' ? 'selected' : '' }}>
+                                                        Lowest Price
+                                                    </option>
+                                                    <option value="highest_price" {{ request('sort_by') == 'highest_price' ? 'selected' : '' }}>
+                                                        Highest Price
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <!-- Include the current items per page as a hidden input -->
+                                            @if(request('per_page'))
+                                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
