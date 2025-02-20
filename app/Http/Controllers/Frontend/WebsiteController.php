@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Color;
-use App\Models\Product;
 use App\Models\Slider;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
 use function Monolog\alert;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class WebsiteController extends Controller
 {
@@ -45,13 +46,27 @@ class WebsiteController extends Controller
             $query->latest();
         }
 
+        // Handle color filtering (only if colors are selected)
+        if ($request->has('colors') && !empty($request->colors)) {
+            $colors = $request->input('colors');
+            $query->whereHas('colors', function ($q) use ($colors) {
+                $q->whereIn('colors.id', $colors);
+            });
+        }
+
         $perPage = $request->has('per_page') ? $request->input('per_page') : 2; // Default to 2 items per page
         $products = $query->paginate($perPage);
+
+        // Fetch subcategories of the specific category
+        $subcategories = SubCategory::where('category_id', $id)->get();
+        $colors = Color::all();
 
         return view('website.category.index', [
             'products'   => $products,
             'categoryId' => $id,
             'perPage'    => $perPage,
+            'sidebar_subcategories' => $subcategories,
+            'colors' => $colors,
         ]);
 
         // return view('website.category.index', [

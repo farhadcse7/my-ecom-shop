@@ -115,4 +115,11 @@ class Product extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
+
+    // for many to many relationship with product - product filtering with color and product
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'product_colors', 'product_id', 'color_id');
+    }
+
 }

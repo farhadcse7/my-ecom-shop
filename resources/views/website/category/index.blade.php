@@ -80,16 +80,16 @@
                             <div class="tp-shop-widget-content">
                                 <div class="tp-shop-widget-categories">
                                     <ul>
-                                        <li><a href="#">Leather <span>10</span></a></li>
-                                        <li><a href="#">Classic Watch <span>18</span></a></li>
-                                        <li><a href="#">Leather Man Wacth <span>22</span></a></li>
-                                        <li><a href="#">Trending Watch <span>17</span></a></li>
-                                        <li><a href="#">Google <span>22</span></a></li>
-                                        <li><a href="#">Woman Wacth <span>14</span></a></li>
-                                        <li><a href="#">Tables <span>19</span></a></li>
-                                        <li><a href="#">Electronics <span>29</span></a></li>
-                                        <li><a href="#">Phones <span>05</span></a></li>
-                                        <li><a href="#">Grocery <span>14</span></a></li>
+                                        <!-- Display Subcategories -->
+                                        @if($sidebar_subcategories->isNotEmpty())
+                                            <ul>
+                                                @foreach($sidebar_subcategories as $subcategory)
+                                                <li><a href="{{ route('sub-category', $subcategory->id) }}">{{ $subcategory->name }} <span>{{ $subcategory->products->count() }}</span></a></li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                        <p>No subcategories found for this category.</p>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -97,61 +97,36 @@
                         <!-- color -->
                         <div class="tp-shop-widget mb-50">
                             <h3 class="tp-shop-widget-title">Filter by Color</h3>
-
+                            <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET" id="color-filter-form">
                             <div class="tp-shop-widget-content">
                                 <div class="tp-shop-widget-checkbox-circle-list">
                                     <ul>
+                                        @foreach ($colors as $color)
                                         <li>
                                             <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="red">
-                                                <label for="red">Red</label>
-                                                <span data-bg-color="#FF401F" class="tp-shop-widget-checkbox-circle-self"></span>
+                                                <input type="checkbox" id="{{ $color->name }}id" name="colors[]" value="{{ $color->id }}"
+                                                {{ in_array($color->id, (array) request('colors')) ? 'checked' : '' }} onchange="document.getElementById('color-filter-form').submit();">
+                                                <label for="{{ $color->name }}id">{{ $color->name }}</label>
+                                                <span data-bg-color="{{ $color->name }}" class="tp-shop-widget-checkbox-circle-self"></span>
                                             </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">8</span>
+                                            {{-- <span class="tp-shop-widget-checkbox-circle-number">23</span> --}}
                                         </li>
-                                        <li>
-                                            <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="dark_blue">
-                                                <label for="dark_blue">Dark Blue</label>
-                                                <span data-bg-color="#4666FF" class="tp-shop-widget-checkbox-circle-self"></span>
-                                            </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">14</span>
-                                        </li>
-                                        <li>
-                                            <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="oragnge">
-                                                <label for="oragnge">Orange</label>
-                                                <span data-bg-color="#FF9E2C" class="tp-shop-widget-checkbox-circle-self"></span>
-                                            </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">18</span>
-                                        </li>
-                                        <li>
-                                            <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="purple">
-                                                <label for="purple">Purple</label>
-                                                <span data-bg-color="#B615FD" class="tp-shop-widget-checkbox-circle-self"></span>
-                                            </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">23</span>
-                                        </li>
-                                        <li>
-                                            <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="yellow">
-                                                <label for="yellow">Yellow</label>
-                                                <span data-bg-color="#FFD747" class="tp-shop-widget-checkbox-circle-self"></span>
-                                            </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">17</span>
-                                        </li>
-                                        <li>
-                                            <div class="tp-shop-widget-checkbox-circle">
-                                                <input type="checkbox" id="green">
-                                                <label for="green">Green</label>
-                                                <span data-bg-color="#41CF0F" class="tp-shop-widget-checkbox-circle-self"></span>
-                                            </div>
-                                            <span class="tp-shop-widget-checkbox-circle-number">15</span>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
+
+                            <!-- Include hidden inputs for other query parameters -->
+                            @if(request('sort_by'))
+                            <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
+                            @endif
+                            @if(request('per_page'))
+                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                            @endif
+
+                        <!-- Submit Button (Optional) -->
+                        {{-- <button type="submit" class="btn btn-primary">Apply Filters</button> --}}
+                        </form>
                         </div>
                         <!-- product rating -->
                         <div class="tp-shop-widget mb-50">

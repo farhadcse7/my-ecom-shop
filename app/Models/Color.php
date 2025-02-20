@@ -36,4 +36,12 @@ class Color extends Model
         self::$color = Color::find($id);
         self::$color->delete();
     }
+
+    // for many to many relationship with product - product filtering with color and product
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_colors', 'color_id', 'product_id');
+    }
+
+
 }
