@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Size;
+use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Slider;
 use App\Models\Product;
@@ -54,12 +56,34 @@ class WebsiteController extends Controller
             });
         }
 
+        // Handle brand filtering
+        if ($request->has('brands') && !empty($request->brands)) {
+            $brands = $request->input('brands');
+            $query->whereIn('brand_id', $brands);
+        }
+
+        // Handle subcategory filtering
+        if ($request->has('subcategories') && !empty($request->subcategories)) {
+            $subcategories = $request->input('subcategories');
+            $query->whereIn('sub_category_id', $subcategories);
+        }
+
+        // Handle size filtering
+        if ($request->has('size') && !empty($request->size)) {
+            $sizeId = $request->input('size');
+            $query->whereHas('sizes', function ($q) use ($sizeId) {
+                $q->where('sizes.id', $sizeId);
+            });
+        }
+
         $perPage = $request->has('per_page') ? $request->input('per_page') : 2; // Default to 2 items per page
         $products = $query->paginate($perPage);
 
         // Fetch subcategories of the specific category
         $subcategories = SubCategory::where('category_id', $id)->get();
         $colors = Color::all();
+        $brands = Brand::all();
+        $sizes = Size::all();
 
         return view('website.category.index', [
             'products'   => $products,
@@ -67,6 +91,8 @@ class WebsiteController extends Controller
             'perPage'    => $perPage,
             'sidebar_subcategories' => $subcategories,
             'colors' => $colors,
+            'brands' => $brands,
+            'sizes' => $sizes,
         ]);
 
         // return view('website.category.index', [

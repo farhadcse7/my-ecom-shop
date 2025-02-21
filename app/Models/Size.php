@@ -36,4 +36,11 @@ class Size extends Model
         self::$size = Size::find($id);
         self::$size->delete();
     }
+
+     // for many to many relationship with product - product filtering with size and product
+    public function products()
+    {
+        // return $this->belongsToMany(Product::class, 'product_sizes', 'size_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'product_sizes');
+    }
 }

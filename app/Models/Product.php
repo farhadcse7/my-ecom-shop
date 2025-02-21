@@ -122,4 +122,11 @@ class Product extends Model
         return $this->belongsToMany(Color::class, 'product_colors', 'product_id', 'color_id');
     }
 
+    // for many to many relationship with product - product filtering with size and product
+    public function sizes()
+    {
+        // return $this->belongsToMany(Size::class, 'product_sizes', 'product_id', 'size_id');
+        return $this->belongsToMany(Size::class, 'product_sizes');
+    }
+
 }
