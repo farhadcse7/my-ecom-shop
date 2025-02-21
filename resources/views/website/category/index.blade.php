@@ -42,21 +42,34 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="tp-shop-sidebar mr-10">
                         <!-- filter -->
-                        <div class="tp-shop-widget mb-35">
-                            <h3 class="tp-shop-widget-title no-border">Price Filter</h3>
-                            <div class="tp-shop-widget-content">
-                                <div class="tp-shop-widget-filter">
-                                    <div id="slider-range" class="mb-10"></div>
-                                    <div
-                                        class="tp-shop-widget-filter-info d-flex align-items-center justify-content-between">
-                                        <span class="input-range">
-                                            <input type="text" id="amount" readonly>
-                                        </span>
-                                        <button class="tp-shop-widget-filter-btn" type="button">Filter</button>
+                        <!-- Price Filter -->
+                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET" id="price-filter-form">
+                            <div class="tp-shop-widget mb-35">
+                                <h3 class="tp-shop-widget-title no-border">Price Filter</h3>
+                                <div class="tp-shop-widget-content">
+                                    <div class="tp-shop-widget-filter">
+                                        <!-- Range Slider -->
+                                        <div id="slider-range" class="mb-10"></div>
+                                        <div
+                                            class="tp-shop-widget-filter-info d-flex align-items-center justify-content-between">
+                                            <!-- Display Selected Price Range -->
+                                            <span class="input-range">
+                                                <input type="text" id="amount" readonly>
+                                            </span>
+                                            <!-- Hidden Inputs for Min and Max Price -->
+                                            <input type="hidden" id="min_price" name="min_price"
+                                                value="{{ request('min_price', 0) }}">
+                                            <input type="hidden" id="max_price" name="max_price"
+                                                value="{{ request('max_price', 200000) }}">
+                                            <!-- Hidden Input to Track Form Submission -->
+                                            <input type="hidden" name="price_filter_applied" value="1">
+                                            <!-- Filter Button -->
+                                            <button class="tp-shop-widget-filter-btn" type="submit">Filter</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <!-- status -->
                         <div class="tp-shop-widget mb-50">
                             <h3 class="tp-shop-widget-title">Product Status</h3>
@@ -176,14 +189,23 @@
                                 {{-- <button type="submit" class="btn btn-primary">Apply Filters</button> --}}
                             </div>
                         </form>
-                        <!-- Sizes -->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET" id="size-filter-form">
+                        <!-- Sizes for radio button-->
+                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
+                            id="size-filter-form">
                             <!-- Size Filtering -->
                             <div class="tp-shop-widget mb-50">
-                                <h3 class="tp-shop-widget-title">Select Size</h3>
+                                <h3 class="tp-shop-widget-title">Select Size (Radio Button)</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
                                         <ul class="filter-items filter-checkbox">
+                                            <!-- Add a "Deselect" option -->
+                                            <li class="filter-item checkbox">
+                                                <input id="deselect-size" type="radio" name="size" value=""
+                                                    {{ !request('size') ? 'checked' : '' }}
+                                                    onchange="document.getElementById('size-filter-form').submit();">
+                                                <label for="deselect-size">Deselect</label>
+                                            </li>
+
                                             @foreach ($sizes as $size)
                                                 <li class="filter-item checkbox">
                                                     <input id="{{ $size->name }}" type="radio" name="size"
@@ -191,6 +213,30 @@
                                                         {{ request('size') == $size->id ? 'checked' : '' }}
                                                         onchange="document.getElementById('size-filter-form').submit();">
                                                     <label for="{{ $size->name }}">{{ $size->name }}</label>
+                                                </li>
+                                            @endforeach
+                                        </ul><!-- .filter-items -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Sizes for checkbox button -->
+                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
+                            id="size-checkbox-filter-form">
+                            <!-- Size Filtering -->
+                            <div class="tp-shop-widget mb-50">
+                                <h3 class="tp-shop-widget-title">Select Sizes(Check Box)</h3>
+                                <div class="tp-shop-widget-content">
+                                    <div class="tp-shop-widget-checkbox">
+                                        <ul class="filter-items filter-checkbox">
+                                            @foreach ($sizes as $size)
+                                                <li class="filter-item checkbox">
+                                                    <input id="{{ $size->name }}chk" type="checkbox" name="sizes[]"
+                                                        value="{{ $size->id }}"
+                                                        {{ in_array($size->id, (array) request('sizes')) ? 'checked' : '' }}
+                                                        onchange="document.getElementById('size-checkbox-filter-form').submit();">
+                                                    <label for="{{ $size->name }}chk">{{ $size->name }}</label>
                                                 </li>
                                             @endforeach
                                         </ul><!-- .filter-items -->

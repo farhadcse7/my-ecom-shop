@@ -16,6 +16,10 @@
 <script src="{{asset('/')}}website/assets/js/ajax-form.js"></script>
 <script src="{{asset('/')}}website/assets/js/main.js"></script>
 
+<!-- jQuery UI -->
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
 
 <!-- theme settings wrapper class remove script -->
 <script>
@@ -141,3 +145,34 @@
     });
 
 </script> --}}
+
+<script>
+    //price range slider script
+    $(function() {
+        // Initialize the range slider
+        $("#slider-range").slider({
+            range: true,
+            min: 0, // Minimum price
+            max: 200000, // Maximum price (adjust based on your product prices)
+            values: [
+                {{ request('min_price', 0) }}, // Default min price
+                {{ request('max_price', 200000) }} // Default max price
+            ],
+            slide: function(event, ui) {
+                // Update the displayed price range
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                // Update the hidden inputs
+                $("#min_price").val(ui.values[0]);
+                $("#max_price").val(ui.values[1]);
+            },
+            change: function(event, ui) {
+                // Submit the form when the slider value changes
+                document.getElementById('price-filter-form').submit();
+            }
+        });
+
+        // Set initial display value
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>

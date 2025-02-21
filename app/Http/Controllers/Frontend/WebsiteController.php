@@ -76,6 +76,28 @@ class WebsiteController extends Controller
             });
         }
 
+        // Handle sizes checkbox filtering
+        if ($request->has('sizes') && !empty($request->sizes)) {
+            $sizes = $request->input('sizes');
+            $query->whereHas('sizes', function ($q) use ($sizes) {
+                $q->whereIn('sizes.id', $sizes);
+            });
+        }
+
+        // Handle price filtering
+        // if ($request->has('min_price') && $request->has('max_price')) {
+        //     $minPrice = $request->input('min_price');
+        //     $maxPrice = $request->input('max_price');
+        //     $query->whereBetween('selling_price', [$minPrice, $maxPrice]);
+        // }
+
+        // Handle price filtering (only if price filter is applied)
+        if ($request->has('price_filter_applied')) {
+            $minPrice = $request->input('min_price', 0); // Default to 0 if not provided
+            $maxPrice = $request->input('max_price', 200000); // Default to 200000 if not provided
+            $query->whereBetween('selling_price', [$minPrice, $maxPrice]);
+        }
+
         $perPage = $request->has('per_page') ? $request->input('per_page') : 2; // Default to 2 items per page
         $products = $query->paginate($perPage);
 
