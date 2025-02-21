@@ -34,9 +34,9 @@ class WebsiteController extends Controller
     {
         $query = Product::where('category_id', $id);
 
+        // Handle Sorting
         if ($request->has('sort_by')) {
             $sortBy = $request->input('sort_by');
-
             if ($sortBy == 'lowest_price') {
                 $query->orderBy('selling_price', 'asc');
             } elseif ($sortBy == 'highest_price') {
@@ -46,14 +46,6 @@ class WebsiteController extends Controller
             }
         } else {
             $query->latest();
-        }
-
-        // Handle color filtering (only if colors are selected)
-        if ($request->has('colors') && !empty($request->colors)) {
-            $colors = $request->input('colors');
-            $query->whereHas('colors', function ($q) use ($colors) {
-                $q->whereIn('colors.id', $colors);
-            });
         }
 
         // Handle brand filtering
@@ -68,11 +60,11 @@ class WebsiteController extends Controller
             $query->whereIn('sub_category_id', $subcategories);
         }
 
-        // Handle size filtering
-        if ($request->has('size') && !empty($request->size)) {
-            $sizeId = $request->input('size');
-            $query->whereHas('sizes', function ($q) use ($sizeId) {
-                $q->where('sizes.id', $sizeId);
+        // Handle color filtering (only if colors are selected)
+        if ($request->has('colors') && !empty($request->colors)) {
+            $colors = $request->input('colors');
+            $query->whereHas('colors', function ($q) use ($colors) {
+                $q->whereIn('colors.id', $colors);
             });
         }
 
@@ -84,6 +76,14 @@ class WebsiteController extends Controller
             });
         }
 
+        // Handle size filtering
+        if ($request->has('size') && !empty($request->size)) {
+            $sizeId = $request->input('size');
+            $query->whereHas('sizes', function ($q) use ($sizeId) {
+                $q->where('sizes.id', $sizeId);
+            });
+        }
+
         // Handle price filtering
         // if ($request->has('min_price') && $request->has('max_price')) {
         //     $minPrice = $request->input('min_price');
@@ -92,7 +92,7 @@ class WebsiteController extends Controller
         // }
 
         // Handle price filtering (only if price filter is applied)
-        if ($request->has('price_filter_applied')) {
+        if ($request->has('min_price') && $request->has('max_price')) {
             $minPrice = $request->input('min_price', 0); // Default to 0 if not provided
             $maxPrice = $request->input('max_price', 200000); // Default to 200000 if not provided
             $query->whereBetween('selling_price', [$minPrice, $maxPrice]);

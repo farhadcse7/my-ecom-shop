@@ -41,10 +41,10 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
                     <div class="tp-shop-sidebar mr-10">
-                        <!-- filter -->
-                        <!-- Price Filter -->
+                        <!-- Filter form-->
                         <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET" id="price-filter-form">
-                            <div class="tp-shop-widget mb-35">
+                            <!-- Price Filter -->
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title no-border">Price Filter</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-filter">
@@ -61,37 +61,78 @@
                                                 value="{{ request('min_price', 0) }}">
                                             <input type="hidden" id="max_price" name="max_price"
                                                 value="{{ request('max_price', 200000) }}">
-                                            <!-- Hidden Input to Track Form Submission -->
-                                            <input type="hidden" name="price_filter_applied" value="1">
+
                                             <!-- Filter Button -->
                                             <button class="tp-shop-widget-filter-btn" type="submit">Filter</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Hidden Inputs for Other Query Parameters -->
+                            @if (request('sort_by'))
+                                <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
+                            @endif
+                            @if (request('per_page'))
+                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                            @endif
+                            @if (request('subcategories'))
+                                @foreach ((array) request('subcategories') as $subcategory)
+                                    <input type="hidden" name="subcategories[]" value="{{ $subcategory }}">
+                                @endforeach
+                            @endif
+                            @if (request('brands'))
+                                @foreach ((array) request('brands') as $brand)
+                                    <input type="hidden" name="brands[]" value="{{ $brand }}">
+                                @endforeach
+                            @endif
+                            @if (request('size'))
+                                <input type="hidden" name="size" value="{{ request('size') }}">
+                            @endif
+                            @if (request('sizes'))
+                                @foreach ((array) request('sizes') as $size)
+                                    <input type="hidden" name="sizes[]" value="{{ $size }}">
+                                @endforeach
+                            @endif
+                            @if (request('colors'))
+                                @foreach ((array) request('colors') as $color)
+                                    <input type="hidden" name="colors[]" value="{{ $color }}">
+                                @endforeach
+                            @endif
                         </form>
-                        <!-- status -->
-                        <div class="tp-shop-widget mb-50">
-                            <h3 class="tp-shop-widget-title">Product Status</h3>
-                            <div class="tp-shop-widget-content">
-                                <div class="tp-shop-widget-checkbox">
-                                    <ul class="filter-items filter-checkbox">
-                                        <li class="filter-item checkbox">
-                                            <input id="on_sale" type="checkbox">
-                                            <label for="on_sale">On sale</label>
-                                        </li>
-                                        <li class="filter-item checkbox">
-                                            <input id="in_stock" type="checkbox">
-                                            <label for="in_stock">In Stock</label>
-                                        </li>
-                                    </ul><!-- .filter-items -->
+
+                        <!-- Other Filters Form -->
+                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
+                            id="other-filters-form">
+                            <!-- Hidden Inputs to Preserve Price Filter -->
+                            @if (request('min_price'))
+                                <input type="hidden" name="min_price" value="{{ request('min_price') }}">
+                            @endif
+                            @if (request('max_price'))
+                                <input type="hidden" name="max_price" value="{{ request('max_price') }}">
+                            @endif
+
+
+                            <!-- Product Status -->
+                            <div class="tp-shop-widget mb-25">
+                                <h3 class="tp-shop-widget-title">Product Status</h3>
+                                <div class="tp-shop-widget-content">
+                                    <div class="tp-shop-widget-checkbox">
+                                        <ul class="filter-items filter-checkbox">
+                                            <li class="filter-item checkbox">
+                                                <input id="on_sale" type="checkbox">
+                                                <label for="on_sale">On sale</label>
+                                            </li>
+                                            <li class="filter-item checkbox">
+                                                <input id="in_stock" type="checkbox">
+                                                <label for="in_stock">In Stock</label>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Brands -->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET" id="brand-filter-form">
+
                             <!-- Brand Filtering -->
-                            <div class="tp-shop-widget mb-50">
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Select Brands</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
@@ -100,21 +141,17 @@
                                                 <li class="filter-item checkbox">
                                                     <input id="{{ $brand->name }}" type="checkbox" name="brands[]"
                                                         value="{{ $brand->id }}"
-                                                        {{ in_array($brand->id, (array) request('brands')) ? 'checked' : '' }}
-                                                        onchange="document.getElementById('brand-filter-form').submit();">
+                                                        {{ in_array($brand->id, (array) request('brands')) ? 'checked' : '' }}>
                                                     <label for="{{ $brand->name }}">{{ $brand->name }}</label>
                                                 </li>
                                             @endforeach
-                                        </ul><!-- .filter-items -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <!-- categories -->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
-                            id="subcategory-filter-form">
+
                             <!-- Category Filtering -->
-                            <div class="tp-shop-widget mb-50">
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Categories</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
@@ -123,8 +160,7 @@
                                                 <li class="filter-item checkbox">
                                                     <input id="{{ Str::slug($subcategory->name) }}id" type="checkbox"
                                                         name="subcategories[]" value="{{ $subcategory->id }}"
-                                                        {{ in_array($subcategory->id, (array) request('subcategories')) ? 'checked' : '' }}
-                                                        onchange="document.getElementById('subcategory-filter-form').submit();">
+                                                        {{ in_array($subcategory->id, (array) request('subcategories')) ? 'checked' : '' }}>
                                                     <label
                                                         for="{{ Str::slug($subcategory->name) }}id">{{ $subcategory->name }}</label>
                                                 </li>
@@ -133,30 +169,26 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <div class="tp-shop-widget mb-50">
-                            <h3 class="tp-shop-widget-title mt-3">Go Categories Page</h3>
-                            <div class="tp-shop-widget-categories">
-                                <ul>
-                                    <!-- Display Subcategories -->
-                                    @if ($sidebar_subcategories->isNotEmpty())
-                                        <ul>
-                                            @foreach ($sidebar_subcategories as $subcategory)
-                                                <li><a href="{{ route('sub-category', $subcategory->id) }}">{{ $subcategory->name }}
-                                                        <span>{{ $subcategory->products->count() }}</span></a></li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p>No subcategories found for this category.</p>
-                                    @endif
-                                </ul>
+                            <!-- Display Subcategories -->
+                            <div class="tp-shop-widget mb-25">
+                                <h3 class="tp-shop-widget-title mt-3">Go Categories Page</h3>
+                                <div class="tp-shop-widget-categories">
+                                    <ul>
+                                        @if ($sidebar_subcategories->isNotEmpty())
+                                            <ul>
+                                                @foreach ($sidebar_subcategories as $subcategory)
+                                                    <li><a href="{{ route('sub-category', $subcategory->id) }}">{{ $subcategory->name }}
+                                                            <span>{{ $subcategory->products->count() }}</span></a></li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p>No subcategories found for this category.</p>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <!-- color -->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
-                            id="color-filter-form">
                             <!-- Color Filtering -->
-                            <div class="tp-shop-widget mb-50">
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Filter by Color</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox-circle-list">
@@ -164,10 +196,9 @@
                                             @foreach ($colors as $color)
                                                 <li>
                                                     <div class="tp-shop-widget-checkbox-circle">
-                                                        <input type="checkbox" id="{{ $color->name }}id" name="colors[]"
-                                                            value="{{ $color->id }}"
-                                                            {{ in_array($color->id, (array) request('colors')) ? 'checked' : '' }}
-                                                            onchange="document.getElementById('color-filter-form').submit();">
+                                                        <input type="checkbox" id="{{ $color->name }}id"
+                                                            name="colors[]" value="{{ $color->id }}"
+                                                            {{ in_array($color->id, (array) request('colors')) ? 'checked' : '' }}>
                                                         <label for="{{ $color->name }}id">{{ $color->name }}</label>
                                                         <span data-bg-color="{{ $color->name }}"
                                                             class="tp-shop-widget-checkbox-circle-self"></span>
@@ -178,22 +209,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- Include hidden inputs for other query parameters -->
-                                @if (request('sort_by'))
-                                    <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
-                                @endif
-                                @if (request('per_page'))
-                                    <input type="hidden" name="per_page" value="{{ request('per_page') }}">
-                                @endif
-                                <!-- Submit Button (Optional) -->
-                                {{-- <button type="submit" class="btn btn-primary">Apply Filters</button> --}}
                             </div>
-                        </form>
-                        <!-- Sizes for radio button-->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
-                            id="size-filter-form">
-                            <!-- Size Filtering -->
-                            <div class="tp-shop-widget mb-50">
+                            <!-- Sizes Filtering for radio button-->
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Select Size (Radio Button)</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
@@ -201,31 +219,24 @@
                                             <!-- Add a "Deselect" option -->
                                             <li class="filter-item checkbox">
                                                 <input id="deselect-size" type="radio" name="size" value=""
-                                                    {{ !request('size') ? 'checked' : '' }}
-                                                    onchange="document.getElementById('size-filter-form').submit();">
+                                                    {{ !request('size') ? 'checked' : '' }}>
                                                 <label for="deselect-size">Deselect</label>
                                             </li>
-
                                             @foreach ($sizes as $size)
                                                 <li class="filter-item checkbox">
                                                     <input id="{{ $size->name }}" type="radio" name="size"
                                                         value="{{ $size->id }}"
-                                                        {{ request('size') == $size->id ? 'checked' : '' }}
-                                                        onchange="document.getElementById('size-filter-form').submit();">
+                                                        {{ request('size') == $size->id ? 'checked' : '' }}>
                                                     <label for="{{ $size->name }}">{{ $size->name }}</label>
                                                 </li>
                                             @endforeach
-                                        </ul><!-- .filter-items -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-                        <!-- Sizes for checkbox button -->
-                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
-                            id="size-checkbox-filter-form">
-                            <!-- Size Filtering -->
-                            <div class="tp-shop-widget mb-50">
+                            <!-- Sizes Filtering for checkbox button -->
+                            <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Select Sizes(Check Box)</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
@@ -234,20 +245,28 @@
                                                 <li class="filter-item checkbox">
                                                     <input id="{{ $size->name }}chk" type="checkbox" name="sizes[]"
                                                         value="{{ $size->id }}"
-                                                        {{ in_array($size->id, (array) request('sizes')) ? 'checked' : '' }}
-                                                        onchange="document.getElementById('size-checkbox-filter-form').submit();">
+                                                        {{ in_array($size->id, (array) request('sizes')) ? 'checked' : '' }}>
                                                     <label for="{{ $size->name }}chk">{{ $size->name }}</label>
                                                 </li>
                                             @endforeach
-                                        </ul><!-- .filter-items -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Hidden Inputs for Other Query Parameters -->
+                            @if (request('sort_by'))
+                                <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
+                            @endif
+                            @if (request('per_page'))
+                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                            @endif
+
+                            <!-- Submit Button -->
+                            {{-- <button type="submit" class="btn btn-primary btn-sm mb-3">Apply Filters</button> --}}
                         </form>
 
-
                         <!-- product rating -->
-                        <div class="tp-shop-widget mb-50">
+                        <div class="tp-shop-widget mb-25 mt-3">
                             <h3 class="tp-shop-widget-title">Top Rated Products</h3>
 
                             <div class="tp-shop-widget-content">
@@ -618,15 +637,17 @@
                                             </ul>
                                         </div>
                                         <div class="tp-shop-top-result">
-                                            <p>Showing 1–14 of 26 results</p>
+                                            <p>Showing results</p>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="col-xl-7">
-                                    <div class="tp-shop-top-right d-sm-flex align-items-center justify-content-xl-end">
-                                        <!-- Items Per Page Form -->
-                                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET">
+
+                                    <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
+                                        id="combined-filter-form">
+                                        <div class="tp-shop-top-right d-sm-flex align-items-center justify-content-xl-end">
+                                            <!-- Items Per Page Form -->
                                             <div class="tp-shop-top-select">
                                                 <select id="items_per_page" name="per_page"
                                                     onchange="this.form.submit()">
@@ -649,14 +670,9 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <!-- Include the current sorting option as a hidden input -->
-                                            @if (request('sort_by'))
-                                                <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
-                                            @endif
-                                        </form>
 
-                                        <div class="col-md-1"></div>
-                                        <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET">
+                                            <div class="col-md-1"></div>
+                                            <!-- Items Sorting -->
                                             <div class="tp-shop-top-select">
                                                 <select id="sort_by" name="sort_by" onchange="this.form.submit()">
                                                     <option value="default"
@@ -673,12 +689,42 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <!-- Include the current items per page as a hidden input -->
-                                            @if (request('per_page'))
-                                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
-                                            @endif
-                                        </form>
-                                    </div>
+                                        </div>
+
+                                        <!-- Hidden Inputs for Other Query Parameters -->
+                                        @if (request('min_price'))
+                                            <input type="hidden" name="min_price" value="{{ request('min_price') }}">
+                                        @endif
+                                        @if (request('max_price'))
+                                            <input type="hidden" name="max_price" value="{{ request('max_price') }}">
+                                        @endif
+
+                                        @if (request('subcategories'))
+                                            @foreach ((array) request('subcategories') as $subcategory)
+                                                <input type="hidden" name="subcategories[]"
+                                                    value="{{ $subcategory }}">
+                                            @endforeach
+                                        @endif
+                                        @if (request('brands'))
+                                            @foreach ((array) request('brands') as $brand)
+                                                <input type="hidden" name="brands[]" value="{{ $brand }}">
+                                            @endforeach
+                                        @endif
+                                        @if (request('size'))
+                                            <input type="hidden" name="size" value="{{ request('size') }}">
+                                        @endif
+                                        @if (request('sizes'))
+                                            @foreach ((array) request('sizes') as $size)
+                                                <input type="hidden" name="sizes[]" value="{{ $size }}">
+                                            @endforeach
+                                        @endif
+                                        @if (request('colors'))
+                                            @foreach ((array) request('colors') as $color)
+                                                <input type="hidden" name="colors[]" value="{{ $color }}">
+                                            @endforeach
+                                        @endif
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
