@@ -52,19 +52,34 @@
                                         <div id="slider-range" class="mb-10"></div>
                                         <div
                                             class="tp-shop-widget-filter-info d-flex align-items-center justify-content-between">
-                                            <!-- Display Selected Price Range -->
-                                            <span class="input-range">
-                                                <input type="text" id="amount" readonly>
-                                            </span>
-                                            <!-- Hidden Inputs for Min and Max Price -->
-                                            <input type="hidden" id="min_price" name="min_price"
-                                                value="{{ request('min_price', 0) }}">
-                                            <input type="hidden" id="max_price" name="max_price"
-                                                value="{{ request('max_price', 300000) }}">
-
-                                            <!-- Filter Button -->
-                                            <button class="tp-shop-widget-filter-btn" type="submit">Filter</button>
+                                            <!-- Price Range Display -->
+                                            <div class="price-range-display">
+                                                <span class="min-price">$<span
+                                                        id="min-price-display">{{ request('min_price', 0) }}</span></span>
+                                                <span>-</span>
+                                                <span class="max-price">$<span
+                                                        id="max-price-display">{{ request('max_price', 300000) }}</span></span>
+                                            </div>
                                         </div>
+                                        <!-- Input fields for Min and Max Price -->
+                                        <div class="input-fields">
+                                            <label for="min_price_input">Min:</label>
+                                            <input type="number" id="min_price_input" value="{{ request('min_price', 0) }}"
+                                                min="0" step="1" class="price-input">
+                                            <label for="max_price_input">Max:</label>
+                                            <input type="number" id="max_price_input"
+                                                value="{{ request('max_price', 300000) }}" max="300000" step="1"
+                                                class="price-input">
+                                        </div>
+                                        <!-- Hidden Inputs for Min and Max Price -->
+                                        <input type="hidden" id="min_price" name="min_price"
+                                            value="{{ request('min_price', 0) }}">
+                                        <input type="hidden" id="max_price" name="max_price"
+                                            value="{{ request('max_price', 300000) }}">
+
+                                        <!-- Filter Button -->
+                                        <button class="tp-shop-widget-filter-btn mt-1" type="button"
+                                            id="apply-filter">Filter</button>
                                     </div>
                                 </div>
                             </div>
@@ -831,5 +846,69 @@
             </div>
         </div>
     </div>
+    <style>
+        .tp-shop-widget-filter {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 5px;
+        }
 
+        #slider-range {
+            margin-bottom: 10px;
+        }
+
+        .tp-shop-widget-filter-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-range-display {
+            font-size: 14px;
+            color: #333;
+
+        }
+
+        .price-range-display span {
+            font-weight: bold;
+        }
+
+        .input-fields {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .input-fields label {
+            margin-right: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .input-fields .price-input {
+            width: 80px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .tp-shop-widget-filter-btn {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tp-shop-widget-filter-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 @endsection

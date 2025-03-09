@@ -121,24 +121,94 @@
                 {{ request('max_price', 300000) }} // Default max price
             ],
             slide: function(event, ui) {
-                // Update the displayed price range
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                // Update the hidden inputs
+                // Update the displayed price range on the slider
+                $("#min-price-display").text(ui.values[0]);
+                $("#max-price-display").text(ui.values[1]);
+
+                // Update the hidden input fields
                 $("#min_price").val(ui.values[0]);
                 $("#max_price").val(ui.values[1]);
+
+                // Sync manual input fields
+                $("#min_price_input").val(ui.values[0]);
+                $("#max_price_input").val(ui.values[1]);
             },
             change: function(event, ui) {
-                // Submit the form when the slider value changes
-                // document.getElementById('price-filter-form').submit();
-
                 // Trigger AJAX filtering instead of form submission
                 applyFilters();
             }
         });
 
-        // Set initial display value
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
+        // Initialize the display with the current slider values
+        $("#min-price-display").text($("#slider-range").slider("values", 0));
+        $("#max-price-display").text($("#slider-range").slider("values", 1));
+
+        // Sync the slider with manual inputs
+        let minVal, maxVal;
+
+        // Sync min price input
+        $("#min_price_input").on('input', function() {
+            minVal = parseInt($("#min_price_input").val()) || 0; // Ensure it's an integer
+            maxVal = parseInt($("#max_price_input").val()) || 300000; // Default max value
+
+            // Ensure valid range (min <= max)
+            if (minVal >= 0 && minVal <= maxVal) {
+                // Update the slider
+                $("#slider-range").slider("values", 0, minVal);
+                $("#slider-range").slider("values", 1, maxVal);
+
+                // Update the display and hidden inputs
+                $("#min-price-display").text(minVal);
+                $("#max-price-display").text(maxVal);
+                $("#min_price").val(minVal);
+                $("#max_price").val(maxVal);
+
+            } else {
+                // Restore the last valid value
+                $("#min_price_input").val($("#slider-range").slider("values", 0));
+            }
+        });
+
+        // Sync max price input
+        $("#max_price_input").on('input', function() {
+            maxVal = parseInt($("#max_price_input").val()) || 300000; // Ensure it's an integer
+            minVal = parseInt($("#min_price_input").val()) || 0; // Default min value
+
+            // Ensure valid range (max >= min)
+            if (maxVal >= minVal && maxVal <= 300000) {
+                // Update the slider
+                $("#slider-range").slider("values", 0, minVal);
+                $("#slider-range").slider("values", 1, maxVal);
+
+                // Update the display and hidden inputs
+                $("#min-price-display").text(minVal);
+                $("#max-price-display").text(maxVal);
+                $("#min_price").val(minVal);
+                $("#max_price").val(maxVal);
+
+
+            } else {
+                // Restore the last valid value
+                $("#max_price_input").val($("#slider-range").slider("values", 1));
+            }
+        });
+
+        // AJAX request on Filter button click
+        $("#apply-filter").on("click", function() {
+            applyFilters(); // Call the filtering function
+        });
+
+        // Trigger AJAX request when input fields lose focus (user clicks away or presses enter)
+        $("#min_price_input, #max_price_input").on('blur', function() {
+            applyFilters(); // Trigger AJAX request when input field is blurred
+        });
+
+        // Trigger AJAX request on 'Enter' key press in input fields
+        $("#min_price_input, #max_price_input").on('keyup', function(event) {
+            if (event.key === "Enter") {
+                applyFilters(); // Trigger AJAX request when 'Enter' is pressed
+            }
+        });
 
         // Other filtering starts from here
         const categoryId = $('#category_id').data('category-id');
@@ -150,7 +220,7 @@
             const sortingData = $('#combined-filter-form').serialize();
             const combinedData = priceFilterData + '&' + otherFilterData + '&' + sortingData;
 
-            console.log("Combined Data:", combinedData);
+            //console.log("Combined Data:", combinedData);
 
             // AJAX Request
             $.ajax({
@@ -158,7 +228,7 @@
                 method: "GET",
                 data: combinedData,
                 success: function(response) {
-                    console.log("AJAX Response:", response);
+                    //console.log("AJAX Response:", response);
                     $('#search-result').html($(response).find('#search-result').html());
                     $('#pagination-container').html($(response).find('#pagination-container')
                         .html());
@@ -180,7 +250,7 @@
             e.preventDefault();
             const url = $(this).attr('href');
 
-            console.log("Pagination URL:", url);
+            //console.log("Pagination URL:", url);
 
             $.ajax({
                 url: url,
