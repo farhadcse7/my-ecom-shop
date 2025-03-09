@@ -103,6 +103,7 @@
                         <!-- Other Filters Form -->
                         <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
                             id="other-filters-form">
+
                             <!-- Hidden Inputs to Preserve Price Filter -->
                             @if (request('min_price'))
                                 <input type="hidden" name="min_price" value="{{ request('min_price') }}">
@@ -460,69 +461,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tp-shop-widget-product-item d-flex align-items-center">
-                                        <div class="tp-shop-widget-product-thumb">
-                                            <a href="">
-                                                <img src="{{ asset('/') }}website/assets/img/product/shop/sm/shop-sm-4.jpg"
-                                                    alt="">
-                                            </a>
-                                        </div>
-                                        <div class="tp-shop-widget-product-content">
-                                            <div class="tp-shop-widget-product-rating-wrapper d-flex align-items-center">
-                                                <div class="tp-shop-widget-product-rating">
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.854 3.756L12 4.362L9 7.284L9.708 11.412L6 9.462L2.292 11.412L3 7.284L0 4.362L4.146 3.756L6 0Z"
-                                                                fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.854 3.756L12 4.362L9 7.284L9.708 11.412L6 9.462L2.292 11.412L3 7.284L0 4.362L4.146 3.756L6 0Z"
-                                                                fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.854 3.756L12 4.362L9 7.284L9.708 11.412L6 9.462L2.292 11.412L3 7.284L0 4.362L4.146 3.756L6 0Z"
-                                                                fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.854 3.756L12 4.362L9 7.284L9.708 11.412L6 9.462L2.292 11.412L3 7.284L0 4.362L4.146 3.756L6 0Z"
-                                                                fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 0L7.854 3.756L12 4.362L9 7.284L9.708 11.412L6 9.462L2.292 11.412L3 7.284L0 4.362L4.146 3.756L6 0Z"
-                                                                fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                                <div class="tp-shop-widget-product-rating-number">
-                                                    <span>(4.8)</span>
-                                                </div>
-                                            </div>
-                                            <h4 class="tp-shop-widget-product-title">
-                                                <a href="">Minimal Backpack.</a>
-                                            </h4>
-                                            <div class="tp-shop-widget-product-price-wrapper">
-                                                <span class="tp-shop-widget-product-price">$165.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
