@@ -34,20 +34,6 @@ class WebsiteController extends Controller
     {
         $query = Product::where('category_id', $id);
 
-        // Handle Sorting
-        if ($request->has('sort_by')) {
-            $sortBy = $request->input('sort_by');
-            if ($sortBy == 'lowest_price') {
-                $query->orderBy('selling_price', 'asc');
-            } elseif ($sortBy == 'highest_price') {
-                $query->orderBy('selling_price', 'desc');
-            } else {
-                $query->latest();
-            }
-        } else {
-            $query->latest();
-        }
-
         // Handle brand filtering
         if ($request->has('brands') && !empty($request->brands)) {
             $brands = $request->input('brands');
@@ -96,6 +82,20 @@ class WebsiteController extends Controller
             $minPrice = $request->input('min_price', 0); // Default to 0 if not provided
             $maxPrice = $request->input('max_price', 200000); // Default to 200000 if not provided
             $query->whereBetween('selling_price', [$minPrice, $maxPrice]);
+        }
+
+        // Handle Sorting
+        if ($request->has('sort_by')) {
+            $sortBy = $request->input('sort_by');
+            if ($sortBy == 'lowest_price') {
+                $query->orderBy('selling_price', 'asc');
+            } elseif ($sortBy == 'highest_price') {
+                $query->orderBy('selling_price', 'desc');
+            } else {
+                $query->latest();
+            }
+        } else {
+            $query->latest();
         }
 
         $perPage = $request->has('per_page') ? $request->input('per_page') : 2; // Default to 2 items per page
@@ -155,41 +155,6 @@ class WebsiteController extends Controller
         $search   = $_GET['query'];
         $products = Product::where('name', 'like', '%' . $search . '%')->latest()->get();
         return response()->json($products);
-    }
-
-    //ajax sorting
-    public function sortBy(Request $request)
-    {
-        if (!$request->has('category_id') || !$request->has('sort_by')) {
-            return response()->json(['error' => 'Missing required parameters']);
-        }
-
-        $query = Product::where('category_id', $request->category_id);
-
-        // Handle sorting
-        if ($request->sort_by == 'lowest_price') {
-            $products = $query->orderBy('selling_price', 'asc')->paginate(2);
-        } elseif ($request->sort_by == 'highest_price') {
-            $products = $query->orderBy('selling_price', 'desc')->paginate(2);
-        } else {
-            $products = $query->paginate(2);
-        }
-
-        // Render HTML content for products
-        $view = view('website.category.index-content', [
-            'products'    => $products,
-            'currentSort' => $request->sort_by,
-            'categoryId'  => $request->category_id,
-        ])->render();
-
-        // Generate pagination
-        $pagination = $products->hasPages() ? $products->links('pagination::bootstrap-5')->render() : '';
-
-        // Return a JSON response with HTML and pagination
-        return response()->json([
-            'html'       => $view,
-            'pagination' => $pagination,
-        ]);
     }
 
     public function blog()

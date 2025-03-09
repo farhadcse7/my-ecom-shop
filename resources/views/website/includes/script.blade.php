@@ -87,66 +87,6 @@
     });
 </script>
 
-<!--  price sorting ajax -->
-{{-- <script>
-    $(document).ready(function () {
-        // Sorting handler
-        $('#sort_by').on('change', function () {
-            let sort_by = $(this).val(); // Get selected sorting option
-            let category_id = $('#category_id').val(); // Get category ID (hidden field)
-            let currentPage = getCurrentPage(); // Get current page for pagination
-
-            // Fetch products based on the sort option and current page
-            fetchPage(currentPage, sort_by, category_id);
-        });
-
-        // Pagination handler
-        $(document).on('click', '#pagination-container a', function (e) {
-            e.preventDefault(); // Prevent the default behavior of the link
-
-            // Safely extract page number from href
-            let href = $(this).attr('href');
-            if (href && href.includes('page=')) {
-                let page = href.split('page=')[1]; // Extract page number
-                fetchPage(page); // Fetch the products for the new page
-            }
-        });
-
-        // Function to get the current page number (needed for pagination)
-        function getCurrentPage() {
-            let currentPage = $('.pagination .active a').attr('href');
-            if (currentPage && currentPage.includes('page=')) {
-                return parseInt(currentPage.split('page=')[1]);
-            }
-            return 1; // Default to page 1 if no active page
-        }
-
-        // Function to fetch products based on sorting, category, and page
-        function fetchPage(page, sort_by = $('#sort_by').val(), category_id = $('#category_id').val()) {
-            $.ajax({
-                url: "{{ route('sort.by') }}", // AJAX route to fetch sorted products
-                method: "GET",
-                data: {sort_by: sort_by, category_id: category_id, page: page}, // Pass sorting, category, and page data
-                success: function (res) {
-                    if (res.html) {
-                        // Remove the old pagination before adding the new one
-                        $('#pagination-container').empty();
-
-                        // Replace the product list and pagination with new data
-                        $('#search-result').html(res.html);
-
-                        // Add the new pagination links
-                        $('#pagination-container').html(res.pagination);
-                    }
-                },
-                error: function (err) {
-                    console.error('Error:', err); // Log any errors
-                }
-            });
-        }
-    });
-
-</script> --}}
 
 <script>
     //price range slider script
@@ -179,7 +119,7 @@
     });
 </script>
 
-<script>
+{{-- <script>
     // Auto-Submit for Other Filters (Brands, Categories, Colors, Sizes Checkbox)
     document.querySelectorAll('#other-filters-form input[type="checkbox"], #other-filters-form input[type="radio"]')
         .forEach(input => {
@@ -187,7 +127,7 @@
                 document.getElementById('other-filters-form').submit();
             });
         });
-</script>
+</script> --}}
 
 {{-- <script>
     // Auto-Submit for Dropdowns (use when you have multiple dropdowns)
@@ -197,3 +137,64 @@
         });
     });
 </script> --}}
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready");
+        // const categoryId = $('#category_id').val(); // Fetching value instead of data attribute
+        const categoryId = $('#category_id').data('category-id');
+
+        function applyFilters() {
+            // Serialize both forms and combine data
+            const filterData = $('#other-filters-form').serialize();
+            const sortingData = $('#combined-filter-form').serialize();
+            const combinedData = filterData + '&' + sortingData;
+
+            console.log("Combined Data:", combinedData);
+
+            // AJAX Request
+            $.ajax({
+                url: `/product-category/${categoryId}`,
+                method: "GET",
+                data: combinedData,
+                success: function(response) {
+                    console.log("AJAX Response:", response);
+                    $('#search-result').html($(response).find('#search-result').html());
+                    $('#pagination-container').html($(response).find('#pagination-container')
+                        .html());
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr.responseText);
+                }
+            });
+        }
+
+        // Trigger AJAX when filters are changed
+        $('#other-filters-form, #combined-filter-form').on('change', 'select, input', function(e) {
+            e.preventDefault();
+            applyFilters();
+        });
+
+        // Handle pagination AJAX
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            const url = $(this).attr('href');
+
+            console.log("Pagination URL:", url);
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function(response) {
+                    console.log("Pagination AJAX Response:", response);
+                    $('#search-result').html($(response).find('#search-result').html());
+                    $('#pagination-container').html($(response).find(
+                        '#pagination-container').html());
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
