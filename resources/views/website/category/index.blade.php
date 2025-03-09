@@ -60,7 +60,7 @@
                                             <input type="hidden" id="min_price" name="min_price"
                                                 value="{{ request('min_price', 0) }}">
                                             <input type="hidden" id="max_price" name="max_price"
-                                                value="{{ request('max_price', 200000) }}">
+                                                value="{{ request('max_price', 300000) }}">
 
                                             <!-- Filter Button -->
                                             <button class="tp-shop-widget-filter-btn" type="submit">Filter</button>

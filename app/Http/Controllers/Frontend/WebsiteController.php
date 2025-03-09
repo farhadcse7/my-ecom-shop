@@ -80,7 +80,7 @@ class WebsiteController extends Controller
         // Handle price filtering (only if price filter is applied)
         if ($request->has('min_price') && $request->has('max_price')) {
             $minPrice = $request->input('min_price', 0); // Default to 0 if not provided
-            $maxPrice = $request->input('max_price', 200000); // Default to 200000 if not provided
+            $maxPrice = $request->input('max_price', 300000); // Default to 200000 if not provided
             $query->whereBetween('selling_price', [$minPrice, $maxPrice]);
         }
 

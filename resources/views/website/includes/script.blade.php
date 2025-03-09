@@ -106,6 +106,7 @@
     });
 </script> --}}
 
+{{-- Product filering and sorting start --}}
 <script>
     $(document).ready(function() {
         console.log("Document is ready");
@@ -113,11 +114,11 @@
         // Initialize the range slider
         $("#slider-range").slider({
             range: true,
-            min: 0, // Minimum price
-            max: 200000, // Maximum price (adjust based on your product prices)
+            min: 0, // Minimum price (showing bar range start value)
+            max: 300000, // Maximum price (showing bar range end value)
             values: [
                 {{ request('min_price', 0) }}, // Default min price
-                {{ request('max_price', 200000) }} // Default max price
+                {{ request('max_price', 300000) }} // Default max price
             ],
             slide: function(event, ui) {
                 // Update the displayed price range
@@ -139,9 +140,7 @@
         $("#amount").val("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
 
-        //other filtering starts from here
-
-        // const categoryId = $('#category_id').val(); // Fetching value instead of data attribute
+        // Other filtering starts from here
         const categoryId = $('#category_id').data('category-id');
 
         function applyFilters() {
@@ -199,3 +198,4 @@
         });
     });
 </script>
+{{-- Product filering and sorting end --}}
