@@ -89,15 +89,6 @@
                         <form action="{{ route('category', ['id' => $categoryId]) }}" method="GET"
                             id="other-filters-form">
 
-                            <!-- Hidden Inputs to Preserve Price Filter -->
-                            @if (request('min_price'))
-                                <input type="hidden" name="min_price" value="{{ request('min_price') }}">
-                            @endif
-                            @if (request('max_price'))
-                                <input type="hidden" name="max_price" value="{{ request('max_price') }}">
-                            @endif
-
-
                             <!-- Product Status -->
                             <div class="tp-shop-widget mb-25">
                                 <h3 class="tp-shop-widget-title">Product Status</h3>
