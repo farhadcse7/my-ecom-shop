@@ -87,38 +87,6 @@
     });
 </script>
 
-
-<script>
-    //price range slider script
-    $(function() {
-        // Initialize the range slider
-        $("#slider-range").slider({
-            range: true,
-            min: 0, // Minimum price
-            max: 200000, // Maximum price (adjust based on your product prices)
-            values: [
-                {{ request('min_price', 0) }}, // Default min price
-                {{ request('max_price', 200000) }} // Default max price
-            ],
-            slide: function(event, ui) {
-                // Update the displayed price range
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                // Update the hidden inputs
-                $("#min_price").val(ui.values[0]);
-                $("#max_price").val(ui.values[1]);
-            },
-            change: function(event, ui) {
-                // Submit the form when the slider value changes
-                document.getElementById('price-filter-form').submit();
-            }
-        });
-
-        // Set initial display value
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
-    });
-</script>
-
 {{-- <script>
     // Auto-Submit for Other Filters (Brands, Categories, Colors, Sizes Checkbox)
     document.querySelectorAll('#other-filters-form input[type="checkbox"], #other-filters-form input[type="radio"]')
@@ -141,14 +109,47 @@
 <script>
     $(document).ready(function() {
         console.log("Document is ready");
+
+        // Initialize the range slider
+        $("#slider-range").slider({
+            range: true,
+            min: 0, // Minimum price
+            max: 200000, // Maximum price (adjust based on your product prices)
+            values: [
+                {{ request('min_price', 0) }}, // Default min price
+                {{ request('max_price', 200000) }} // Default max price
+            ],
+            slide: function(event, ui) {
+                // Update the displayed price range
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                // Update the hidden inputs
+                $("#min_price").val(ui.values[0]);
+                $("#max_price").val(ui.values[1]);
+            },
+            change: function(event, ui) {
+                // Submit the form when the slider value changes
+                // document.getElementById('price-filter-form').submit();
+
+                // Trigger AJAX filtering instead of form submission
+                applyFilters();
+            }
+        });
+
+        // Set initial display value
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+
+        //other filtering starts from here
+
         // const categoryId = $('#category_id').val(); // Fetching value instead of data attribute
         const categoryId = $('#category_id').data('category-id');
 
         function applyFilters() {
             // Serialize both forms and combine data
-            const filterData = $('#other-filters-form').serialize();
+            const priceFilterData = $('#price-filter-form').serialize();
+            const otherFilterData = $('#other-filters-form').serialize();
             const sortingData = $('#combined-filter-form').serialize();
-            const combinedData = filterData + '&' + sortingData;
+            const combinedData = priceFilterData + '&' + otherFilterData + '&' + sortingData;
 
             console.log("Combined Data:", combinedData);
 

@@ -68,36 +68,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Hidden Inputs for Other Query Parameters -->
-                            @if (request('sort_by'))
-                                <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
-                            @endif
-                            @if (request('per_page'))
-                                <input type="hidden" name="per_page" value="{{ request('per_page') }}">
-                            @endif
-                            @if (request('subcategories'))
-                                @foreach ((array) request('subcategories') as $subcategory)
-                                    <input type="hidden" name="subcategories[]" value="{{ $subcategory }}">
-                                @endforeach
-                            @endif
-                            @if (request('brands'))
-                                @foreach ((array) request('brands') as $brand)
-                                    <input type="hidden" name="brands[]" value="{{ $brand }}">
-                                @endforeach
-                            @endif
-                            @if (request('size'))
-                                <input type="hidden" name="size" value="{{ request('size') }}">
-                            @endif
-                            @if (request('sizes'))
-                                @foreach ((array) request('sizes') as $size)
-                                    <input type="hidden" name="sizes[]" value="{{ $size }}">
-                                @endforeach
-                            @endif
-                            @if (request('colors'))
-                                @foreach ((array) request('colors') as $color)
-                                    <input type="hidden" name="colors[]" value="{{ $color }}">
-                                @endforeach
-                            @endif
                         </form>
 
                         <!-- Other Filters Form -->
