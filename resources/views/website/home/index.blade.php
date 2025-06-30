@@ -550,6 +550,7 @@
     </section>
     <!-- banner area end -->
 
+    {{-- 
     <!-- product offer area start (Deal of the Day) -->
     <section class="tp-product-offer grey-bg-2 pt-70 pb-80">
         <div class="container">
@@ -975,7 +976,7 @@
         </div>
     </section>
     <!-- product deal area end -->
-
+    --}}
     <!-- Random Products start -->
     <section class="tp-product-gadget-area pt-80 pb-75">
         <div class="container">
