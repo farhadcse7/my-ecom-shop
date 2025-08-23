@@ -15,6 +15,59 @@
 <script src="{{ asset('/') }}website/assets/js/imagesloaded-pkgd.js"></script>
 <script src="{{ asset('/') }}website/assets/js/ajax-form.js"></script>
 <script src="{{ asset('/') }}website/assets/js/main.js"></script>
+<!-- sweet alert 2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '{{ session('success') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('error') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    @endif
+
+    @if(session('warning'))
+        Swal.fire({
+            icon: 'warning',
+            title: '{{ session('warning') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    @endif
+
+    @if(session('info'))
+        Swal.fire({
+            icon: 'info',
+            title: '{{ session('info') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    @endif
+</script>
+<!-- sweet alert 2 end-->
 
 <!-- jQuery UI -->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>

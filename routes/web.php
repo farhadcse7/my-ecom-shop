@@ -36,7 +36,7 @@ Route::get('/product-sub-category/{id}', [WebsiteController::class, 'subCategory
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 
 //Cart
-Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index'); //cart product list showing
+Route::get('/cart/index', [CartController::class, 'index'])->name('cart.show'); //cart product list showing
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{rowId}', [CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');

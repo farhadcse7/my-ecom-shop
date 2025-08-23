@@ -241,7 +241,7 @@
                 <span>{{Cart::subtotal()}}</span>
             </div>
             <div class="cartmini__checkout-btn">
-                <a href="{{route('cart.index')}}" class="tp-btn mb-10 w-100"> view cart</a>
+                <a href="{{route('cart.show')}}" class="tp-btn mb-10 w-100"> view cart</a>
                 <a href="{{route('checkout')}}" class="tp-btn tp-btn-border w-100"> checkout</a>
             </div>
         </div>

@@ -163,12 +163,12 @@
                                             </div>
                                         </div>
                                         <div class="tp-product-details-add-to-cart mb-15 w-100">
-                                            <button type="submit" class="tp-product-details-add-to-cart-btn w-100">
+                                            <button type="submit" name="action" value="add_to_cart" class="tp-product-details-add-to-cart-btn w-100">
                                                 Add To Cart
                                             </button>
                                         </div>
                                     </div>
-                                    <button class="tp-product-details-buy-now-btn w-100">
+                                    <button type="submit" name="action" value="buy_now" class="tp-product-details-buy-now-btn w-100">
                                         Buy Now
                                     </button>
                                 </div>
